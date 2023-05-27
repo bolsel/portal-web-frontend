@@ -1,0 +1,93 @@
+
+  html,
+  body {
+    @apply font-lato bg-gray-50 text-blue-gray-800;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-roboto;
+  }
+header {
+  /*background: red;*/
+  @apply flex items-center w-screen bg-primary h-12 fixed top-0 z-50 sm:h-16 lg:h-20 transition-colors ease-brand duration-250
+    lg:bg-black lg:bg-opacity-10 lg:backdrop-filter lg:backdrop-blur-lg lg:hover:bg-primary;
+  &.has-bg {
+    @apply bg-primary;
+  }
+}
+//.fade-enter-active,
+//.fade-leave-active {
+//  transition: all 0.9s ease;
+//  overflow: hidden;
+//  position: absolute;
+//  opacity: 1;
+//}
+//
+//.fade-enter-from,
+//.fade-leave-to {
+//  opacity: 0;
+//}
+.article {
+  &__body {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    strong {
+      @apply font-lora text-gray-800;
+    }
+
+    h1 {
+      @apply text-[5.8rem] leading-[8.8rem] font-normal;
+    }
+
+    h2 {
+      @apply text-[4rem] leading-[6.5rem] font-bold;
+    }
+
+    h3 {
+      @apply text-[3rem] leading-[4.9rem] font-bold;
+    }
+
+    h4 {
+      @apply text-[2.3rem] leading-[3.75rem] font-bold;
+    }
+
+    h5 {
+      @apply text-[1.75rem] leading-[2.8rem] font-bold;
+    }
+
+    h6 {
+      @apply text-[1.3rem] leading-[2.1rem] font-bold;
+    }
+
+    p {
+      @apply text-lg leading-7 mb-7;
+    }
+
+    img {
+      @apply w-full h-auto;
+    }
+
+    figure figcaption {
+      @apply text-center leading-7 text-gray-600;
+    }
+
+    blockquote {
+      @apply border-l-8 border-gray-300 px-6;
+    }
+
+    blockquote p {
+      @apply font-lora text-base leading-6 text-gray-600 italic;
+    }
+  }
+}
+@import './banner';
+@import './swiper';

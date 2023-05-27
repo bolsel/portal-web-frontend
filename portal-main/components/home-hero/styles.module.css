@@ -1,0 +1,30 @@
+.main {
+  @apply relative;
+}
+.imageContainer {
+  @apply h-[740px];
+}
+
+.imageBg {
+  @apply w-full h-full absolute top-0;
+  background: radial-gradient(
+    100% 820.78% at 0% 0%,
+    rgba(40, 20, 19, 0.9) 0%,
+    rgba(0, 32, 39, 0.7) 61.62%
+  );
+}
+.curved {
+  position: relative;
+  @apply bg-gray-50;
+  /*background-color: #fafafa;*/
+  z-index: 10;
+  width: 120%;
+  margin-top: -42px;
+  margin-left: -10%;
+  margin-right: 10%;
+  height: 100px;
+  border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+  -moz-border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+  -webkit-border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+  overflow: hidden;
+}
