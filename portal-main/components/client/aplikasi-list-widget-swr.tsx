@@ -30,7 +30,11 @@ export default function AplikasiListWidgetSwr() {
         </div>
       </div>
     </UIContainer>}
-    noItemsComponent={()=><div>;aaa</div>}
+    noItemsComponent={()=><UIContainer>
+      <div className='mb-5 bg-base-200 w-full h-[104px] rounded-lg flex justify-center items-center'>
+        Belum ada data aplikasi
+      </div>
+    </UIContainer>}
     paramsQuery={{limit:10}}
     >
     {({data})=>{

@@ -75,7 +75,6 @@ export const NewsListViewSwr: FC<Omit<NewsListViewProps, 'items'> & {
   if (isLoading) return loadingComponent ?? <LoadingComponent/>
   if (!data) return noItemsComponent ?? <div>tidak ada data</div>
   if (!data.data) return noItemsComponent ?? <div>tidak ada data</div>
-
   return <NewsListView
     {...props}
     small={small}

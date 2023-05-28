@@ -25,7 +25,7 @@ export default function BeritaPageIndex() {
       <NewsCategoriesListSwiperSwr/>
     </section>
     <UIContainer className="mx-auto grid grid-cols-1 gap-8 lg:gap-20 lg:grid-cols-news-container pb-8">
-      <section className="w-full flex flex-col p-5">
+      <section className="w-full flex flex-col">
         <NewsListViewSwr
           pathQuery={category ? ['byCategorySlug', category] : ['latest']}
           paramsQuery={{limit:5}}

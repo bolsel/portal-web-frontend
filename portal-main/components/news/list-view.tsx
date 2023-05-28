@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import {FC, ReactElement} from "react";
 import {trimSlashes} from "@portal-web/shared-base";
-import { UINextImageBlur, UIPaginationProps} from "@portal-web/shared-ui";
+import {UINextImageBlur, UIPagination, UIPaginationProps} from "@portal-web/shared-ui";
 
 type ComponentType = FC<{ item: Record<string, any>, index: number }>
 export type NewsListViewProps = {
@@ -85,6 +85,7 @@ export const NewsListView: FC<NewsListViewProps> = (
         </div>
       </div>
       <div className="w-full">{footer && footer}</div>
+      {pagination && <UIPagination {...pagination}/>}
     </div>
   )
 }
