@@ -4,7 +4,6 @@ import NewsReadShare from '../../components/news/read/share';
 import React from 'react';
 import Image from 'next/image';
 import {urlAssetCdn} from '../../src/global-helpers';
-import getConfig from 'next/config';
 import {UIContainer} from "@portal-web/shared-ui";
 import {NewsListViewSwr} from "../../components/client/news-list-view-swr";
 import NewsReadHeader from "../../components/news/read/header";
@@ -21,8 +20,7 @@ export async function getServerSideProps({params}) {
       notFound: true,
     };
   }
-  const {publicRuntimeConfig} = getConfig();
-  const articleUrl = `${publicRuntimeConfig.NEXT_PUBLIC_URL}/berita/${data.slug}`;
+  const articleUrl = `${process.env.NEXT_PUBLIC_URL}/berita/${data.slug}`;
   const apiSharedCount = getResourceApiUrl(`news/shared/${data.id}`)
   // update view_count
   await (new NewsResource).itemsHandler().updateOne(data.id, {
