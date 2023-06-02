@@ -12,9 +12,16 @@ import NewsListViewHeader from "../../components/news/list-view-header";
 
 export async function getServerSideProps({params}) {
   const {slug} = params;
-  const data = await (new NewsResource).apiResourceFetch({
-    pathQuery: ['bySlug', slug],
-  });
+  let data;
+  try {
+    data = await (new NewsResource).apiResourceFetch({
+      pathQuery: ['bySlug', slug],
+    });
+  }catch (e){
+    return {
+      notFound: true,
+    };
+  }
   if (!data) {
     return {
       notFound: true,
@@ -96,7 +103,7 @@ export default function ReadBeritaPage({data, apiSharedCount, slug, articleUrl})
       <article className="article">
         <NewsReadHeader news={data} articleUrl={articleUrl} apiSharedCount={apiSharedCount}/>
         <UIContainer className="mt-12 mb-12 mx-auto">
-          <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] md:gap-[72px]">
+          <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
             <div className="flex flex-col gap-7">
               <div className="article__body w-full min-h-screen">
                 {/*<div  dangerouslySetInnerHTML={{__html: data.content}}/>*/}
@@ -141,24 +148,6 @@ export default function ReadBeritaPage({data, apiSharedCount, slug, articleUrl})
                     quote={data.description}
                   />
                 </div>
-                {/*  <template #header>*/}
-                {/*  <NewsListHeader label="Berita Terkait" className="mb-2" />*/}
-                {/*</template>*/}
-                {/*<div className="flex flex-col gap-3 w-full">*/}
-                {/*  <p className="inline-flex gap-3 font-lato text-xs text-blue-gray-200 leading-5">*/}
-                {/*    <Icon*/}
-                {/*      src="/icons/share.svg"*/}
-                {/*      alt="Bagikan berita"*/}
-                {/*      size="16px"*/}
-                {/*      className="text-green-600"*/}
-                {/*    />*/}
-                {/*    Bagikan Berita Via*/}
-                {/*  </p>*/}
-                {/*  <NewsDetailShare*/}
-                {/*    v-bind="shareButtons"*/}
-                {/*  @share="onShareNews($event)"*/}
-                {/*  />*/}
-                {/*</div>*/}
               </div>
             </section>
           </section>
