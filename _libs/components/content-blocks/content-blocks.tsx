@@ -1,4 +1,4 @@
-import {urlAssetCdn} from "../../../portal-main/src/global-helpers";
+import {urlAssetCdn} from "../../src/global-helpers";
 import clsx from "clsx";
 import {UINextImageBlur} from "@portal-web/shared-ui";
 
