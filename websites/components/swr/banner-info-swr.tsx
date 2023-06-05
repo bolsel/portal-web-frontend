@@ -2,11 +2,11 @@
 
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
-import { Autoplay, Mousewheel, Navigation, Pagination } from 'swiper';
+import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRef } from 'react';
-import { UIContainer, UISwrResource } from '@portal-web/shared-ui';
+import { UISwrResource } from '@portal-web/shared-ui';
 
 export default function BannerInfoSwr() {
   const swiperRef = useRef<SwiperRef>(null);

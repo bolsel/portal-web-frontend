@@ -3,7 +3,6 @@ import { getBuildedMenuProfilList } from '../../../src/menu';
 import { UIIcon } from '@portal-web/shared-ui';
 import Link from 'next/link';
 import clsx from 'clsx';
-import LibContentBlocks from '../../../../_libs/components/content-blocks/content-blocks';
 
 export default function BaseLayoutDocumentMenu({ children, ...props }) {
   const { website, data } = props;

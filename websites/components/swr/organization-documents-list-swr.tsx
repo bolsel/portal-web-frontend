@@ -1,5 +1,4 @@
 import { UIPagination, UISwrResource } from '@portal-web/shared-ui';
-import { OrganizationDocumentsResource } from '@portal-web/shared-api/server';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';

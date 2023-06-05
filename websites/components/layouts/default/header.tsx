@@ -2,7 +2,6 @@ import { UIContainer, UIIcon } from '@portal-web/shared-ui';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getBuildedMenuList } from '../../../src/menu';
 import LayoutsDefaultHeaderMobile from './header-mobile';
