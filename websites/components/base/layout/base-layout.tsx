@@ -37,7 +37,7 @@ export default function BaseLayout({
 
       <section className="w-full bg-gray-200">
         <div className="relative -top-24 z-10 ">
-          <div className="container mx-auto xl:max-w-7xl ">
+          <div className="container mx-auto px-6 2xl:px-0 xl:max-w-7xl">
             {breadcrumbs && <LayoutsDefaultBreadcrumb items={breadcrumbs} />}
             <div className="bg-white min-h-screen rounded-xl">{children}</div>
           </div>

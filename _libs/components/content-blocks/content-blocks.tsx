@@ -1,7 +1,6 @@
-import Image from "next/image";
 import {urlAssetCdn} from "../../../portal-main/src/global-helpers";
-import React from "react";
 import clsx from "clsx";
+import {UINextImageBlur} from "@portal-web/shared-ui";
 
 export type LibContentBlocksProps = {
   data: { time: number, blocks: any[], version: string }
@@ -12,22 +11,20 @@ export default function LibContentBlocks({data}: LibContentBlocksProps) {
   blocks.forEach((block, i) => {
     if (block.type === 'image') {
       const hasCaption = block.data.caption;
-      items.push(
-        <p key={i}>
-          <Image
-            alt=""
-            width="0"
-            height="0"
-            sizes="100vw"
-            key={i}
-            src={urlAssetCdn(block.data.file.filename_disk)}
-            // className={clsx({'mb-7':!hasCaption})}
-          />
-          {hasCaption ? (
-            <div className="text-center italic text-sm">{hasCaption}</div>
-          ) : null}
-        </p>
-      );
+      items.push(<div className='w-full' key={i}>
+        <UINextImageBlur
+          key={i}
+          alt=""
+          width="0"
+          height="0"
+          sizes="100vw"
+          className={clsx('rounded-sm m-0', {'!mb-7':!hasCaption})}
+          src={urlAssetCdn(block.data.file.filename_disk)}
+        />
+        {hasCaption ? (
+          <div className="text-center italic text-sm">{hasCaption}</div>
+        ) : null}
+      </div>)
     } else if (block.type === 'fromhtml') {
       items.push(
         <div key={i} dangerouslySetInnerHTML={{__html: block.data.html}}/>
@@ -61,7 +58,7 @@ export default function LibContentBlocks({data}: LibContentBlocksProps) {
         if (style === 'unordered') {
           return <ul className={clsx(
             'cdx-nested-list',
-            {'cdx-nested-list__item-children':children},
+            {'cdx-nested-list__item-children': children},
             `cdx-nested-list--${style}`)
           }>
             {_items}
@@ -69,7 +66,7 @@ export default function LibContentBlocks({data}: LibContentBlocksProps) {
         }
         return <ol className={clsx(
           'cdx-nested-list',
-          {'cdx-nested-list__item-children':children},
+          {'cdx-nested-list__item-children': children},
           `cdx-nested-list--${style}`)
         }>
           {_items}

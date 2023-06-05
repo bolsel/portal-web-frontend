@@ -6,7 +6,7 @@ import {
 } from '@portal-web/shared-api/server';
 import Head from 'next/head';
 import React from 'react';
-import { UIContainer } from '@portal-web/shared-ui';
+import {UIContainer, UINextImageBlur} from '@portal-web/shared-ui';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
@@ -72,7 +72,7 @@ export default function PageProfilSekilas(props) {
           <div className="flex flex-col gap-7">
             <div className="w-full min-h-screen">
               <div className="flex flex-col gap-2 mt-3">
-                <Image
+                <UINextImageBlur
                   src={data.image_cover.url}
                   alt={data.title}
                   width="0"
