@@ -1,0 +1,6 @@
+{
+  "name": "bolsel-portal-websites",
+  "description": "Bolsel PortalWeb websites app",
+  "version": "1.0.0",
+  "dockerImage": "bolsel/portal-websites"
+}

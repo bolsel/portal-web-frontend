@@ -1,0 +1,150 @@
+html,
+body {
+  @apply font-lato bg-gray-50 text-blue-gray-800;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-roboto;
+}
+
+.jumbotron-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /*@apply  bg-radial-gradient-r from-primary/100 to-primary/10;*/
+  /*background: radial-gradient(100% 2589.12% at 0 0, theme(colors.primary) 0, rgba(40, 20, 21, 0.9) 100%);*/
+  /*background: radial-gradient(100% 2589.12% at 0 0, rgba(35, 6, 4, 0.98) 0, rgba(40, 20, 21, 1.9) 100%);*/
+  background: radial-gradient(
+    100% 2589.12% at 0 0,
+    rgba(40, 0, 12, 0.98) 0,
+    rgba(0, 32, 39, 0.9) 100%
+  );
+}
+
+@import './themes';
+
+.cdx-nested-list {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  counter-reset: item;
+  list-style: none;
+
+  &__item {
+    line-height: 1.6em;
+    display: flex;
+    margin: 2px 0;
+
+    [contenteditable] {
+      outline: none;
+    }
+
+    &-body {
+      flex-grow: 2;
+    }
+
+    &-content,
+    &-children {
+      flex-basis: 100%;
+    }
+
+    &-content {
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    &-children {
+    }
+
+    &::before {
+      counter-increment: item;
+      margin-right: 5px;
+      white-space: nowrap;
+    }
+  }
+
+  &--ordered > &__item::before {
+    content: counters(item, '.') '. ';
+  }
+
+  &--unordered > &__item::before {
+    content: '•';
+  }
+
+  &__settings {
+    display: flex;
+
+    .cdx-settings-button {
+      width: 50%;
+    }
+  }
+}
+.prose {
+  @apply px-0;
+}
+.contents-blocks,
+.prose {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  strong {
+    @apply font-lora text-gray-800;
+  }
+
+  //h1 {
+  //  @apply text-[5.8rem] leading-[8.8rem] font-normal;
+  //}
+  //
+  //h2 {
+  //  @apply text-[4rem] leading-[6.5rem] font-bold;
+  //}
+  //
+  //h3 {
+  //  @apply text-[3rem] leading-[4.9rem] font-bold;
+  //}
+  //
+  //h4 {
+  //  @apply text-[2.3rem] leading-[3.75rem] font-bold;
+  //}
+  //
+  //h5 {
+  //  @apply text-[1.75rem] leading-[2.8rem] font-bold;
+  //}
+  //
+  //h6 {
+  //  @apply text-[1.3rem] leading-[2.1rem] font-bold;
+  //}
+
+  p {
+    @apply text-lg leading-7 mb-7;
+  }
+
+  img {
+    @apply w-full h-auto;
+  }
+
+  figure figcaption {
+    @apply text-center leading-7 text-gray-600;
+  }
+
+  blockquote {
+    @apply border-l-8 border-gray-300 px-6;
+  }
+
+  blockquote p {
+    @apply font-lora text-base leading-6 text-gray-600 italic;
+  }
+}
+
+@import './banner';
