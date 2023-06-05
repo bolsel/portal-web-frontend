@@ -10,8 +10,28 @@ on:
 
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      portalmain: ${{ steps.filter.outputs.portalmain }}
+      websites: ${{ steps.filter.outputs.websites }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Check for changes
+        uses: dorny/paths-filter@v2.2.0
+        id: filter
+        with:
+          filters: |
+            portalmain:
+              - 'portal-main/**'
+            websites:
+              - 'websites/**'
   build_push_image:
     runs-on: ubuntu-latest
+    needs:
+      - changes
     steps:
       - uses: actions/checkout@master
         with:
@@ -35,22 +55,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            portalmain:
-              - 'portal-main/**'
-            websites:
-              - 'websites/**'
 
       - name: portal-main push image
         run: make push-image c=bolsel/portal-main
         working-directory: ./main
-        if: steps.filter.outputs.portalmain == 'true'
+        if: needs.changes.outputs.portalmain == 'true'
 
       - name: websites push image
         run: make push-image c=bolsel/websites
         working-directory: ./main
-        if: steps.filter.outputs.websites == 'true'
+        if: needs.changes.outputs.websites == 'true'
 
