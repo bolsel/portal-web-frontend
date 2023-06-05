@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          repository: codeup-id/portal-web-frontend
+          repository: upiksaleh/portal-web-frontend
           path: ./main
 
       - name: Checkout repository
