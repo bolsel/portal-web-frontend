@@ -1,7 +1,7 @@
 {
   "name": "bolsel-portal-websites",
   "description": "Bolsel PortalWeb websites app",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "dockerImage": "bolsel/portal-websites",
   "dependencies": {
     "react-share": "^4.4.1"
