@@ -44,10 +44,6 @@ jobs:
         with:
           images: |
             bolsel/portal-web-base
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
 
       - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
