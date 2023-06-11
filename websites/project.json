@@ -16,7 +16,10 @@
         "development": {
           "outputPath": "apps/bolsel/websites"
         },
-        "production": {}
+        "production": {},
+        "self": {
+          "outputPath": "apps/bolsel/dist/websites"
+        }
       }
     },
     "serve": {

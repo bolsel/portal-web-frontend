@@ -18,7 +18,10 @@
         "development": {
           "outputPath": "apps/bolsel/portal-main"
         },
-        "production": {}
+        "production": {},
+        "self": {
+          "outputPath": "apps/bolsel/dist/portal-main"
+        }
       }
     },
     "serve": {
