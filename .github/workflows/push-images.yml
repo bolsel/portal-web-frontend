@@ -60,6 +60,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: Install project dependencies
+        run: yarn
+
       - name: portal-main push image
         run: make push-image c=bolsel/portal-main
         working-directory: ./main
