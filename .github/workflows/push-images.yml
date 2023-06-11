@@ -25,9 +25,13 @@ jobs:
         with:
           filters: |
             portalmain:
+              - '_libs/**'
               - 'portal-main/**'
             websites:
+              - '_libs/**'
               - 'websites/**'
+            pushimageworkflow:
+              - '.github/workflows/push-images.yml'
   build_push_image:
     runs-on: ubuntu-latest
     needs:
@@ -59,10 +63,12 @@ jobs:
       - name: portal-main push image
         run: make push-image c=bolsel/portal-main
         working-directory: ./main
-        if: needs.changes.outputs.portalmain == 'true'
+        if: needs.changes.outputs.portalmain == 'true' || needs.changes.outputs.pushimageworkflow == 'true'
 
       - name: websites push image
         run: make push-image c=bolsel/websites
         working-directory: ./main
-        if: needs.changes.outputs.websites == 'true'
+        if: needs.changes.outputs.websites == 'true' || needs.changes.outputs.pushimageworkflow == 'true'
+        env:
+          NEXT_PUBLIC_API_RESOURCE_BASE_URL: https://bolselkab.go.id/api/resources/
 
