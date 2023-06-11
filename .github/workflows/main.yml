@@ -63,9 +63,9 @@ jobs:
           cache: 'yarn'
       
       - name: Install project dependencies
-        run: yarn
-      - name: Build portal-backend
-        run: yarn nx run bolsel-portal-backend:build:self
+        run: yarn install --frozen-lockfile
+      - name: Build portal-main
+        run: yarn nx run bolsel-portal-main:build:self
       - name: Build websites
         run: yarn nx run bolsel-websites:build:self
         env:
