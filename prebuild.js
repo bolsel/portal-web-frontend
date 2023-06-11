@@ -16,6 +16,6 @@ fs.writeFileSync("./dist/portal-main/package.json", JSON.stringify(p1,null,2));
 fs.writeFileSync("./dist/websites/package.json", JSON.stringify(p2,null,2));
 fs.writeFileSync("./dist/package.json", JSON.stringify(package,null,2));
 fs.copyFileSync('./Dockerfile-app', './dist/portal-main/Dockerfile')
-fs.copyFileSync('./.dockerignore', './dist/portal-main/.dockerignire')
+fs.copyFileSync('./.dockerignore', './dist/portal-main/.dockerignore')
 fs.copyFileSync('./Dockerfile-app', './dist/websites/Dockerfile')
-fs.copyFileSync('./.dockerignore', './dist/websites/.dockerignire')
+fs.copyFileSync('./.dockerignore', './dist/websites/.dockerignore')
