@@ -1,7 +1,7 @@
 {
-  "name": "bolsel-portal-main",
+  "name": "bolsel-main",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/bolsel/portal-main",
+  "sourceRoot": "apps/bolsel/main",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,16 +11,16 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/bolsel/portal-main",
-        "outputPath": "dist/apps/bolsel/portal-main"
+        "root": "apps/bolsel/main",
+        "outputPath": "dist/apps/bolsel/main"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/bolsel/portal-main"
+          "outputPath": "apps/bolsel/main"
         },
         "production": {},
         "self": {
-          "outputPath": "apps/bolsel/dist/portal-main"
+          "outputPath": "apps/bolsel/dist/main"
         }
       }
     },
@@ -28,17 +28,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "bolsel-portal-main:build",
+        "buildTarget": "bolsel-main:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "bolsel-portal-main:build:development",
+          "buildTarget": "bolsel-main:build:development",
           "dev": true,
           "port": 4301
         },
         "production": {
-          "buildTarget": "bolsel-portal-main:build:production",
+          "buildTarget": "bolsel-main:build:production",
           "dev": false,
           "port": 4302
         }
@@ -47,7 +47,7 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "bolsel-portal-main:build:production"
+        "buildTarget": "bolsel-main:build:production"
       }
     },
     "test": {
@@ -56,7 +56,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "apps/bolsel/portal-main/jest.config.ts",
+        "jestConfig": "apps/bolsel/main/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -73,7 +73,7 @@
       ],
       "options": {
         "lintFilePatterns": [
-          "apps/bolsel/portal-main/**/*.{ts,tsx,js,jsx}"
+          "apps/bolsel/main/**/*.{ts,tsx,js,jsx}"
         ]
       }
     }
