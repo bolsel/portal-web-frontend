@@ -30,10 +30,10 @@ fs.copyFileSync('./_docker/base/Dockerfile', `${DIST_PATH}/Dockerfile`);
 
 CURRENT_BUILD_IDS['_base'] = crypto.createHash("md5").update(fs.readFileSync(`${DIST_PATH}/package.json`)).digest("hex");
 const CURRENT_BUILD_IDS_ORDERED = Object.keys(CURRENT_BUILD_IDS).sort().reduce(
-    (obj, key) => { 
-      obj[key] = CURRENT_BUILD_IDS[key]; 
+    (obj, key) => {
+      obj[key] = CURRENT_BUILD_IDS[key];
       return obj;
-    }, 
+    },
     {}
   );
 
@@ -52,7 +52,7 @@ const _include_to_build = [];
 for(let i in PREV_BUILD_IDS){
     const _prev_build_id = PREV_BUILD_IDS[i];
     if(CURRENT_BUILD_IDS[i] !== _prev_build_id){
-        const context = i === '_base' ? '.' : `./${i}`;
+        const context = i === '_base' ? './' : `./${i}`;
         const image = i === '_base' ? 'bolsel/portal-web-base' : `bolsel/portal-web-${i}-app`
         _include_to_build.push({
             id: i,
