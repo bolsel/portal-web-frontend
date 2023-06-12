@@ -31,6 +31,13 @@ jobs:
       - name: Install project dependencies
         run: yarn install --frozen-lockfile
 
+      - uses: actions/cache@v3
+        with:
+          path: ./apps/bolsel/dist
+          key: ${{ runner.os }}-DIST-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-DIST-
+
       - name: Build main app
         run: yarn nx run bolsel-main:build:self
       - name: Build websites app
@@ -47,18 +54,12 @@ jobs:
 
       - run: ls -al apps/bolsel/dist
 
-      - uses: actions/cache@v3
-        with:
-          path: ./apps/bolsel/dist
-          key: ${{ runner.os }}-DIST-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-DIST-
-
   build-image:
     runs-on: ubuntu-latest
     needs: [build-app]
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix: ${{ fromJSON(needs.build-app.outputs.matrix) }}
 
     permissions:
