@@ -19,3 +19,7 @@ fs.copyFileSync('./Dockerfile-app', './dist/portal-main/Dockerfile')
 fs.copyFileSync('./.dockerignore', './dist/portal-main/.dockerignore')
 fs.copyFileSync('./Dockerfile-app', './dist/websites/Dockerfile')
 fs.copyFileSync('./.dockerignore', './dist/websites/.dockerignore')
+const crypto = require("crypto");
+const buff = fs.readFileSync("./dist/package.json");
+const hashPackage = crypto.createHash("sha256").update(buff).digest("hex");
+fs.writeFileSync("./dist/package.json.sha256", hashPackage);
