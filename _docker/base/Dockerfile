@@ -9,7 +9,7 @@ RUN apk --no-cache add \
   && ln -sf /usr/bin/python3 /usr/bin/python
 
 WORKDIR /app
-COPY ./dist/package.json ./
+COPY ./package.json ./
 RUN yarn install --prod
 RUN yarn add sharp --prod
 
