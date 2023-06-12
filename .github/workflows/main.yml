@@ -77,7 +77,7 @@ jobs:
       - name: package.json hash
         id: packagejsonhash
         run: |
-          content=`cat ./dist/package.json.sha256`
+          content=`cat ./apps/bolsel/dist/package.json.sha256`
           echo "::set-output name=packagejsonhash::$content"
       - run: |
           echo "${{steps.packagejsonhash.outputs.packagejsonhash}}"
