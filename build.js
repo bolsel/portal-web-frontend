@@ -26,6 +26,7 @@ APPS.forEach((app)=>{
 
 // write base package.json
 fs.writeFileSync(`${DIST_PATH}/package.json`, JSON.stringify(base_package_json,null,2));
+fs.copyFileSync('./_docker/base/Dockerfile', `${DIST_PATH}/Dockerfile`);
 
 CURRENT_BUILD_IDS['_base'] = crypto.createHash("md5").update(fs.readFileSync(`${DIST_PATH}/package.json`)).digest("hex");
 const CURRENT_BUILD_IDS_ORDERED = Object.keys(CURRENT_BUILD_IDS).sort().reduce(
