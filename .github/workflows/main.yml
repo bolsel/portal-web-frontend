@@ -76,13 +76,23 @@ jobs:
       - name: prebuild
         run: cd apps/bolsel && node prebuild.js
       
-      - name: package.json hash
+      - name: get package.json hash
         id: packagejsonhash
         run: |
           content=`cat ./apps/bolsel/dist/package.json.sha256`
-          echo "::set-output name=packagejsonhash::$content"
-      - run: |
-          echo "${{steps.packagejsonhash.outputs.packagejsonhash}}"
+          echo "value=$content" >> $GITHUB_OUTPUT
+
+      - name: get portal-main BUILD_ID
+        id: portalmainbuildid
+        run: |
+          content=`cat ./apps/bolsel/dist/portal-main/.next/BUILD_ID`
+          echo "value=$content" >> $GITHUB_OUTPUT
+
+      - name: get portal-main BUILD_ID
+        id: websitesbuildid
+        run: |
+          content=`cat ./apps/bolsel/dist/websites/.next/BUILD_ID`
+          echo "value=$content" >> $GITHUB_OUTPUT
 
       - name: Extract metadata for Docker image (base)
         id: meta-base
@@ -93,7 +103,7 @@ jobs:
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
           labels: |
-            packagejsonhash=${{steps.packagejsonhash.outputs.packagejsonhash}}
+            packagejsonhash=${{steps.packagejsonhash.outputs.value}}
       
       - name: Extract metadata for Docker image (portal-main)
         id: meta-portal-main
@@ -104,6 +114,8 @@ jobs:
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
             type=raw,value=${{ steps.portal-main-version.outputs.current-version}}
+          labels: |
+            buildid=${{steps.portalmainbuildid.outputs.value}}
 
       - name: Extract metadata for Docker image (websites)
         id: meta-websites
@@ -114,6 +126,8 @@ jobs:
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
             type=raw,value=${{ steps.websites-version.outputs.current-version}}
+          labels: |
+            buildid=${{steps.websitesbuildid.outputs.value}}
 
       - name: Build and push (base)
         uses: docker/build-push-action@v4
@@ -123,10 +137,9 @@ jobs:
           tags: ${{ steps.meta-base.outputs.tags }}
           labels: ${{ steps.meta-base.outputs.labels }}
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ steps.meta-base.outputs.labels.packagejsonhash != steps.packagejsonhash.outputs.value}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
-        if: steps.meta-base.outputs.labels.packagejsonhash != steps.packagejsonhash.outputs.packagejsonhash
 
       - name: Build and push (portal-main)
         uses: docker/build-push-action@v4
@@ -136,7 +149,7 @@ jobs:
           tags: ${{ steps.meta-portal-main.outputs.tags }}
           labels: ${{ steps.meta-portal-main.outputs.labels }}
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ steps.meta-portal-main.outputs.labels.buildid != steps.portalmainbuildid.outputs.value}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -148,7 +161,7 @@ jobs:
           tags: ${{ steps.meta-websites.outputs.tags }}
           labels: ${{ steps.meta-websites.outputs.labels }}
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ steps.meta-websites.outputs.labels.buildid != steps.websitesbuildid.outputs.value}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
