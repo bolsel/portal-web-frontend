@@ -31,9 +31,9 @@ jobs:
       - name: Install project dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build portal-main
-        run: yarn nx run bolsel-portal-main:build:self
-      - name: Build websites
+      - name: Build main app
+        run: yarn nx run bolsel-main:build:self
+      - name: Build websites app
         run: yarn nx run bolsel-websites:build:self
         env:
           NEXT_PUBLIC_API_RESOURCE_BASE_URL: https://bolselkab.go.id/api/resources/
