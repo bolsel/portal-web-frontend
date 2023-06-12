@@ -8,6 +8,7 @@ on:
       - "_libs/**"
       - ".github/workflows/main.yml"
       - "Dockerfile"
+      - "Dockerfile-app"
       - "prebuild.js"
 
 
