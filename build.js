@@ -50,7 +50,7 @@ for(let i in CURRENT_BUILD_IDS_ORDERED){
 const _include_to_build = [];
 for(let i in PREV_BUILD_IDS){
     const _prev_build_id = PREV_BUILD_IDS[i];
-    if(CURRENT_BUILD_IDS[i] === _prev_build_id){
+    if(CURRENT_BUILD_IDS[i] !== _prev_build_id){
         const context = i === '_base' ? DIST_PATH : `${DIST_PATH}/${i}`;
         const image = i === '_base' ? 'bolsel/portal-web-base' : `bolsel/portal-web-${i}-app`
         _include_to_build.push({

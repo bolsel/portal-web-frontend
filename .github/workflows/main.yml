@@ -9,7 +9,7 @@ jobs:
   build-app:
     runs-on: ubuntu-latest
     outputs: 
-      matrix: ${{ steps.build.outputs.value }}
+      matrix: ${{ fromJSON(steps.build.outputs.value) }}
     steps:
       - uses: actions/checkout@master
         with:
