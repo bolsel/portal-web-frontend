@@ -14,9 +14,9 @@ RUN yarn install --prod
 RUN yarn add sharp --prod
 
 FROM base AS runner
-WORKDIR /app
+WORKDIR /
 ENV NODE_ENV=production
-
+ENV NPM_CONFIG_PREFIX=/node_modules
 COPY --chown=node:node --from=deps /app/node_modules ./node_modules
 COPY --chown=node:node --from=deps /app/package.json ./package.json
 

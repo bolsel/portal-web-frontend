@@ -1,20 +1,15 @@
-name: main
+name: Build & push images
 
 on:
   push:
-    paths:
-      - "portal-main/**"
-      - "websites/**"
-      - "_libs/**"
-      - ".github/workflows/main.yml"
-      - "Dockerfile"
-      - "Dockerfile-app"
-      - "prebuild.js"
-
+    branches:
+      - "main"
 
 jobs:
-  build_push_image:
+  build-app:
     runs-on: ubuntu-latest
+    outputs: 
+      matrix: ${{ steps.build.outputs.value }}
     steps:
       - uses: actions/checkout@master
         with:
@@ -24,41 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          repository: bolsel/portal-web-frontend
           path: ./apps/bolsel
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      - name: get version (portal-main)
-        id: portal-main-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
-        with:
-          path: ./apps/bolsel/portal-main
-
-      - name: get version (portal-main)
-        id: websites-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
-        with:
-          path: ./apps/bolsel/websites
-
-      - name: Login to Docker Hub
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+      
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -67,108 +30,89 @@ jobs:
       
       - name: Install project dependencies
         run: yarn install --frozen-lockfile
+
       - name: Build portal-main
         run: yarn nx run bolsel-portal-main:build:self
       - name: Build websites
         run: yarn nx run bolsel-websites:build:self
         env:
           NEXT_PUBLIC_API_RESOURCE_BASE_URL: https://bolselkab.go.id/api/resources/
-      - name: prebuild
-        run: cd apps/bolsel && node prebuild.js
+
+      - name: build
+        id: build
+        run: |
+          cd apps/bolsel
+          content=`node build.js`
+          echo "value=$content" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        id: restore-build
+        with:
+          path: ./apps/bolsel/dist
+          key: ${{ runner.os }}-dist
+
+
+  build-image:
+    runs-on: ubuntu-latest
+    needs: [build-app]
+    strategy:
+      fail-fast: false
+      matrix: ${{ needs.build-app.outputs.matrix }}
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/cache@v3
+        id: restore-build
+        with:
+          path: ./apps/bolsel/dist
+          key: ${{ runner.os }}-dist
+
+      - run: mv ./apps/bolsel/dist/* .
+      - run: rm -rf ./apps 
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+    
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache-${{ matrix.id }}
+          key: ${{ runner.os }}-buildx-${{ matrix.id }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.id }}-
+  
       
-      - name: get package.json hash
-        id: packagejsonhash
-        run: |
-          content=`cat ./apps/bolsel/dist/package.json.sha256`
-          echo "value=$content" >> $GITHUB_OUTPUT
-
-      - name: get portal-main BUILD_ID
-        id: portalmainbuildid
-        run: |
-          content=`cat ./apps/bolsel/dist/portal-main/.next/BUILD_ID`
-          echo "value=$content" >> $GITHUB_OUTPUT
-
-      - name: get portal-main BUILD_ID
-        id: websitesbuildid
-        run: |
-          content=`cat ./apps/bolsel/dist/websites/.next/BUILD_ID`
-          echo "value=$content" >> $GITHUB_OUTPUT
-
-      - name: Extract metadata for Docker image (base)
-        id: meta-base
-        uses: docker/metadata-action@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
-          images: |
-            bolsel/portal-web-base
-          tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-          labels: |
-            packagejsonhash=${{steps.packagejsonhash.outputs.value}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      - name: Extract metadata for Docker image (portal-main)
-        id: meta-portal-main
+      - name: Extract metadata for Docker
+        id: meta
         uses: docker/metadata-action@v4
         with:
-          images: |
-            bolsel/portal-web-main-app
+          images: ${{ matrix.image }}
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-            type=raw,value=${{ steps.portal-main-version.outputs.current-version}}
-          labels: |
-            buildid=${{steps.portalmainbuildid.outputs.value}}
-
-      - name: Extract metadata for Docker image (websites)
-        id: meta-websites
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            bolsel/portal-web-websites-app
-          tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-            type=raw,value=${{ steps.websites-version.outputs.current-version}}
-          labels: |
-            buildid=${{steps.websitesbuildid.outputs.value}}
-
-      - name: Build and push (base)
+    
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./apps/bolsel
-          file: ./apps/bolsel/Dockerfile
-          tags: ${{ steps.meta-base.outputs.tags }}
-          labels: ${{ steps.meta-base.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
-          push: ${{ steps.meta-base.outputs.labels.packagejsonhash != steps.packagejsonhash.outputs.value}}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          context: ${{ matrix.context }}
+          file: ${{ matrix.context }}/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ matrix.id }}
+          cache-to: type=local,dest=/tmp/.buildx-cache-${{ matrix.id }}-new
 
-      - name: Build and push (portal-main)
-        uses: docker/build-push-action@v4
-        with:
-          context: ./apps/bolsel/dist/portal-main
-          file: ./apps/bolsel/dist/portal-main/Dockerfile
-          tags: ${{ steps.meta-portal-main.outputs.tags }}
-          labels: ${{ steps.meta-portal-main.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
-          push: ${{ steps.meta-portal-main.outputs.labels.buildid != steps.portalmainbuildid.outputs.value}}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      - name: Build and push (websites)
-        uses: docker/build-push-action@v4
-        with:
-          context: ./apps/bolsel/dist/websites
-          file: ./apps/bolsel/dist/websites/Dockerfile
-          tags: ${{ steps.meta-websites.outputs.tags }}
-          labels: ${{ steps.meta-websites.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
-          push: ${{ steps.meta-websites.outputs.labels.buildid != steps.websitesbuildid.outputs.value}}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      # Temp fix:
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
-      - name: Move cache
+      - name: Move Docker cache
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          rm -rf /tmp/.buildx-cache-${{ matrix.id }}
+          mv /tmp/.buildx-cache-${{ matrix.id }}-new /tmp/.buildx-cache-${{ matrix.id }}

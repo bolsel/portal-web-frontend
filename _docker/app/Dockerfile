@@ -1,7 +1,6 @@
 FROM bolsel/portal-web-base:latest
-WORKDIR /srv
+WORKDIR /app
 ENV NODE_ENV=production
-ENV NPM_CONFIG_PREFIX=/app/node_modules
 COPY --chown=node:node . .
 USER node
 EXPOSE 80
