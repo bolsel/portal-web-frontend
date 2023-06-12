@@ -9,9 +9,9 @@ jobs:
   build-app:
     runs-on: ubuntu-latest
     outputs: 
-      matrix: ${{ fromJSON(steps.build.outputs.value) }}
+      matrix: ${{ steps.build.outputs.value }}
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
         with:
           repository: upiksaleh/portal-web-frontend
           path: .
@@ -57,7 +57,7 @@ jobs:
     needs: [build-app]
     strategy:
       fail-fast: false
-      matrix: ${{ needs.build-app.outputs.matrix }}
+      matrix: ${{ fromJSON(needs.build-app.outputs.matrix) }}
 
     permissions:
       contents: read
