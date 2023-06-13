@@ -62,6 +62,6 @@ for(let i in PREV_BUILD_IDS){
     }
 }
 const matrix = {
-    include: _include_to_build
+    include:  _include_to_build
 }
-console.log(JSON.stringify(matrix))
+console.log(_include_to_build.length === 0 ? false : JSON.stringify(matrix))
