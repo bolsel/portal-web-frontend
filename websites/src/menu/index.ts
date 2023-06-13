@@ -52,7 +52,7 @@ export function getBuildedMenuList({ website }) {
         },
         {
           title: 'Dokumen lainnya',
-          link: '/dokumen/laporan-keuangan',
+          link: '/dokumen/lainnya',
           description: `Dokumen lainnya ${website.organization.name}`,
           icon: 'mdi:file-document-outline',
         },
