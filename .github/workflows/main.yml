@@ -41,6 +41,8 @@ jobs:
 
       - name: Build main app
         run: yarn nx run bolsel-main:build:self
+        env:
+          NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: GTM-P38RHGM
       - name: Build websites app
         run: yarn nx run bolsel-websites:build:self
         env:
