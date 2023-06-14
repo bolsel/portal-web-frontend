@@ -44,7 +44,7 @@ export default function PageProfilSekilas(props) {
     <BaseLayoutProfilMenu {...props}>
       <div className="max-w-none">
         <ul className="flex flex-col divide-y gap-4">
-          {data.map((item, index) => {
+          {data.length ? data.map((item, index) => {
             return (
               <li key={index} className="group">
                 <div className="flex items-start p-3 gap-4 ">
@@ -81,7 +81,7 @@ export default function PageProfilSekilas(props) {
                 )}
               </li>
             );
-          })}
+          }):<div>Belum ada data</div>}
         </ul>
       </div>
     </BaseLayoutProfilMenu>

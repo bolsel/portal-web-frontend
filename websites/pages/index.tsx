@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export function Index() {
+export function Index({website}) {
   /*
    * Replace the elements below with your own.
    *
@@ -46,6 +46,7 @@ export function Index() {
             viewType={'grid'}
             hideViewSwitch
             paramsQuery={{ limit: 10 }}
+            pathQuery={['byWebId', website.id]}
           />
           <div className="flex w-full h-[38px] mt-5">
             <div className="border-b-[3px] border-primary">

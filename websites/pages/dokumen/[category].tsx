@@ -1,11 +1,8 @@
 import { serverSideHost } from '../../src/server';
 import {
   OrganizationDocumentsResource,
-  OrganizationsResource,
 } from '@portal-web/shared-api/server';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import OrganizationDocumentsListSwr from '../../components/swr/organization-documents-list-swr';
-import BaseLayoutDocumentMenu from '../../components/base/layout/document-menu-layout';
 import { UIIcon } from '@portal-web/shared-ui';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -30,21 +27,6 @@ export async function getServerSideProps(context) {
       subTitle: `Informasi dokumen (${_categoryText()})`,
       category: category ?? 'lainnya',
       data,
-      // breadcrumbs: [
-      //   {
-      //     label: 'Beranda',
-      //     link: '/',
-      //   },
-      //   {
-      //     label: 'Profil',
-      //     link: '/profil',
-      //   },
-      //   {
-      //     label: 'Sekilas',
-      //     link: '',
-      //     active: true,
-      //   },
-      // ]
     },
   };
 }

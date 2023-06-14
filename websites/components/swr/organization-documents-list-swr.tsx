@@ -16,7 +16,7 @@ function EmptySearch({ category }) {
     <section className="w-full flex flex-col items-center justify-center bg-white pb-8">
       <section className="text-center">
         <p className="font-lato text-sm leading-relaxed text-gray-700 text-center mb-0.5">
-          Untuk sementara belum dokumen (<strong>{category}</strong>)
+          Untuk sementara belum ada dokumen (<strong>{category}</strong>)
         </p>
       </section>
     </section>

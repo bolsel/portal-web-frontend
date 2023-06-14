@@ -1,40 +1,11 @@
 import { serverSideHost } from '../../src/server';
-import {
-  getResourceApiUrl,
-  NewsResource,
-  WebNewsResource,
-} from '@portal-web/shared-api/server';
-import Head from 'next/head';
 import React from 'react';
-import { UIContainer } from '@portal-web/shared-ui';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import Image from 'next/image';
-import { Icon } from '@iconify/react';
-import LibDataNewsReadShare from '../../../_libs/components/data/news/read/share';
 import LibSwrDataWebNewsList from '../../../_libs/components/swr/data-web-news-list';
 import LibSwrDataNewsList from '../../../_libs/components/swr/data-news-list';
 import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
-  // let data;
-  // try {
-  //   data = await (new WebNewsResource()).apiResourceFetch({
-  //     pathQuery: ['byWebAndSlug', website.id, slug]
-  //   })
-  // } catch (e) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-
-  // const articleUrl = `https://${website.domain}/berita/${data.slug}`;
-  // const apiSharedCount = getResourceApiUrl(`web_news/shared/${data.id}`)
-  // // update view_count
-  // await (new WebNewsResource()).itemsHandler().updateOne(data.id, {
-  //   view_count: data.view_count + 1,
-  // });
-
   return {
     props: {
       website,
@@ -48,7 +19,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function PageProfilSekilas(props) {
-  const { data, articleUrl, apiSharedCount } = props;
+  const { website } = props;
   return (
     <main>
       <div className="px-5">
@@ -57,9 +28,8 @@ export default function PageProfilSekilas(props) {
           <div className="flex flex-col gap-7 p-5">
             <LibSwrDataWebNewsList
               viewType={'grid'}
-              // hideViewSwitch
-              // noPagination
               paramsQuery={{ limit: 10 }}
+              pathQuery={['byWebId',website.id]}
             />
           </div>
           <section className="my-5">
