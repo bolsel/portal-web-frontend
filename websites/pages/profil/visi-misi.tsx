@@ -39,7 +39,7 @@ export default function PageProfilSekilas(props) {
       <div className="prose max-w-none">
         <h2>Visi</h2>
         <LibContentBlocks data={data.visi} />
-        <h2>Visi</h2>
+        <h2>Misi</h2>
         <LibContentBlocks data={data.misi} />
       </div> : <div>Belum ada data</div>}
     </BaseLayoutProfilMenu>
