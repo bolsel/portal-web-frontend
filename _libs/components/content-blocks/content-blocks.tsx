@@ -31,7 +31,6 @@ export default function LibContentBlocks({data}: LibContentBlocksProps) {
       );
     } else if (block.type === 'header') {
       const HeaderLevel = ({level, children}) => {
-        console.log(level)
         if (level === 1) return <h1>{children}</h1>
         else if (level === 2) return <h2>{children}</h2>
         else if (level === 3) return <h3>{children}</h3>
