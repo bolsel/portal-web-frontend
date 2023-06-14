@@ -1,20 +1,27 @@
 import { serverSideHost } from '../../src/server';
 import {
   getResourceApiUrl,
-  NewsResource,
   WebNewsResource,
 } from '@portal-web/shared-api/server';
 import Head from 'next/head';
 import React from 'react';
-import {UIContainer, UINextImageBlur} from '@portal-web/shared-ui';
+import {UINextImageBlur} from '@portal-web/shared-ui';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import LibDataNewsReadShare from '../../../_libs/components/data/news/read/share';
 import LibSwrDataWebNewsList from '../../../_libs/components/swr/data-web-news-list';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   const { slug } = context.params;
   let data;
   try {

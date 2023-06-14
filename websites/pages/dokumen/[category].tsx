@@ -11,6 +11,15 @@ import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
   const { category } = context.params;
   const website = await serverSideHost(context);
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   const { data } = await new OrganizationDocumentsResource().apiResourceFetch({
     pathQuery: ['byOrganizationId', website.organization.id],
   });

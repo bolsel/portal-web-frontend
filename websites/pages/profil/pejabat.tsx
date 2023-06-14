@@ -9,6 +9,15 @@ import Image from 'next/image';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   const { data } = await new OrganizationPejabatResource().apiResourceFetch({
     pathQuery: ['byOrganizationId', website.organization.id],
   });
@@ -18,21 +27,6 @@ export async function getServerSideProps(context) {
       title: 'Profil Pejabat',
       subTitle: `Profil pejabat ${website.organization.name}`,
       data: data ?? [],
-      // breadcrumbs: [
-      //   {
-      //     label: 'Beranda',
-      //     link: '/',
-      //   },
-      //   {
-      //     label: 'Profil',
-      //     link: '/profil',
-      //   },
-      //   {
-      //     label: 'Sekilas',
-      //     link: '',
-      //     active: true,
-      //   },
-      // ]
     },
   };
 }

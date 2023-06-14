@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: '/404',
+        destination: '/404-website',
       },
       props: {},
     };

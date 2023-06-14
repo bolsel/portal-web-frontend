@@ -11,6 +11,15 @@ import GrafikInfoWidgetSwr from '../components/swr/grafik-info-widget-swr';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   return {
     props: {
       website,

@@ -10,6 +10,15 @@ import BaseLayoutProfilMenu from '../../components/base/layout/profil-menu-layou
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   const data = await new OrganizationsResource().apiResourceFetch({
     pathQuery: ['getStructureById', website.organization.id],
   });
@@ -19,21 +28,6 @@ export async function getServerSideProps(context) {
       title: 'Struktur Organisasi',
       subTitle: `Struktur Organisasi ${website.organization.name}`,
       data,
-      // breadcrumbs: [
-      //   {
-      //     label: 'Beranda',
-      //     link: '/',
-      //   },
-      //   {
-      //     label: 'Profil',
-      //     link: '/profil',
-      //   },
-      //   {
-      //     label: 'Sekilas',
-      //     link: '',
-      //     active: true,
-      //   },
-      // ]
     },
   };
 }
