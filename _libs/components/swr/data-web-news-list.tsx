@@ -35,7 +35,7 @@ export default function LibSwrDataWebNewsList(
   return <UISwrResource
     resourceKey={'web_news'}
     loadingComponent={() => <Skeleton/>}
-    noItemsComponent={() => <div>noItem</div>}
+    noItemsComponent={() => <div>Belum ada data.</div>}
     pathQuery={pathQuery}
     paramsQuery={{
       ...paramsQuery,
