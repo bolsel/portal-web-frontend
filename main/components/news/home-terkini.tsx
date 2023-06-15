@@ -37,7 +37,6 @@ export default function NewsHomeTerkini() {
             >
               <button
                 role="tab"
-                aria-controls="latest-news-panel"
                 onClick={() => setP('latest')}
                 className={clsx(
                   'text-sm uppercase text-center border-b-4 pb-3 cursor-pointer',
@@ -50,7 +49,6 @@ export default function NewsHomeTerkini() {
               </button>
               <button
                 role="tab"
-                aria-controls="latest-news-panel"
                 onClick={() => setP('popular')}
                 className={clsx(
                   'text-sm uppercase text-center border-b-4 pb-3 cursor-pointer',
