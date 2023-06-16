@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <meta name='description' content='Portal Resmi Pemerintah Kabupaten Bolaang Mongondow Selatan'/>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
