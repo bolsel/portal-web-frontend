@@ -2,8 +2,8 @@ import BaseJumbotron from '../../components/base/jumbotron';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import clsx from 'clsx';
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import {UIContainer} from "@portal-web/shared-ui";
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import { UIContainer } from '@portal-web/shared-ui';
 
 const basePath = '/tentang-bolsel';
 const menuItems = {

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState } from 'react';
-import {UIContainer, UIIcon} from "@portal-web/shared-ui";
-import {Icon, iconExists} from "@iconify/react";
+import { UIContainer, UIIcon } from '@portal-web/shared-ui';
+import { Icon, iconExists } from '@iconify/react';
 
 const MobileMenu = () => {
   const { mobileMenuShow, setMobileMenuShow } = useLayoutDefaultContext();
@@ -51,7 +51,7 @@ const ImageWithFallback = (props) => {
 };
 
 function MenuIcon({ icon, ...props }) {
-    return <UIIcon {...props} icon={`${icon}`} />;
+  return <UIIcon {...props} icon={`${icon}`} />;
 }
 
 const MenuItems = () => {
@@ -119,7 +119,7 @@ const MenuItems = () => {
             )}
           </div>
           <button
-            className='ml-3 hover:bg-primary-500 hover:rounded-lg'
+            className="ml-3 hover:bg-primary-500 hover:rounded-lg"
             title="Tutup Menu Navigasi"
             onClick={() => layoutData.setCurrentMenu?.(null)}
           >

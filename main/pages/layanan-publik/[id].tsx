@@ -2,25 +2,24 @@ import React from 'react';
 import LayananPublikImagesThumb from '../../components/layanan-publik/images-thumb';
 import LayananPublikInfoUmum from '../../components/layanan-publik/info-umum';
 import LayananPublikInformations from '../../components/layanan-publik/informations';
-import BaseJumbotron from "../../components/base/jumbotron";
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import {UIContainer, UIIcon} from "@portal-web/shared-ui";
-import {PublicServicesResource} from "@portal-web/shared-api/server";
+import BaseJumbotron from '../../components/base/jumbotron';
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import { UIContainer, UIIcon } from '@portal-web/shared-ui';
+import { PublicServicesResource } from '@portal-web/shared-api/server';
 
 export async function getServerSideProps({ params }) {
   const { id } = params;
   const publicServiceResource = new PublicServicesResource();
   const data = await publicServiceResource.apiResourceFetch({
-    pathQuery:['byId',id]
-  })
+    pathQuery: ['byId', id],
+  });
   if (!data) {
     return {
       notFound: true,
     };
   }
   return {
-    props: { id, data: (data)},
-
+    props: { id, data: data },
   };
 }
 

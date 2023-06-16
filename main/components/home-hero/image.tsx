@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import {UICarousel} from "@portal-web/shared-ui";
+import { UICarousel } from '@portal-web/shared-ui';
 // import Carousel from '../../carousel/carousel/carousel';
 
 const HomeHeroImage = () => {

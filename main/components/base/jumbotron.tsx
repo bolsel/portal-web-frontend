@@ -2,16 +2,16 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import React from 'react';
 import { baseTitle } from '../../src/global-helpers';
-import {UIContainer} from "@portal-web/shared-ui";
+import { UIContainer } from '@portal-web/shared-ui';
 
 export default function BaseJumbotron({
-                                        breadcrumb,
-                                        bgImage = '/images/bg/jumbotron-default.jpeg',
-                                        title,
-                                        subtitle,
-                                        suffix,
-                                        metaData,
-                                      }: {
+  breadcrumb,
+  bgImage = '/images/bg/jumbotron-default.jpeg',
+  title,
+  subtitle,
+  suffix,
+  metaData,
+}: {
   breadcrumb?: any;
   bgImage?: string;
   title: string;

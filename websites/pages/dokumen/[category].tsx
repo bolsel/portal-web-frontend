@@ -1,7 +1,5 @@
 import { serverSideHost } from '../../src/server';
-import {
-  OrganizationDocumentsResource,
-} from '@portal-web/shared-api/server';
+import { OrganizationDocumentsResource } from '@portal-web/shared-api/server';
 import OrganizationDocumentsListSwr from '../../components/swr/organization-documents-list-swr';
 import { UIIcon } from '@portal-web/shared-ui';
 import Link from 'next/link';

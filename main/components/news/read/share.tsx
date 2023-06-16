@@ -5,10 +5,9 @@ import {
   TwitterShareButton,
 } from 'react-share';
 
-import {Icon} from '@iconify/react';
+import { Icon } from '@iconify/react';
 import createShareButton from 'react-share/lib/hocs/createShareButton';
 import objectToGetParams from 'react-share/lib/utils/objectToGetParams';
-
 
 function whatsappLink(
   url: string,
@@ -32,21 +31,27 @@ const WhatsappShareButton = createShareButton(
   (props) => ({}),
   {}
 );
-export default function NewsReadShare({id,apiSharedCount, url, title, quote = null}) {
+export default function NewsReadShare({
+  id,
+  apiSharedCount,
+  url,
+  title,
+  quote = null,
+}) {
   const networks: any = [
     {
       name: 'facebook',
       component: FacebookShareButton,
       icon: (
-        <Icon icon="mdi:facebook" color="#2196F3" inline className="w-6 h-6"/>
+        <Icon icon="mdi:facebook" color="#2196F3" inline className="w-6 h-6" />
       ),
-      props: () => ({title, quote, hashtag: 'bolselkab'}),
+      props: () => ({ title, quote, hashtag: 'bolselkab' }),
     },
     {
       name: 'twitter',
       component: TwitterShareButton,
       icon: (
-        <Icon icon="mdi:twitter" color="#2196F3" inline className="w-6 h-6"/>
+        <Icon icon="mdi:twitter" color="#2196F3" inline className="w-6 h-6" />
       ),
       props: () => ({
         title,
@@ -58,17 +63,17 @@ export default function NewsReadShare({id,apiSharedCount, url, title, quote = nu
       name: 'whatsapp',
       component: WhatsappShareButton,
       icon: (
-        <Icon icon="mdi:whatsapp" color="#1FB767" inline className="w-6 h-6"/>
+        <Icon icon="mdi:whatsapp" color="#1FB767" inline className="w-6 h-6" />
       ),
-      props: () => ({title, quote}),
+      props: () => ({ title, quote }),
     },
     {
       name: 'telegram',
       component: TelegramShareButton,
       icon: (
-        <Icon icon="mdi:telegram" color="#0088cc" inline className="w-6 h-6"/>
+        <Icon icon="mdi:telegram" color="#0088cc" inline className="w-6 h-6" />
       ),
-      props: () => ({title, quote}),
+      props: () => ({ title, quote }),
     },
     {
       name: 'email',
@@ -81,7 +86,7 @@ export default function NewsReadShare({id,apiSharedCount, url, title, quote = nu
           className="w-6 h-6"
         />
       ),
-      props: () => ({subject: title, body: quote}),
+      props: () => ({ subject: title, body: quote }),
     },
   ];
 
@@ -96,7 +101,7 @@ export default function NewsReadShare({id,apiSharedCount, url, title, quote = nu
           >
             <network.component
               beforeOnClick={() => {
-                if(apiSharedCount) {
+                if (apiSharedCount) {
                   fetch(apiSharedCount);
                 }
               }}

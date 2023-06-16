@@ -2,9 +2,9 @@ import HomeHeroImage from './image';
 import styles from './styles.module.css';
 import clsx from 'clsx';
 // import HomeHeroSearch from './search';
-import {UIContainer} from "@portal-web/shared-ui";
-import localFont from "@next/font/local";
-import HomeHeroSearch from "./search";
+import { UIContainer } from '@portal-web/shared-ui';
+import localFont from '@next/font/local';
+import HomeHeroSearch from './search';
 
 const _introFontClassName = localFont({
   src: '../../public/fonts/Intro.otf',

@@ -4,14 +4,15 @@ import clsx from 'clsx';
 import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Icon } from '@iconify/react';
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import {UIContainer, UISearchInput} from "@portal-web/shared-ui";
-import {DocumentCategoriesResource} from "@portal-web/shared-api/server";
-import DocumentListSwr from "../../components/client/document-list-swr";
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import { UIContainer, UISearchInput } from '@portal-web/shared-ui';
+import { DocumentCategoriesResource } from '@portal-web/shared-api/server';
+import DocumentListSwr from '../../components/client/document-list-swr';
 
 export async function getServerSideProps(context) {
-  const { data: documentCategories } =
-    await (new DocumentCategoriesResource()).itemsHandler().readByQuery({
+  const { data: documentCategories } = await new DocumentCategoriesResource()
+    .itemsHandler()
+    .readByQuery({
       fields: ['id', 'name'],
     });
   return {
@@ -148,7 +149,7 @@ export default function DokumenPage({ documentCategories }) {
                   currentValue={''}
                   placeholder="Pencarian"
                   onSubmit={(value) => setSearch(value)}
-                  onClear={()=>setSearch('')}
+                  onClear={() => setSearch('')}
                 />
               </div>
               <div className="!gap-0 mb-6 xl:hidden w-full">

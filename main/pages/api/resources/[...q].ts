@@ -1,3 +1,3 @@
-import {ApiResourcePage} from "@portal-web/shared-api/server";
+import { ApiResourcePage } from '@portal-web/shared-api/server';
 
-export default ApiResourcePage({})
+export default ApiResourcePage({});

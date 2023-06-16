@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { LightGallery } from 'lightgallery/lightgallery';
 
 export default function LayananPublikImagesThumb({ data }) {
-  const lightGalleryRef = useRef<LightGallery|null>(null);
+  const lightGalleryRef = useRef<LightGallery | null>(null);
   const [imageActive, setImageActive] = useState(0);
   return (
     <>
@@ -49,7 +49,7 @@ export default function LayananPublikImagesThumb({ data }) {
             {data.images.map((d, i) => {
               return (
                 <a className="" href={d.url} key={i}>
-                  <img src={d.url}/>
+                  <img src={d.url} />
                 </a>
               );
             })}

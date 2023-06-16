@@ -1,16 +1,16 @@
-import {AppProps} from 'next/app';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 // import './styles.css';
 import '@portal-web/shared-ui/presets/default/styles/global.css';
 import '../src/styles/main.scss';
 import BaseLayout from '../components/base/layout/base-layout';
-import {UIConfigProvider} from '@portal-web/shared-ui';
-import {BasePageProps} from '../src/types';
-import {SWRConfig} from "swr";
-import Script from "next/script";
+import { UIConfigProvider } from '@portal-web/shared-ui';
+import { BasePageProps } from '../src/types';
+import { SWRConfig } from 'swr';
+import Script from 'next/script';
 
-function CustomApp({Component, pageProps, router}: AppProps<BasePageProps>) {
-  const {title, website, subTitle} = pageProps;
+function CustomApp({ Component, pageProps, router }: AppProps<BasePageProps>) {
+  const { title, website, subTitle } = pageProps;
   const mainTitle = website
     ? router.asPath !== '/'
       ? `${title} | ${website.name}`
@@ -33,7 +33,7 @@ function CustomApp({Component, pageProps, router}: AppProps<BasePageProps>) {
       />
       <Head>
         <title>{mainTitle}</title>
-        {subTitle ? <meta name="description" content={subTitle}/> : ''}
+        {subTitle ? <meta name="description" content={subTitle} /> : ''}
       </Head>
       <SWRConfig
         value={{

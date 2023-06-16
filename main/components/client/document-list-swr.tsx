@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalDialog from '../modal/modal-dialog';
-import {Icon} from '@iconify/react';
+import { Icon } from '@iconify/react';
 import Link from 'next/link';
-import {UIPagination, UISwrResource} from "@portal-web/shared-ui";
-import Image from "next/image";
-
+import { UIPagination, UISwrResource } from '@portal-web/shared-ui';
+import Image from 'next/image';
 
 interface DocumentsListProps {
   category: string;
   search?: string;
 }
 
-function EmptySearch({search}) {
+function EmptySearch({ search }) {
   return (
     <section className="w-full flex flex-col items-center justify-center bg-white pb-8">
       <section className="text-center">
@@ -26,37 +25,30 @@ function EmptySearch({search}) {
 
 function DocumentsSkeleton() {
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-[60px,1fr] min-w-0 w-full min-h-[228px] md:min-h-[200px] p-4 gap-4 border border-primary-50 rounded-xl">
-      <div className="w-12 h-12 md:w-[60px] md:h-[60px] bg-gray-200 animate-pulse rounded-md"/>
+    <div className="grid grid-cols-1 md:grid-cols-[60px,1fr] min-w-0 w-full min-h-[228px] md:min-h-[200px] p-4 gap-4 border border-primary-50 rounded-xl">
+      <div className="w-12 h-12 md:w-[60px] md:h-[60px] bg-gray-200 animate-pulse rounded-md" />
       <div>
-        <div className="inline-block rounded-md h-[32px] w-[100px] bg-gray-200 animate-pulse mb-4"/>
-        <div className="rounded-sm h-6 w-10/12 bg-gray-200 animate-pulse md:mb-2"/>
-        <div className="hidden md:block rounded-sm h-4 w-full bg-gray-200 animate-pulse md:mb-2"/>
+        <div className="inline-block rounded-md h-[32px] w-[100px] bg-gray-200 animate-pulse mb-4" />
+        <div className="rounded-sm h-6 w-10/12 bg-gray-200 animate-pulse md:mb-2" />
+        <div className="hidden md:block rounded-sm h-4 w-full bg-gray-200 animate-pulse md:mb-2" />
       </div>
       <div className="grid h-[fit-content] grid-cols-2 gap-4 md:col-start-2 md:flex">
-        <div className="h-[36px] w-full md:w-[100px] bg-gray-200 animate-pulse rounded-md"/>
-        <div className="h-[36px] w-full md:w-[100px] bg-gray-200 animate-pulse rounded-md"/>
+        <div className="h-[36px] w-full md:w-[100px] bg-gray-200 animate-pulse rounded-md" />
+        <div className="h-[36px] w-full md:w-[100px] bg-gray-200 animate-pulse rounded-md" />
       </div>
     </div>
   );
 }
 
-function _Skeleton({max}) {
+function _Skeleton({ max }) {
   const items: any = [];
   for (let i = 0; i < max; i++) {
-    items.push(<DocumentsSkeleton key={i}/>);
+    items.push(<DocumentsSkeleton key={i} />);
   }
   return <>{items}</>;
 }
 
-function DocumentsItem({
-                         selengkapnyaClick,
-                         id,
-                         file,
-                         title,
-                         description,
-                       }) {
+function DocumentsItem({ selengkapnyaClick, id, file, title, description }) {
   const documentIcon = () => {
     switch (file.type) {
       case 'application/pdf':
@@ -101,7 +93,7 @@ function DocumentsItem({
             onClick={() => selengkapnyaClick()}
             className="font-lato gap-2 normal-case btn btn-outline btn-sm btn-primary"
           >
-            <Icon icon="base:eye" fontSize="18px"/>
+            <Icon icon="base:eye" fontSize="18px" />
             Selengkapnya
           </button>
           <Link
@@ -111,7 +103,7 @@ function DocumentsItem({
             download
             className="font-lato gap-2 normal-case btn text-white btn-sm btn-primary"
           >
-            <Icon icon="base:download" fontSize="18px"/>
+            <Icon icon="base:download" fontSize="18px" />
             Unduh
           </Link>
         </div>
@@ -121,9 +113,9 @@ function DocumentsItem({
 }
 
 export default function DocumentListSwr({
-                                          category,
-                                          search,
-                                        }: DocumentsListProps) {
+  category,
+  search,
+}: DocumentsListProps) {
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
   const [selengkapnyaShow, setSelengkapnyaShow] = useState(false);
@@ -148,23 +140,23 @@ export default function DocumentListSwr({
     }
   }
 
-  return <UISwrResource
-    resourceKey={'documents'}
-    loadingComponent={() => <_Skeleton max={perPage}/>}
-    noItemsComponent={() => <EmptySearch search={search}/>}
-    pathQuery={['byCategoryId', category]}
-    paramsQuery={{
-      limit: perPage,
-      page: page,
-      search: search
-    }}
-  >
-    {({data, meta}) => {
-      return (
-        <div>
-          <ul className="grid grid-cols-1 gap-4">
-            {
-              data.map((d, i) => (
+  return (
+    <UISwrResource
+      resourceKey={'documents'}
+      loadingComponent={() => <_Skeleton max={perPage} />}
+      noItemsComponent={() => <EmptySearch search={search} />}
+      pathQuery={['byCategoryId', category]}
+      paramsQuery={{
+        limit: perPage,
+        page: page,
+        search: search,
+      }}
+    >
+      {({ data, meta }) => {
+        return (
+          <div>
+            <ul className="grid grid-cols-1 gap-4">
+              {data.map((d, i) => (
                 <li key={i}>
                   <DocumentsItem
                     selengkapnyaClick={() => {
@@ -174,141 +166,140 @@ export default function DocumentListSwr({
                     {...d}
                   />
                 </li>
-              ))
-            }
-          </ul>
-          <div className="mt-6">
-            <UIPagination
-              total={meta.filter_count}
-              page={page}
-              limit={perPage}
-              setLimit={setPerPage}
-              setPage={setPage}
-            />
-          </div>
-          <div className="flex items-end justify-end">
-            <ModalDialog
-              show={selengkapnyaShow}
-              setShow={setSelengkapnyaShow}
-              header={
-                current ? (
-                  <section className="p-6 pb-0 max-w-[510px]">
-                <span
-                  className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
-        hover:text-primary-700 hover:bg-primary-100"
-                >
-                  {current.category.name}
-                </span>
-                    <h1 className="font-roboto font-medium text-[21px] leading-[34px] text-primary-700">
-                      {current.title}
-                    </h1>
-                  </section>
-                ) : (
-                  ''
-                )
-              }
-              footer={
-                <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
-                  <button
-                    className="btn btn-primary btn-outline btn-sm !justify-center"
-                    onClick={() => setSelengkapnyaShow(false)}
-                  >
-                    Tutup
-                  </button>
-                  {current && (
-                    <Link
-                      className="btn btn-primary btn-sm text-white"
-                      href={current.file.url}
-                      target="_blank"
-                      download
-                    >
-                      {' '}
-                      <Icon icon="base:download" fontSize="18px"/> Unduh
-                    </Link>
-                  )}
-                </div>
-              }
-            >
-              {current && (
-                <div className="flex flex-col p-4 md:p-6 gap-2 max-w-[550px] overflow-y-auto overflow-x-hidden">
-                  <section className="col-span-2 flex gap-4">
-                    <div className="w-6">
-                      <Icon
-                        icon="base:info-outline"
-                        className="self-start text-primary w-6 h-6"
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                        Deskripsi Dokumen
-                      </h2>
-                      <div className="w-full max-h-[116px] overflow-y-auto pr-4">
-                        <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
-                          {current && current.description}
-                        </p>
-                      </div>
-                    </div>
-                  </section>
-                  <section className="flex gap-4">
-                    <div className="w-6">
-                      <Icon
-                        icon="base:file-outline"
-                        className="self-start text-primary w-6 h-6"
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                        Format Dokumen
-                      </h2>
-                      <p
+              ))}
+            </ul>
+            <div className="mt-6">
+              <UIPagination
+                total={meta.filter_count}
+                page={page}
+                limit={perPage}
+                setLimit={setPerPage}
+                setPage={setPage}
+              />
+            </div>
+            <div className="flex items-end justify-end">
+              <ModalDialog
+                show={selengkapnyaShow}
+                setShow={setSelengkapnyaShow}
+                header={
+                  current ? (
+                    <section className="p-6 pb-0 max-w-[510px]">
+                      <span
                         className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
-            hover:text-primary-700 hover:bg-primary-100"
+        hover:text-primary-700 hover:bg-primary-100"
                       >
-                        {mimeTypeLabel(current.file.type)}
-                      </p>
-                    </div>
-                  </section>
-                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <section className="flex gap-4">
-                      <div className="w-6">
-                        <Icon
-                          icon="base:calendar"
-                          className="self-start text-primary w-6 h-6"
-                        />
-                      </div>
-                      <div>
-                        <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                          Tanggal Publish
-                        </h2>
-                        <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
-                          {current.publish_date_format}
-                        </p>
-                      </div>
+                        {current.category.name}
+                      </span>
+                      <h1 className="font-roboto font-medium text-[21px] leading-[34px] text-primary-700">
+                        {current.title}
+                      </h1>
                     </section>
-                    <section className="flex gap-4">
-                      <div className="w-6">
-                        <Icon
-                          icon="base:calendar"
-                          className="self-start text-primary w-6 h-6"
-                        />
-                      </div>
-                      <div>
-                        <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                          Diupdate pada
-                        </h2>
-                        <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
-                          {current.date_updated_format ?? '-'}
-                        </p>
-                      </div>
-                    </section>
+                  ) : (
+                    ''
+                  )
+                }
+                footer={
+                  <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
+                    <button
+                      className="btn btn-primary btn-outline btn-sm !justify-center"
+                      onClick={() => setSelengkapnyaShow(false)}
+                    >
+                      Tutup
+                    </button>
+                    {current && (
+                      <Link
+                        className="btn btn-primary btn-sm text-white"
+                        href={current.file.url}
+                        target="_blank"
+                        download
+                      >
+                        {' '}
+                        <Icon icon="base:download" fontSize="18px" /> Unduh
+                      </Link>
+                    )}
                   </div>
-                </div>
-              )}
-            </ModalDialog>
+                }
+              >
+                {current && (
+                  <div className="flex flex-col p-4 md:p-6 gap-2 max-w-[550px] overflow-y-auto overflow-x-hidden">
+                    <section className="col-span-2 flex gap-4">
+                      <div className="w-6">
+                        <Icon
+                          icon="base:info-outline"
+                          className="self-start text-primary w-6 h-6"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
+                          Deskripsi Dokumen
+                        </h2>
+                        <div className="w-full max-h-[116px] overflow-y-auto pr-4">
+                          <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
+                            {current && current.description}
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="flex gap-4">
+                      <div className="w-6">
+                        <Icon
+                          icon="base:file-outline"
+                          className="self-start text-primary w-6 h-6"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
+                          Format Dokumen
+                        </h2>
+                        <p
+                          className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
+            hover:text-primary-700 hover:bg-primary-100"
+                        >
+                          {mimeTypeLabel(current.file.type)}
+                        </p>
+                      </div>
+                    </section>
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <section className="flex gap-4">
+                        <div className="w-6">
+                          <Icon
+                            icon="base:calendar"
+                            className="self-start text-primary w-6 h-6"
+                          />
+                        </div>
+                        <div>
+                          <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
+                            Tanggal Publish
+                          </h2>
+                          <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
+                            {current.publish_date_format}
+                          </p>
+                        </div>
+                      </section>
+                      <section className="flex gap-4">
+                        <div className="w-6">
+                          <Icon
+                            icon="base:calendar"
+                            className="self-start text-primary w-6 h-6"
+                          />
+                        </div>
+                        <div>
+                          <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
+                            Diupdate pada
+                          </h2>
+                          <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
+                            {current.date_updated_format ?? '-'}
+                          </p>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                )}
+              </ModalDialog>
+            </div>
           </div>
-        </div>
-      );
-    }}
-  </UISwrResource>
-
+        );
+      }}
+    </UISwrResource>
+  );
 }

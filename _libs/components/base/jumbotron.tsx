@@ -1,24 +1,23 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import React from 'react';
-import {UIContainer} from "@portal-web/shared-ui";
+import { UIContainer } from '@portal-web/shared-ui';
 
-export default function LibBaseJumbotron(
-  {
-    breadcrumb,
-    bgImage = '/images/bg/jumbotron-default.jpeg',
-    title,
-    subtitle,
-    suffix,
-    metaData,
-  }: {
-    breadcrumb?: any;
-    bgImage?: string;
-    title: string;
-    subtitle?: string;
-    suffix?: any;
-    metaData?: boolean;
-  }) {
+export default function LibBaseJumbotron({
+  breadcrumb,
+  bgImage = '/images/bg/jumbotron-default.jpeg',
+  title,
+  subtitle,
+  suffix,
+  metaData,
+}: {
+  breadcrumb?: any;
+  bgImage?: string;
+  title: string;
+  subtitle?: string;
+  suffix?: any;
+  metaData?: boolean;
+}) {
   return (
     <section
       className="relative w-full bg-gray-800"
@@ -33,10 +32,10 @@ export default function LibBaseJumbotron(
         <Head>
           {/*<title>{baseTitle(title)}</title>*/}
           {/*<meta name="title" content={baseTitle(title)}/>*/}
-          <meta name="description" content={subtitle}/>
+          <meta name="description" content={subtitle} />
         </Head>
       ) : null}
-      <div className="jumbotron-overlay"/>
+      <div className="jumbotron-overlay" />
       <UIContainer className="relative pt-24 pb-40 z-10">
         {breadcrumb && breadcrumb}
         {title && (

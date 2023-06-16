@@ -5,7 +5,7 @@ import {
 } from '@portal-web/shared-api/server';
 import Head from 'next/head';
 import React from 'react';
-import {UINextImageBlur} from '@portal-web/shared-ui';
+import { UINextImageBlur } from '@portal-web/shared-ui';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import { Icon } from '@iconify/react';
 import LibDataNewsReadShare from '../../../_libs/components/data/news/read/share';

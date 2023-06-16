@@ -18,7 +18,7 @@ export default function LayananPublikInfoUmum({ data }) {
       </div>
     </div>
   );
-  const dataList:any = [];
+  const dataList: any = [];
   if (data.type && data.type.length) {
     dataList.push({
       title: 'Jenis Pelayanan',

@@ -4,10 +4,10 @@ import { Icon } from '@iconify/react';
 import ModalDialog from '../../modal/modal-dialog';
 import NewsReadShare from './share';
 import Image from 'next/image';
-import {UIContainer} from "@portal-web/shared-ui";
-import BaseBreadcrumb from "../../base/breadcrumb";
+import { UIContainer } from '@portal-web/shared-ui';
+import BaseBreadcrumb from '../../base/breadcrumb';
 
-export default function NewsReadHeader({ news, articleUrl,apiSharedCount }) {
+export default function NewsReadHeader({ news, articleUrl, apiSharedCount }) {
   const breadcrumbItems = [
     { link: '/', label: 'Beranda' },
     { link: '/berita', label: 'Berita' },

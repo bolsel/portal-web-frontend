@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import throttle from 'lodash/throttle';
 import clsx from 'clsx';
 import { Icon } from '@iconify/react';
-import {UIDevice} from "@portal-web/shared-ui";
+import { UIDevice } from '@portal-web/shared-ui';
 
 export default function LibBaseModalDialog({
   show = false,
@@ -13,14 +13,14 @@ export default function LibBaseModalDialog({
   header = null,
   footer = null,
   children,
-}:{
-  show?:boolean,
-  setShow?:any,
-  button?:any
-  fullscreen?:boolean,
-  header?:any,
-  footer?:any
-  children?:any
+}: {
+  show?: boolean;
+  setShow?: any;
+  button?: any;
+  fullscreen?: boolean;
+  header?: any;
+  footer?: any;
+  children?: any;
 }) {
   const [isOpen, setIsOpen] = useState(show);
   const [isFullScreen, setIsFullScreen] = useState(fullscreen);

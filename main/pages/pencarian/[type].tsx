@@ -1,12 +1,16 @@
 import BaseJumbotron from '../../components/base/jumbotron';
-import {useRouter} from 'next/router';
-import {Icon} from '@iconify/react';
+import { useRouter } from 'next/router';
+import { Icon } from '@iconify/react';
 import SearchList from '../../components/search/list';
-import {useState} from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import {UIContainer, UIPagination, UISearchInput} from "@portal-web/shared-ui";
-import {useResourceSWR} from "@portal-web/shared-api";
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import {
+  UIContainer,
+  UIPagination,
+  UISearchInput,
+} from '@portal-web/shared-ui';
+import { useResourceSWR } from '@portal-web/shared-api';
 
 export default function PencarianTypePage() {
   const router = useRouter();
@@ -16,12 +20,13 @@ export default function PencarianTypePage() {
 
   const currentQuery = router.query.q as string;
   const type = router.query.type as string;
-  const {data: dataNews, isLoading: isLoadingNews} = useResourceSWR('news', {
+  const { data: dataNews, isLoading: isLoadingNews } = useResourceSWR('news', {
     pathQuery: ['latest'],
     paramsQuery: {
       search: currentQuery,
-      page, limit: perPage
-    }
+      page,
+      limit: perPage,
+    },
   });
   return (
     <main>
@@ -66,12 +71,12 @@ export default function PencarianTypePage() {
                 className="btn btn-outline btn-sm btn-primary gap-2"
                 onClick={() => router.push(`/pencarian?q=${currentQuery}`)}
               >
-                <Icon icon="mdi:arrow-left" width={18} height={18}/>
+                <Icon icon="mdi:arrow-left" width={18} height={18} />
                 Kembali
               </button>
               <h2 className="font-roboto text-xl font-medium text-blue-gray-700">
                 <span className="capitalize">{type}</span> terkait{' '}
-                <br className="md:hidden"/>{' '}
+                <br className="md:hidden" />{' '}
                 <strong className="text-primary-700">{currentQuery}</strong>
               </h2>
             </div>

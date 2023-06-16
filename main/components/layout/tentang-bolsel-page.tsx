@@ -2,8 +2,8 @@ import BaseJumbotron from '../base/jumbotron';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { Icon } from '@iconify/react';
-import BaseBreadcrumb from "../base/breadcrumb";
-import {UIContainer} from "@portal-web/shared-ui";
+import BaseBreadcrumb from '../base/breadcrumb';
+import { UIContainer } from '@portal-web/shared-ui';
 
 export default function LayoutTentangBolselPage({ children, page }) {
   const basePath = '/tentang-bolsel';

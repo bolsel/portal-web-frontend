@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import SearchList from './list';
 import { data } from 'autoprefixer';
-import {UIContainer, UIDevice, UISearchInput} from "@portal-web/shared-ui";
-import {useResourceSWR} from "@portal-web/shared-api";
-import {useRouter} from "next/router";
+import { UIContainer, UIDevice, UISearchInput } from '@portal-web/shared-ui';
+import { useResourceSWR } from '@portal-web/shared-api';
+import { useRouter } from 'next/router';
 
 function TidakAdaData({ q }) {
   return (
@@ -24,24 +24,28 @@ export default function Search({
 }) {
   const router = useRouter();
   const { data: dataNews, isLoading: isLoadingNews } = useResourceSWR('news', {
-    pathQuery:['latest'],
-    paramsQuery:{
-      search:currentSearchQuery,
-      limit: 8
-    }
-  })
-  const { data: dataNewsPopular, isLoading: isLoadingNewsPopular } = useResourceSWR('news', {
-    pathQuery:['popular'],
-    paramsQuery:{
-      search:currentSearchQuery,
-      limit: 5
-    }
-  })
+    pathQuery: ['latest'],
+    paramsQuery: {
+      search: currentSearchQuery,
+      limit: 8,
+    },
+  });
+  const { data: dataNewsPopular, isLoading: isLoadingNewsPopular } =
+    useResourceSWR('news', {
+      pathQuery: ['popular'],
+      paramsQuery: {
+        search: currentSearchQuery,
+        limit: 5,
+      },
+    });
   const hasDataNews = !isLoadingNews && dataNews && dataNews.data.length;
   return (
     <UIContainer className="relative -top-24 z-20">
       <div className="p-3 md:p-4 lg:py-8 lg:px-10 rounded-xl bg-white min-h-[600px] shadow min-w-0 flex flex-col gap-6 lg:gap-8">
-        <UISearchInput onSubmit={(value)=>router.push(`/pencarian?q=${value}`)} currentValue={currentSearchQuery} />
+        <UISearchInput
+          onSubmit={(value) => router.push(`/pencarian?q=${value}`)}
+          currentValue={currentSearchQuery}
+        />
         <section>
           {hasDataNews ? (
             <h2 className="font-lora text-center md:text-left text-2xl font-bold text-blue-gray-700">

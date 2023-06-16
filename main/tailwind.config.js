@@ -3,7 +3,7 @@ const { join } = require('path');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets:[require('../../../libs/shared/ui/presets/default')],
+  presets: [require('../../../libs/shared/ui/presets/default')],
   content: [
     join(
       __dirname,
@@ -13,7 +13,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
+      colors: {
         'primary-dark': '#b91c1c',
         'primary-50': '#fef2f2',
         'primary-100': '#fee2e2',
@@ -25,7 +25,7 @@ module.exports = {
         'primary-700': '#b91c1c',
         'primary-800': '#991b1b',
         'primary-900': '#7f1d1d',
-      }
+      },
     },
   },
   plugins: [],

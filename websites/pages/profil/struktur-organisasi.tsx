@@ -36,9 +36,13 @@ export default function PageProfilSekilas(props) {
   const { data } = props;
   return (
     <BaseLayoutProfilMenu {...props}>
-      {data ? <div className="prose max-w-none">
-        <LibContentBlocks data={data} />
-      </div> : <div>Belum ada data</div>}
+      {data ? (
+        <div className="prose max-w-none">
+          <LibContentBlocks data={data} />
+        </div>
+      ) : (
+        <div>Belum ada data</div>
+      )}
     </BaseLayoutProfilMenu>
   );
 }

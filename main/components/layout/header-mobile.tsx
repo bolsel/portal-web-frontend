@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import {UIContainer} from "@portal-web/shared-ui";
+import { UIContainer } from '@portal-web/shared-ui';
 
 export default function LayoutDefaultHeaderMobile() {
   const layoutData = useLayoutDefaultContext();
-  const [active, setActive] = useState<number|null>(null);
+  const [active, setActive] = useState<number | null>(null);
   const router = useRouter();
   useEffect(() => {
     layoutData.setMobileMenuShow?.(false);

@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import {useLayoutDefaultContext} from './context';
-import {UIContainer, UIIcon} from "@portal-web/shared-ui";
-import clsx from "clsx";
+import { useLayoutDefaultContext } from './context';
+import { UIContainer, UIIcon } from '@portal-web/shared-ui';
+import clsx from 'clsx';
 
 function Info() {
   const layoutData = useLayoutDefaultContext();
-  const {settings} = layoutData;
+  const { settings } = layoutData;
   return (
     <div className="min-w-0 grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between gap-6 text-white">
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:map-marker" className="py-1 w-8 h-8"/>
+        <UIIcon icon="base:map-marker" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-roboto font-bold leading-7">
             Kompleks Perkantoran Panango
@@ -23,7 +23,7 @@ function Info() {
         </div>
       </div>
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:email" className="py-1 w-8 h-8"/>
+        <UIIcon icon="base:email" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-roboto font-bold leading-7">Surel</p>
           <a href="mailto:info@bolselkab.go.id" className="text-sm leading-6">
@@ -47,7 +47,7 @@ function Info() {
       {/*  </div>*/}
       {/*</div>*/}
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:tabler-social" className="py-1 w-8 h-8"/>
+        <UIIcon icon="base:tabler-social" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-bold">Media Sosial</p>
           <div className="w-full flex justify-between md:justify-start gap-6">
@@ -58,7 +58,7 @@ function Info() {
                 rel="noreferrer"
                 className="hover:bg-[#1877F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-facebook" className="w-6 h-6"/>
+                <UIIcon icon="base:social-facebook" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_twitter ? (
@@ -68,7 +68,7 @@ function Info() {
                 rel="noreferrer"
                 className="hover:bg-[#1DA1F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-twitter" className="w-6 h-6"/>
+                <UIIcon icon="base:social-twitter" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_instagram ? (
@@ -78,7 +78,7 @@ function Info() {
                 rel="noreferrer"
                 className="hover:bg-[#E4405F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-instagram" className="w-6 h-6"/>
+                <UIIcon icon="base:social-instagram" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_youtube ? (
@@ -88,7 +88,7 @@ function Info() {
                 rel="noreferrer"
                 className="hover:bg-[#CD201F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-youtube" className="w-6 h-6"/>
+                <UIIcon icon="base:social-youtube" className="w-6 h-6" />
               </a>
             ) : null}
           </div>
@@ -112,10 +112,10 @@ export default function LayoutDefaultFooter() {
               alt="Beranda"
             />
           </Link>
-          <Info/>
+          <Info />
           <div className="flex w-full flex-col text-white">
             <div className="flex items-start gap-3">
-              <UIIcon icon="base:sitemap-line" className="py-1 w-8 h-8"/>
+              <UIIcon icon="base:sitemap-line" className="py-1 w-8 h-8" />
               <div className="flex w-full min-h-0 flex-col gap-4">
                 <h2 className="font-roboto font-bold leading-7">Sitemap</h2>
                 <section className="min-w-0 flex flex-col divide-y divide-primary-400 -mt-4 lg:hidden">
@@ -164,8 +164,8 @@ export default function LayoutDefaultFooter() {
                       'lg:grid-cols-4': layoutData.menuList.length === 4,
                       'lg:grid-cols-5': layoutData.menuList.length === 5,
                     },
-                    `lg:grid lg:gap-y-8 lg:-ml-7`)
-                  }
+                    `lg:grid lg:gap-y-8 lg:-ml-7`
+                  )}
                 >
                   {layoutData.menuList.map((m, i) => {
                     return (
@@ -210,7 +210,7 @@ export default function LayoutDefaultFooter() {
         <UIContainer>
           <div className="flex flex-col items-center lg:items-start gap-5">
             <p className="font-lato text-xs lg:text-sm font-normal leading-6 text-white text-center lg:text-left">
-              Copyright © 2023 <br className="lg:hidden"/> Pemerintah Kabupaten
+              Copyright © 2023 <br className="lg:hidden" /> Pemerintah Kabupaten
               Bolaang Mongondow Selatan
             </p>
           </div>

@@ -12,19 +12,18 @@ interface SearchListProps {
   footer?: any;
 }
 
-export default function SearchList(
-  {
-    items,
-    isLoading,
-    view = 'list',
-    maxLength = 5,
-    small = false,
-    footer,
-  }: SearchListProps) {
+export default function SearchList({
+  items,
+  isLoading,
+  view = 'list',
+  maxLength = 5,
+  small = false,
+  footer,
+}: SearchListProps) {
   function _Skeleton() {
     const items: any = [];
     for (let i = 0; i < maxLength; i++) {
-      items.push(<SearchItemSkeleton view={view} key={i}/>);
+      items.push(<SearchItemSkeleton view={view} key={i} />);
     }
     return items;
   }
@@ -67,7 +66,7 @@ export default function SearchList(
                   view === 'list'
                     ? 'w-[120px] h-[120px]'
                     : 'w-full h-[120px] mb-6',
-                  {'!w-[72px] !h-[72px]': small}
+                  { '!w-[72px] !h-[72px]': small }
                 )}
               >
                 <Image
@@ -99,8 +98,7 @@ export default function SearchList(
                 aria-label={title}
                 title={title}
               >
-                <h1
-                  className="font-lato font-medium text-lg leading-7 text-blue-gray-800 mb-[6px] group-hover:text-primary-700">
+                <h1 className="font-lato font-medium text-lg leading-7 text-blue-gray-800 mb-[6px] group-hover:text-primary-700">
                   {title}
                 </h1>
               </Link>

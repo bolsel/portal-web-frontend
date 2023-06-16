@@ -1,20 +1,23 @@
 import BaseJumbotron from '../../components/base/jumbotron';
 import { useState } from 'react';
-import {UIContainer, UISearchInput} from "@portal-web/shared-ui";
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import AplikasiKategoriListSelectSwr from "../../components/client/aplikasi-kategori-list-select-swr";
-import AplikasiListDataSwr from "../../components/client/aplikasi-list-data-swr";
-import {ApplicationCategoriesResource} from "@portal-web/shared-api/server";
+import { UIContainer, UISearchInput } from '@portal-web/shared-ui';
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import AplikasiKategoriListSelectSwr from '../../components/client/aplikasi-kategori-list-select-swr';
+import AplikasiListDataSwr from '../../components/client/aplikasi-list-data-swr';
+import { ApplicationCategoriesResource } from '@portal-web/shared-api/server';
 
 export async function getServerSideProps({ params }) {
-  const { data: categories } =
-    await (new ApplicationCategoriesResource).itemsHandler().readByQuery({fields:['id','name'], limit: -1 });
+  const { data: categories } = await new ApplicationCategoriesResource()
+    .itemsHandler()
+    .readByQuery({ fields: ['id', 'name'], limit: -1 });
   return { props: { categories } };
 }
 
 export default function AplikasiPage({ categories }) {
-  const [categoriesSelected, setCategoriesSelected] = useState(categories.map(d=>d.id));
-  const [search,setSearch] = useState('');
+  const [categoriesSelected, setCategoriesSelected] = useState(
+    categories.map((d) => d.id)
+  );
+  const [search, setSearch] = useState('');
   return (
     <main className="overflow-hidden">
       <section>
@@ -57,7 +60,11 @@ export default function AplikasiPage({ categories }) {
                 <h1 className="font-bold font-lora text-primary-700 text-[28px] leading-10 md:text-4xl md:leading-none">
                   Daftar Aplikasi Bolsel
                 </h1>
-                <UISearchInput placeholder="Cari Aplikasi" onClear={()=>setSearch('')} onSubmit={setSearch}/>
+                <UISearchInput
+                  placeholder="Cari Aplikasi"
+                  onClear={() => setSearch('')}
+                  onSubmit={setSearch}
+                />
                 <section className="flex xl:hidden flex-col gap-5">
                   <AplikasiKategoriListSelectSwr
                     categories={categories}
@@ -66,7 +73,10 @@ export default function AplikasiPage({ categories }) {
                     staticOptions={false}
                   />
                 </section>
-                <AplikasiListDataSwr search={search} categories={categoriesSelected} />
+                <AplikasiListDataSwr
+                  search={search}
+                  categories={categoriesSelected}
+                />
               </div>
             </div>
           </div>

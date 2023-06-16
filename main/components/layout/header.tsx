@@ -6,7 +6,7 @@ import { useLayoutDefaultContext } from './context';
 import { useRouter } from 'next/router';
 import BaseLogo from '../base/logo';
 import LayoutDefaultHeaderMobile from './header-mobile';
-import {UIContainer} from "@portal-web/shared-ui";
+import { UIContainer } from '@portal-web/shared-ui';
 
 export default function LayoutDefaultHeader() {
   const layoutData = useLayoutDefaultContext();

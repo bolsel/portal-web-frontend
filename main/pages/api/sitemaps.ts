@@ -1,24 +1,26 @@
-import {NextApiRequest, NextApiResponse} from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import {
   directusInstance,
   NewsCategoriesResource,
   NewsResource,
-  PublicServicesResource
-} from "@portal-web/shared-api/server";
+  PublicServicesResource,
+} from '@portal-web/shared-api/server';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const {data: newsCategories} =
-    await (new NewsCategoriesResource()).itemsHandler().readByQuery({
+  const { data: newsCategories } = await new NewsCategoriesResource()
+    .itemsHandler()
+    .readByQuery({
       fields: ['name', 'slug', 'description', 'icon_name'],
-      limit: -1
+      limit: -1,
     });
-  const {data: publicServices} =
-    await (new PublicServicesResource()).itemsHandler().readByQuery({
+  const { data: publicServices } = await new PublicServicesResource()
+    .itemsHandler()
+    .readByQuery({
       fields: ['id', 'title', 'description'],
-      limit: 5
+      limit: 5,
     });
   const mainMenu = [
     {
@@ -71,12 +73,14 @@ export default async function handler(
       title: 'Layanan Publik',
       link: '/layanan-publik',
       items: [
-        ...(publicServices ? publicServices.map((d: any) => ({
-          title: d.title,
-          link: `/layanan-publik/${d.id}`,
-          description: d.description,
-          icon: 'base:layanan-publik',
-        })) : []),
+        ...(publicServices
+          ? publicServices.map((d: any) => ({
+              title: d.title,
+              link: `/layanan-publik/${d.id}`,
+              description: d.description,
+              icon: 'base:layanan-publik',
+            }))
+          : []),
         ...[
           {
             title: 'Semua Layanan Publik',

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {PortalWebSettingsResource} from '@portal-web/shared-api/server'
+import { PortalWebSettingsResource } from '@portal-web/shared-api/server';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

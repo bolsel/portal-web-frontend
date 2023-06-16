@@ -1,9 +1,9 @@
-import {UIIcon, UISwrResource} from "@portal-web/shared-ui";
-import BaseDataView from "../base/data-view/data-view";
-import React, {useState} from "react";
-import BaseDataViewSkeleton from "../base/data-view/skeleton";
-import Link from "next/link";
-import clsx from "clsx";
+import { UIIcon, UISwrResource } from '@portal-web/shared-ui';
+import BaseDataView from '../base/data-view/data-view';
+import React, { useState } from 'react';
+import BaseDataViewSkeleton from '../base/data-view/skeleton';
+import Link from 'next/link';
+import clsx from 'clsx';
 
 export default function LayananPublikListSwr() {
   const [viewType, setViewType] = useState('list');
@@ -12,10 +12,10 @@ export default function LayananPublikListSwr() {
   const [modalShow, setModalShow] = useState(false);
   const [current, setCurrent] = useState<any>(null);
 
-  const LogoComponent = ({item, className}) => (
+  const LogoComponent = ({ item, className }) => (
     <div className={`${className}`}>
       {item.logo ? (
-        <img src={item.logo.url} alt={`Logo ${item.slug}`} className="w-full"/>
+        <img src={item.logo.url} alt={`Logo ${item.slug}`} className="w-full" />
       ) : (
         <UIIcon
           icon="base:layanan-publik"
@@ -26,7 +26,7 @@ export default function LayananPublikListSwr() {
       )}
     </div>
   );
-  const ItemView = ({item}) => (
+  const ItemView = ({ item }) => (
     <Link
       href={`/layanan-publik/${item.id}`}
       // onClick={() => showModal(item)}
@@ -57,51 +57,60 @@ export default function LayananPublikListSwr() {
               ))}
             </div>
           ) : null}
-          <p
-            className="w-4/4 font-lato text-sm font-normal text-[#415C84] leading-5 line-clamp-3 md:line-clamp-2 mt-3 mb-3">
+          <p className="w-4/4 font-lato text-sm font-normal text-[#415C84] leading-5 line-clamp-3 md:line-clamp-2 mt-3 mb-3">
             {item.description}
           </p>
         </div>
       </div>
     </Link>
   );
-  return (<UISwrResource
-    resourceKey={'public_services'}
-    pathQuery={['listSortFields']}
-    loadingComponent={() => <BaseDataViewSkeleton limit={limit} viewType={viewType}/>}
-    noItemsComponent={() => <li className='text-center'>Belum ada data untuk ditampilkan.</li>}
-    wrapperComponent={
-      ({children,data}) => <BaseDataView
-        viewType={viewType}
-        setViewType={setViewType}
-        pagination={data && data.meta ? {
-          total: data.meta.filter_count,
-          page,
-          limit,
-          setLimit,
-          setPage,
-          customPerPages: [2, 4, 6, 8, 10, 20]
-        } : undefined}
-      >
-        {children}
-      </BaseDataView>
-    }
-  >
-    {(data) => {
-      return data.data.map((item, i) => {
-        return (
-          <li
-            key={i}
-            className={clsx(
-              viewType === 'list'
-                ? ' flex-col gap-2 md:flex-row md:gap-6'
-                : 'flex-col gap-2'
-            )}
-          >
-            {ItemView({item})}
-          </li>
-        );
-      })
-    }}
-  </UISwrResource>)
+  return (
+    <UISwrResource
+      resourceKey={'public_services'}
+      pathQuery={['listSortFields']}
+      loadingComponent={() => (
+        <BaseDataViewSkeleton limit={limit} viewType={viewType} />
+      )}
+      noItemsComponent={() => (
+        <li className="text-center">Belum ada data untuk ditampilkan.</li>
+      )}
+      wrapperComponent={({ children, data }) => (
+        <BaseDataView
+          viewType={viewType}
+          setViewType={setViewType}
+          pagination={
+            data && data.meta
+              ? {
+                  total: data.meta.filter_count,
+                  page,
+                  limit,
+                  setLimit,
+                  setPage,
+                  customPerPages: [2, 4, 6, 8, 10, 20],
+                }
+              : undefined
+          }
+        >
+          {children}
+        </BaseDataView>
+      )}
+    >
+      {(data) => {
+        return data.data.map((item, i) => {
+          return (
+            <li
+              key={i}
+              className={clsx(
+                viewType === 'list'
+                  ? ' flex-col gap-2 md:flex-row md:gap-6'
+                  : 'flex-col gap-2'
+              )}
+            >
+              {ItemView({ item })}
+            </li>
+          );
+        });
+      }}
+    </UISwrResource>
+  );
 }

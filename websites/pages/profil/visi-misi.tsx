@@ -35,13 +35,16 @@ export default function PageProfilSekilas(props) {
   const { data } = props;
   return (
     <BaseLayoutProfilMenu {...props}>
-      {data.visi && data.misi ?
-      <div className="prose max-w-none">
-        <h2>Visi</h2>
-        <LibContentBlocks data={data.visi} />
-        <h2>Misi</h2>
-        <LibContentBlocks data={data.misi} />
-      </div> : <div>Belum ada data</div>}
+      {data.visi && data.misi ? (
+        <div className="prose max-w-none">
+          <h2>Visi</h2>
+          <LibContentBlocks data={data.visi} />
+          <h2>Misi</h2>
+          <LibContentBlocks data={data.misi} />
+        </div>
+      ) : (
+        <div>Belum ada data</div>
+      )}
     </BaseLayoutProfilMenu>
   );
 }

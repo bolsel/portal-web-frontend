@@ -1,7 +1,7 @@
 import BaseJumbotron from '../../components/base/jumbotron';
 import { useRouter } from 'next/router';
-import BaseBreadcrumb from "../../components/base/breadcrumb";
-import Search from "../../components/search";
+import BaseBreadcrumb from '../../components/base/breadcrumb';
+import Search from '../../components/search';
 
 export default function PencarianPage() {
   const router = useRouter();

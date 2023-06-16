@@ -1,15 +1,15 @@
-import {AppProps} from 'next/app';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
-import '@portal-web/shared-ui/presets/default/styles/global.css'
+import '@portal-web/shared-ui/presets/default/styles/global.css';
 import '../src/styles/main.scss';
-import {SWRConfig} from "swr";
-import LayoutDefaultMain from "../components/layout/main";
-import {UIConfigProvider} from "@portal-web/shared-ui";
+import { SWRConfig } from 'swr';
+import LayoutDefaultMain from '../components/layout/main';
+import { UIConfigProvider } from '@portal-web/shared-ui';
 import { GTM_ID, pageview } from '../src/gtm';
-import Script from "next/script";
+import Script from 'next/script';
 
-function CustomApp({Component, pageProps}: AppProps) {
+function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script
@@ -35,22 +35,23 @@ function CustomApp({Component, pageProps}: AppProps) {
           revalidateOnFocus: false,
         }}
       >
-        <UIConfigProvider config={{
-          icons: {
-            APIProviders: [
-              {
-                name: '',
-                resources: [
-                  'https://iconify.api.bolselkab.go.id',
-                  'https://api.iconify.design',
-                ]
-              }
-
-            ]
-          }
-        }}>
+        <UIConfigProvider
+          config={{
+            icons: {
+              APIProviders: [
+                {
+                  name: '',
+                  resources: [
+                    'https://iconify.api.bolselkab.go.id',
+                    'https://api.iconify.design',
+                  ],
+                },
+              ],
+            },
+          }}
+        >
           <LayoutDefaultMain>
-            <NextNProgress color="#ef4444"/>
+            <NextNProgress color="#ef4444" />
             <Component {...pageProps} />
           </LayoutDefaultMain>
           {/*<main className="app">*/}

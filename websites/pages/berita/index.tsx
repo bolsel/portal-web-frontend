@@ -38,7 +38,7 @@ export default function PageProfilSekilas(props) {
             <LibSwrDataWebNewsList
               viewType={'grid'}
               paramsQuery={{ limit: 10 }}
-              pathQuery={['byWebId',website.id]}
+              pathQuery={['byWebId', website.id]}
             />
           </div>
           <section className="my-5">
