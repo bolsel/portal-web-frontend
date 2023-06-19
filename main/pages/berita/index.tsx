@@ -61,8 +61,10 @@ export default function BeritaPageIndex() {
             />
             <LibSwrNewsItems
               hideNavigation
-              pathQuery={category ? ['byCategorySlugPopular', category] : ['popular']}
-              paramsQuery={{ limit: 5}}
+              pathQuery={
+                category ? ['byCategorySlugPopular', category] : ['popular']
+              }
+              paramsQuery={{ limit: 5 }}
               listOptions={{
                 hideViewSwitch: true,
                 viewType: 'list',

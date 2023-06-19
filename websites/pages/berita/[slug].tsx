@@ -5,11 +5,11 @@ import {
 } from '@portal-web/shared-api/server';
 import Head from 'next/head';
 import React from 'react';
-import { UINextImageBlur } from '@portal-web/shared-ui';
+import { UIIcon, UINextImageBlur } from '@portal-web/shared-ui';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import { Icon } from '@iconify/react';
 import LibDataNewsReadShare from '../../../_libs/components/data/news/read/share';
-import LibSwrDataWebNewsList from '../../../_libs/components/swr/data-web-news-list';
+import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
+import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -54,7 +54,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function BeritaSlugPage(props) {
-  const { data, articleUrl, apiSharedCount } = props;
+  const { data, articleUrl, apiSharedCount, website } = props;
   return (
     <>
       <Head>
@@ -89,20 +89,20 @@ export default function BeritaSlugPage(props) {
                 <div className="flex flex-col gap-1 text-gray-700">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1">
-                      <Icon icon="mdi:calendar" className="w-4 h-4" />
+                      <UIIcon icon="mdi:calendar" className="w-4 h-4" />
                       <p className="text-sm">{data.publish_date_format}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Icon icon="mdi:eye" className="w-4 h-4" />
+                      <UIIcon icon="mdi:eye" className="w-4 h-4" />
                       <p className="text-sm">{data.view_count}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Icon icon="mdi:share-variant" className="w-4 h-4" />
+                      <UIIcon icon="mdi:share-variant" className="w-4 h-4" />
                       <p className="text-sm">{data.shared_count}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Icon icon="mdi:tag-outline" className="w-4 h-4" />
+                    <UIIcon icon="mdi:tag-outline" className="w-4 h-4" />
                     <div className="flex gap-2">
                       {(data.tags ?? []).map((tag, i) => {
                         return (
@@ -117,14 +117,14 @@ export default function BeritaSlugPage(props) {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Icon icon="mdi:pencil" className="w-4 h-4" />
+                    <UIIcon icon="mdi:pencil" className="w-4 h-4" />
                     <p className="text-sm">
                       Penulis:{' '}
                       <span className="capitalize italic">{data.writer}</span>
                     </p>
                     <div className="hidden lg:flex items-center gap-2">
                       |{' '}
-                      <Icon
+                      <UIIcon
                         icon="material-symbols:video-camera-front-outline"
                         className="w-4 h-4"
                       />
@@ -136,8 +136,8 @@ export default function BeritaSlugPage(props) {
                       </p>
                     </div>
                   </div>
-                  <div className="block lg:hidden flex items-center gap-2">
-                    <Icon
+                  <div className="lg:hidden flex items-center gap-2">
+                    <UIIcon
                       icon="material-symbols:video-camera-front-outline"
                       className="w-4 h-4"
                     />
@@ -157,10 +157,10 @@ export default function BeritaSlugPage(props) {
             <p className="font-lora text-gray-800"></p>
           </div>
           <section className="my-5">
-            <div className="flex flex-col gap-7 lg:sticky lg:top-[88px]">
-              <div className="flex flex-col gap-3 w-full">
+            <div className="flex flex-col gap-2 lg:sticky lg:top-[88px]">
+              <div className="flex flex-col gap-3 w-full mb-5">
                 <p className="inline-flex gap-3 font-lato text-xs text-blue-gray-200 leading-5">
-                  <Icon
+                  <UIIcon
                     icon="mdi:share-variant-outline"
                     className="self-start text-primary w-5 h-5"
                   />
@@ -174,20 +174,22 @@ export default function BeritaSlugPage(props) {
                   quote={data.description}
                 />
               </div>
-              <div className="flex w-full h-[38px]">
-                <div className="border-b-[3px] border-primary">
-                  <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
-                    Berita Terbaru
-                  </h1>
-                </div>
-                <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
-              </div>
-              <LibSwrDataWebNewsList
-                viewType={'list'}
-                hideViewSwitch
-                noPagination
-                itemComponent={{ small: true }}
+              <LibBaseTitleWidget text="Berita Terbaru" />
+              <LibSwrNewsItems
+                websiteId={website.id}
                 paramsQuery={{ limit: 5 }}
+                hideNavigation
+                listOptions={{
+                  hideViewSwitch: true,
+                  itemOptions: {
+                    small: true,
+                    customComponent: {
+                      description() {
+                        return null;
+                      },
+                    },
+                  },
+                }}
               />
             </div>
           </section>

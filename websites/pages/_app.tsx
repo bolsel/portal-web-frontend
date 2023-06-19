@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-// import './styles.css';
 import '@portal-web/shared-ui/presets/default/styles/global.css';
 import '../src/styles/main.scss';
 import BaseLayout from '../components/base/layout/base-layout';

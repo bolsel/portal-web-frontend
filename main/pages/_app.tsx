@@ -55,10 +55,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <NextNProgress color="#ef4444" />
             <Component {...pageProps} />
           </LayoutDefaultMain>
-          {/*<main className="app">*/}
-          {/*  <NextNProgress color="#ef4444" />*/}
-          {/*  <Component {...pageProps} />*/}
-          {/*</main>*/}
         </UIConfigProvider>
       </SWRConfig>
     </>

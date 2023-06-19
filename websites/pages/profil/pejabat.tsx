@@ -1,8 +1,5 @@
 import { serverSideHost } from '../../src/server';
-import {
-  OrganizationPejabatResource,
-  OrganizationsResource,
-} from '@portal-web/shared-api/server';
+import { OrganizationPejabatResource } from '@portal-web/shared-api/server';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import BaseLayoutProfilMenu from '../../components/base/layout/profil-menu-layout';
 import Image from 'next/image';

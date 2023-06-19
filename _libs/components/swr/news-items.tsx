@@ -41,6 +41,7 @@ export default function LibSwrNewsItems({
   search,
   listOptions,
   pathQuery,
+  paramsQuery,
   hideNavigation,
 }: LibSwrNewsItemsProps) {
   const [perPage, setPerPage] = useState(5);
@@ -65,27 +66,39 @@ export default function LibSwrNewsItems({
     <UISwrResource
       resourceKey={resourceKey}
       loadingComponent={() => {
-        return <LibBaseListItemsView viewType={listOptions?.viewType ?? 'list'} {...listOptions}>
-        {({ viewType }) => {
-          const items: any = [];
-          for (let i = 0; i < 5; i++) {
-            items.push(
-              <LibViewNewsListItemSkeleton viewType={viewType} key={i} {...listOptions?.itemOptions} />
-            );
-          }
-          return items;
-        }}
-      </LibBaseListItemsView>
+        return (
+          <LibBaseListItemsView
+            viewType={listOptions?.viewType ?? 'list'}
+            {...listOptions}
+          >
+            {({ viewType }) => {
+              const items: any = [];
+              for (let i = 0; i < 5; i++) {
+                items.push(
+                  <LibViewNewsListItemSkeleton
+                    viewType={viewType}
+                    key={i}
+                    {...listOptions?.itemOptions}
+                  />
+                );
+              }
+              return items;
+            }}
+          </LibBaseListItemsView>
+        );
       }}
       noItemsComponent={() => (
         <EmptyItems search={search} category={category} />
       )}
       pathQuery={pathQuery}
       paramsQuery={{
-        limit: perPage,
-        page: page,
-        search: search,
-        filter,
+        ...{
+          limit: perPage,
+          page: page,
+          search: search,
+          filter,
+        },
+        ...paramsQuery,
       }}
     >
       {({ data, meta }) => {

@@ -1,9 +1,7 @@
 export type LibBaseTitleWidget = {
   text: string;
 };
-export default function LibBaseTitleWidget({
-  text,
-}: LibBaseTitleWidget) {
+export default function LibBaseTitleWidget({ text }: LibBaseTitleWidget) {
   return (
     <div className="flex w-full h-[38px] mb-6">
       <div className="border-b-[3px] border-primary">

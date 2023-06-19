@@ -1,25 +1,23 @@
-import styles from './index.module.css';
 import { serverSideHost } from '../src/server';
-import LibSwrDataNewsList from '../../_libs/components/swr/data-news-list';
 import React from 'react';
-import LibSwrDataWebNewsList from '../../_libs/components/swr/data-web-news-list';
 import LibSwrBannerInfoWidget from '../../_libs/components/swr/banner-info-widget';
 import LibSwrGrafikInfoWidget from '../../_libs/components/swr/grafik-info-widget';
 import Link from 'next/link';
-import GrafikInfoWidgetSwr from '../components/swr/grafik-info-widget-swr';
 import clsx from 'clsx';
+import LibSwrNewsItems from '../../_libs/components/swr/news-items';
+import LibBaseTitleWidget from '../../_libs/components/base/title-widget';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
-  // if (!website) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: '/404-website',
-  //     },
-  //     props: {},
-  //   };
-  // }
+  if (!website) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404-website',
+      },
+      props: {},
+    };
+  }
   return {
     props: {
       website,
@@ -50,11 +48,12 @@ export function Index({ website }) {
             </div>
             <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
           </div>
-          <LibSwrDataWebNewsList
-            viewType={'grid'}
-            hideViewSwitch
-            paramsQuery={{ limit: 10 }}
-            pathQuery={['byWebId', website.id]}
+          <LibSwrNewsItems
+            websiteId={website.id}
+            listOptions={{
+              viewType: 'grid',
+              itemOptions: {},
+            }}
           />
           <div className="flex w-full h-[38px] mt-5">
             <div className="border-b-[3px] border-primary">
@@ -64,12 +63,28 @@ export function Index({ website }) {
             </div>
             <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
           </div>
-          <LibSwrDataNewsList
-            viewType={'list'}
-            hideViewSwitch
-            noPagination
-            itemComponent={{ isPortalBerita: true }}
+
+          <LibSwrNewsItems
+            hideNavigation
             paramsQuery={{ limit: 5 }}
+            listOptions={{
+              viewType: 'list',
+              hideViewSwitch: true,
+              itemOptions: {
+                customComponent: {
+                  description({ data }) {
+                    return (
+                      <p
+                        className="hidden md:line-clamp-2 font-lato font-normal text-sm leading-6 text-gray-600 mb-2
+                    group-hover:text-blue-gray-600 "
+                      >
+                        {data.description}
+                      </p>
+                    );
+                  },
+                },
+              },
+            }}
           />
           <div className="flex items-center justify-center">
             <Link
@@ -84,15 +99,7 @@ export function Index({ website }) {
         <section className="w-full max-w-full">
           <div className="flex flex-col gap-7 lg:sticky lg:top-[70px]">
             <div className="w-full">
-              <div className="flex w-full h-[38px] mb-5">
-                <div className="border-b-[3px] border-primary">
-                  <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
-                    Info Grafik Terbaru
-                  </h1>
-                </div>
-                <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
-              </div>
-
+              <LibBaseTitleWidget text="Info Grafik Terbaru" />
               <LibSwrGrafikInfoWidget
                 wrapperComponent={({ children }) => (
                   <div className="px-0 lg:px-5 bg-primary-50 w-full rounded-lg">
@@ -102,7 +109,6 @@ export function Index({ website }) {
                 paramsQuery={{ limit: 3 }}
                 viewOptions={{
                   className: 'py-0 pt-5 pb-10',
-                  // slidesPerView:1,
                   slideContainer: {
                     className: clsx(
                       `!bg-cover !bg-center`,
@@ -111,16 +117,6 @@ export function Index({ website }) {
                   },
                 }}
               />
-              {/* <LibSwrGrafikInfoWidget
-              wrapperComponent={({children})=><div className="bg-primary-50 w-full rounded-lg">
-                {children}
-                </div>}
-                paramsQuery={{limit:2}}
-                viewOptions={{
-                  slidesPerView:1
-                }}
-              /> */}
-              {/* <GrafikInfoWidgetSwr /> */}
             </div>
           </div>
         </section>

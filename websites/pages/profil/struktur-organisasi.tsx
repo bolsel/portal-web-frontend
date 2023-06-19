@@ -1,11 +1,6 @@
 import { serverSideHost } from '../../src/server';
-import { UIIcon } from '@portal-web/shared-ui';
-import Link from 'next/link';
-import clsx from 'clsx';
 import { OrganizationsResource } from '@portal-web/shared-api/server';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import { useRouter } from 'next/router';
-import { getBuildedMenuProfilList } from '../../src/menu';
 import BaseLayoutProfilMenu from '../../components/base/layout/profil-menu-layout';
 
 export async function getServerSideProps(context) {

@@ -1,7 +1,6 @@
 import { serverSideHost } from '../../src/server';
 import { OrganizationDocumentsResource } from '@portal-web/shared-api/server';
 import LibViewDocumentItemDetail from '../../../_libs/components/view/document/item-detail';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { documentIcon, publicUrl } from '../../../_libs/src/global-helpers';
 import { useState } from 'react';
