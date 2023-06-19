@@ -1,8 +1,10 @@
 import HomeHero from '../components/home-hero';
 import NewsHomeTerkini from '../components/news/home-terkini';
-import BannerInfoWidgetSwr from '../components/client/banner-info-widget-swr';
 import GrafikInfoWidgetSwr from '../components/client/grafik-info-widget-swr';
 import AplikasiListWidgetSwr from '../components/client/aplikasi-list-widget-swr';
+import LibSwrBannerInfoWidget from '../../_libs/components/swr/banner-info-widget';
+import LibSwrGrafikInfoWidget from '../../_libs/components/swr/grafik-info-widget';
+import clsx from 'clsx';
 
 export function Index() {
   return (
@@ -15,11 +17,28 @@ export function Index() {
         <NewsHomeTerkini />
       </section>
       <section className="py-6 md:py-8 xl:py-12">
-        <BannerInfoWidgetSwr />
+        <LibSwrBannerInfoWidget
+          viewOptions={{}}
+          wrapperComponent={({ children }) => (
+            <div className="container mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6">
+              {children}
+            </div>
+          )}
+        />
       </section>
 
       <section className="py-6 md:py-8 xl:py-12">
-        <GrafikInfoWidgetSwr />
+        <LibSwrGrafikInfoWidget
+          wrapperComponent={({ children }) => (
+            <div className="container bg-gray-200 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
+              {children}
+            </div>
+          )}
+          viewOptions={{
+            className: 'py-[50px]',
+          }}
+        />
+        {/* <GrafikInfoWidgetSwr /> */}
       </section>
       <AplikasiListWidgetSwr />
     </main>

@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import { Icon } from '@iconify/react';
 import ModalDialog from '../../modal/modal-dialog';
-import NewsReadShare from './share';
 import Image from 'next/image';
 import { UIContainer } from '@portal-web/shared-ui';
 import BaseBreadcrumb from '../../base/breadcrumb';
+import LibBaseShareItem from '../../../../_libs/components/base/share-item';
 
 export default function NewsReadHeader({ news, articleUrl, apiSharedCount }) {
   const breadcrumbItems = [
@@ -141,10 +140,11 @@ export default function NewsReadHeader({ news, articleUrl, apiSharedCount }) {
                       <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
                         Bagikan Melalui
                       </h2>
-                      <NewsReadShare
-                        id={news.id}
+                      <LibBaseShareItem
                         url={articleUrl}
-                        apiSharedCount={apiSharedCount}
+                        beforeOnClick={() => {
+                          fetch(apiSharedCount);
+                        }}
                         title={news.title}
                         quote={news.description}
                       />

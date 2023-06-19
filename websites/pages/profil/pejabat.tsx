@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function PageProfilSekilas(props) {
+export default function ProfilPejabatPage(props) {
   const { data, website } = props;
 
   return (

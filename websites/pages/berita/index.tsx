@@ -2,7 +2,9 @@ import { serverSideHost } from '../../src/server';
 import React from 'react';
 import LibSwrDataWebNewsList from '../../../_libs/components/swr/data-web-news-list';
 import LibSwrDataNewsList from '../../../_libs/components/swr/data-news-list';
+import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
 import Link from 'next/link';
+import { UIDevice } from '@portal-web/shared-ui';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -27,7 +29,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function PageProfilSekilas(props) {
+export default function BeritaIndexPage(props) {
   const { website } = props;
   return (
     <main>
@@ -35,6 +37,38 @@ export default function PageProfilSekilas(props) {
         {/*<NewsReadHeader news={data} articleUrl={articleUrl} apiSharedCount={apiSharedCount}/>*/}
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
           <div className="flex flex-col gap-7 p-5">
+            <UIDevice>
+              {({ isMobile }) => {
+                if (isMobile)
+                  return (
+                    <LibSwrNewsItems
+                      websiteId={website.id}
+                      listOptions={{
+                        itemOptions: {
+                          // small: true
+                        },
+                      }}
+                    />
+                  );
+                return (
+                  <LibSwrNewsItems
+                    websiteId={website.id}
+                    listOptions={{
+                      itemOptions: {
+                        // customComponent:{
+                        //   description({data}){
+                        //     return <>alska</>
+                        //   }
+                        // }
+                        // viewType:'grid',
+                        // small: true
+                      },
+                    }}
+                  />
+                );
+              }}
+            </UIDevice>
+
             <LibSwrDataWebNewsList
               viewType={'grid'}
               paramsQuery={{ limit: 10 }}

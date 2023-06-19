@@ -15,8 +15,9 @@ export async function serverSideHost(context: NextPageContext) {
   }
   try {
     const item = await new WebsitesResource().apiResourceFetch({
-      pathQuery: ['byDomain', host],
+      pathQuery: ['byDomainOrAlias', host],
     });
+    item.publicUrl = `https://${host}`;
     return item;
   } catch (e) {
     return false;

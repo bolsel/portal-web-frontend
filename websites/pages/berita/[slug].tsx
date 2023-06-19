@@ -53,10 +53,10 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function PageProfilSekilas(props) {
+export default function BeritaSlugPage(props) {
   const { data, articleUrl, apiSharedCount } = props;
   return (
-    <main>
+    <>
       <Head>
         <title>{data.title}</title>
         <meta name="title" content={data.title} />
@@ -74,7 +74,6 @@ export default function PageProfilSekilas(props) {
         <meta property="twitter:image" content={data.image_cover.url} />
       </Head>
       <article className="px-5">
-        {/*<NewsReadHeader news={data} articleUrl={articleUrl} apiSharedCount={apiSharedCount}/>*/}
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
           <div className="flex flex-col gap-7">
             <div className="w-full min-h-screen">
@@ -155,27 +154,10 @@ export default function PageProfilSekilas(props) {
                 </div>
               )}
             </div>
-            <p className="font-lora text-gray-800">
-              {/*<strong>Editor: </strong> {{ editor }}*/}
-            </p>
-            {/*<NewsDetailTags v-if="hasTags" :tags="tags" />*/}
+            <p className="font-lora text-gray-800"></p>
           </div>
           <section className="my-5">
             <div className="flex flex-col gap-7 lg:sticky lg:top-[88px]">
-              {/*<NewsListViewSwr*/}
-              {/*  noPagination*/}
-              {/*  small*/}
-              {/*  pathQuery={['byCategorySlug', data.category.slug]}*/}
-              {/*  paramsQuery={{*/}
-              {/*    filter: {*/}
-              {/*      slug: {*/}
-              {/*        _neq: slug*/}
-              {/*      }*/}
-              {/*    },*/}
-              {/*    limit: 5*/}
-              {/*  }}*/}
-              {/*  header={<NewsListViewHeader label="Berita Terkait"/>}*/}
-              {/*/>*/}
               <div className="flex flex-col gap-3 w-full">
                 <p className="inline-flex gap-3 font-lato text-xs text-blue-gray-200 leading-5">
                   <Icon
@@ -211,6 +193,6 @@ export default function PageProfilSekilas(props) {
           </section>
         </section>
       </article>
-    </main>
+    </>
   );
 }

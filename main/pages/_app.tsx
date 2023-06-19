@@ -37,6 +37,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
       >
         <UIConfigProvider
           config={{
+            publicUrl: 'https://bolselkab.go.id',
             icons: {
               APIProviders: [
                 {

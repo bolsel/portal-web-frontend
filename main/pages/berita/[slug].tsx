@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Icon } from '@iconify/react';
-import NewsReadShare from '../../components/news/read/share';
 import React from 'react';
 import Image from 'next/image';
 import { urlAssetCdn } from '../../src/global-helpers';
@@ -9,8 +8,10 @@ import { NewsListViewSwr } from '../../components/client/news-list-view-swr';
 import NewsReadHeader from '../../components/news/read/header';
 import { getResourceApiUrl, NewsResource } from '@portal-web/shared-api/server';
 import NewsListViewHeader from '../../components/news/list-view-header';
+import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
+import LibBaseShareItem from '../../../_libs/components/base/share-item';
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   const { slug } = params;
   let data;
   try {
@@ -38,54 +39,12 @@ export async function getServerSideProps({ params }) {
     props: { slug: slug, data, articleUrl, apiSharedCount },
   };
 }
-
-const ContentBlocksComp = ({ blocks }: { blocks: any[] }) => {
-  // if(blocks.length) return null;
-  const items: any = [];
-  blocks.forEach((block, i) => {
-    if (block.type === 'image') {
-      const hasCaption = block.data.caption;
-      items.push(
-        <p key={i}>
-          <Image
-            alt=""
-            width="0"
-            height="0"
-            sizes="100vw"
-            key={i}
-            src={urlAssetCdn(block.data.file.filename_disk)}
-            // className={clsx({'mb-7':!hasCaption})}
-          />
-          {hasCaption ? (
-            <div className="text-center italic text-sm">{hasCaption}</div>
-          ) : null}
-        </p>
-      );
-    } else if (block.type === 'fromhtml') {
-      items.push(
-        <div key={i} dangerouslySetInnerHTML={{ __html: block.data.html }} />
-      );
-    } else if (block.type === 'paragraph') {
-      items.push(
-        <p key={i} className="text-justify">
-          {block.data.text}
-        </p>
-      );
-    }
-  });
-  return <>{items}</>;
-};
 export default function ReadBeritaPage({
   data,
   apiSharedCount,
   slug,
   articleUrl,
 }) {
-  // const {data: dataTerkait, isLoading} = useSwrNews({
-  //   type: 'latest',
-  //   perPage: 5,
-  //   category: data.category_slug
-  // })
   return (
     <main>
       <Head>
@@ -115,15 +74,10 @@ export default function ReadBeritaPage({
           <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
             <div className="flex flex-col gap-7">
               <div className="article__body w-full min-h-screen">
-                {/*<div  dangerouslySetInnerHTML={{__html: data.content}}/>*/}
                 {data.content && data.content.blocks && (
-                  <ContentBlocksComp blocks={data.content.blocks} />
+                  <LibContentBlocks data={data.content} />
                 )}
               </div>
-              <p className="font-lora text-gray-800">
-                {/*<strong>Editor: </strong> {{ editor }}*/}
-              </p>
-              {/*<NewsDetailTags v-if="hasTags" :tags="tags" />*/}
             </div>
             <section>
               <div className="flex flex-col gap-7 lg:sticky lg:top-[88px]">
@@ -149,12 +103,13 @@ export default function ReadBeritaPage({
                     />
                     Bagikan Berita
                   </p>
-                  <NewsReadShare
-                    apiSharedCount={apiSharedCount}
-                    id={data.id}
+                  <LibBaseShareItem
                     url={articleUrl}
                     title={data.title}
                     quote={data.description}
+                    beforeOnClick={() => {
+                      fetch(apiSharedCount);
+                    }}
                   />
                 </div>
               </div>

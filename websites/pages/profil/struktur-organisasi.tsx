@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function PageProfilSekilas(props) {
+export default function ProfilStrukturOrganisasiPage(props) {
   const { data } = props;
   return (
     <BaseLayoutProfilMenu {...props}>

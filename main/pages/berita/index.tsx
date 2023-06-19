@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { UIContainer } from '@portal-web/shared-ui';
+import { UIContainer, UIDevice } from '@portal-web/shared-ui';
 import { useRouter } from 'next/router';
-import { NewsListViewSwr } from '../../components/client/news-list-view-swr';
 import NewsCategoriesListSwiperSwr from '../../components/client/news-categories-list-swiper-swr';
 import NewsCarouselHeaderSwr from '../../components/client/news-carousel-header-swr';
-import NewsListViewHeader from '../../components/news/list-view-header';
+import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
+import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
 
 export default function BeritaPageIndex() {
   const router = useRouter();
@@ -19,57 +19,62 @@ export default function BeritaPageIndex() {
           pathQuery={category ? ['byCategorySlug', category] : ['latest']}
           paramsQuery={{ limit: 4 }}
         />
-        {/*<UIDataNewsByCategoriesCarouselSwr/>*/}
       </section>
       <section className="py-4 border-b border-primary-200 overflow-hidden mb-6">
         <NewsCategoriesListSwiperSwr />
       </section>
-      <UIContainer className="mx-auto grid grid-cols-1 gap-8 lg:gap-20 lg:grid-cols-news-container pb-8">
+      <UIContainer className="bg-white rounded-md mb-5 shadow-lg p-3 mx-auto grid grid-cols-1 gap-8 lg:gap-20 lg:grid-cols-news-container pb-8">
         <section className="w-full flex flex-col">
-          <NewsListViewSwr
-            pathQuery={category ? ['byCategorySlug', category] : ['latest']}
-            paramsQuery={{ limit: 5 }}
-
-            // items={data && data.data}
-            // isLoading={isLoading}
-            // footer={
-            //   data &&
-            //   data.meta && (
-            //     <div className="mt-5">
-            //       <Pagination
-            //         perPageChange={setPerPage}
-            //         currentPage={page}
-            //         perPage={perPage}
-            //         setPage={setPage}
-            //         total={data.meta.total}
-            //       />
-            //     </div>
-            //   )
-            // }
-          />
+          <UIDevice>
+            {({ isMobile }) => {
+              if (isMobile)
+                return (
+                  <LibSwrNewsItems
+                    pathQuery={
+                      category ? ['byCategorySlug', category] : ['latest']
+                    }
+                    paramsQuery={{ limit: 5 }}
+                    listOptions={{
+                      hideViewSwitch: true,
+                      viewType: 'grid',
+                    }}
+                  />
+                );
+              return (
+                <LibSwrNewsItems
+                  pathQuery={
+                    category ? ['byCategorySlug', category] : ['latest']
+                  }
+                  paramsQuery={{ limit: 5 }}
+                  listOptions={{
+                    viewType: 'list',
+                  }}
+                />
+              );
+            }}
+          </UIDevice>
         </section>
         <div className="sticky top-[200px]">
-          <div className="w-full flex flex-col gap-8 lg:gap-14 ">
-            <NewsListViewSwr
-              small
-              paramsQuery={{ limit: 5 }}
-              noPagination
-              pathQuery={category ? ['byCategorySlug', category] : ['latest']}
-              header={
-                <NewsListViewHeader
-                  label={'Berita Populer'}
-                  category={category}
-                />
-              }
-              // aheader={<div className="flex w-full h-[38px]">
-              //   <div className="border-b-[3px] border-primary">
-              //     <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
-              //       Berita Populer{' '}
-              //       {category && <span className="text-gray-500">di {category}</span>}
-              //     </h1>
-              //   </div>
-              //   <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
-              // </div>}
+          <div className="w-full flex flex-col gap-2 lg:gap-4 ">
+            <LibBaseTitleWidget
+              text={`Berita Populer ${category ? `di ${category}` : ''}`}
+            />
+            <LibSwrNewsItems
+              hideNavigation
+              pathQuery={category ? ['byCategorySlugPopular', category] : ['popular']}
+              paramsQuery={{ limit: 5}}
+              listOptions={{
+                hideViewSwitch: true,
+                viewType: 'list',
+                itemOptions: {
+                  small: true,
+                  customComponent: {
+                    description() {
+                      return null;
+                    },
+                  },
+                },
+              }}
             />
           </div>
         </div>

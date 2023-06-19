@@ -1,13 +1,13 @@
 import styles from './index.module.css';
-import { WebsitesResource } from '@portal-web/shared-api/server';
 import { serverSideHost } from '../src/server';
 import LibSwrDataNewsList from '../../_libs/components/swr/data-news-list';
-import BannerInfoSwr from '../components/swr/banner-info-swr';
-import { UIContainer } from '@portal-web/shared-ui';
 import React from 'react';
 import LibSwrDataWebNewsList from '../../_libs/components/swr/data-web-news-list';
+import LibSwrBannerInfoWidget from '../../_libs/components/swr/banner-info-widget';
+import LibSwrGrafikInfoWidget from '../../_libs/components/swr/grafik-info-widget';
 import Link from 'next/link';
 import GrafikInfoWidgetSwr from '../components/swr/grafik-info-widget-swr';
+import clsx from 'clsx';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -30,18 +30,17 @@ export async function getServerSideProps(context) {
 }
 
 export function Index({ website }) {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
-
   return (
     <div>
-      <div className="p-1 lg:p-2">
-        <BannerInfoSwr />
-      </div>
-      <section className="p-3 md:p-4 lg:py-8 lg:px-10 h-full grid grid-cols-1 gap-6 lg:grid-cols-[65%,auto] md:gap-[72px]">
+      <LibSwrBannerInfoWidget
+        wrapperComponent={({ children }) => (
+          <div className="p-1 lg:p-2">{children}</div>
+        )}
+        viewOptions={{
+          breakpoints: undefined,
+        }}
+      />
+      <section className="p-3 md:p-4 lg:py-8 lg:px-10 h-full grid grid-cols-1 gap-6 lg:grid-cols-[65%,30%] md:gap-[72px]">
         <div className="flex flex-col gap-7">
           <div className="flex w-full h-[38px]">
             <div className="border-b-[3px] border-primary">
@@ -93,7 +92,35 @@ export function Index({ website }) {
                 </div>
                 <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
               </div>
-              <GrafikInfoWidgetSwr />
+
+              <LibSwrGrafikInfoWidget
+                wrapperComponent={({ children }) => (
+                  <div className="px-0 lg:px-5 bg-primary-50 w-full rounded-lg">
+                    {children}
+                  </div>
+                )}
+                paramsQuery={{ limit: 3 }}
+                viewOptions={{
+                  className: 'py-0 pt-5 pb-10',
+                  // slidesPerView:1,
+                  slideContainer: {
+                    className: clsx(
+                      `!bg-cover !bg-center`,
+                      '!w-[300px] !h-[500px] lg:!w-full'
+                    ),
+                  },
+                }}
+              />
+              {/* <LibSwrGrafikInfoWidget
+              wrapperComponent={({children})=><div className="bg-primary-50 w-full rounded-lg">
+                {children}
+                </div>}
+                paramsQuery={{limit:2}}
+                viewOptions={{
+                  slidesPerView:1
+                }}
+              /> */}
+              {/* <GrafikInfoWidgetSwr /> */}
             </div>
           </div>
         </section>

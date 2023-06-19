@@ -35,24 +35,30 @@ export function getBuildedMenuList({ website }) {
       items: getBuildedMenuProfilList({ website }),
     },
     {
-      title: 'Informasi',
+      title: 'Dokumen',
       link: '/',
       items: [
         {
+          title: 'Semua Dokumen',
+          link: '/dokumen',
+          description: `Informasi Dokumen ${website.organization.name}`,
+          icon: 'mdi:file-document-outline',
+        },
+        {
           title: 'Dokumen Perencanaan',
-          link: '/dokumen/dokumen-perencanaan',
+          link: '/dokumen?kategori=dokumen-perencanaan',
           description: `Dokumen Perencanaan ${website.organization.name}`,
           icon: 'mdi:file-document-outline',
         },
         {
           title: 'Laporan Keuangan',
-          link: '/dokumen/laporan-keuangan',
+          link: '/dokumen?kategori=laporan-keuangan',
           description: `Laporan Keuangan ${website.organization.name}`,
           icon: 'mdi:file-document-outline',
         },
         {
           title: 'Dokumen lainnya',
-          link: '/dokumen/lainnya',
+          link: '/dokumen?kategori=lainnya',
           description: `Dokumen lainnya ${website.organization.name}`,
           icon: 'mdi:file-document-outline',
         },

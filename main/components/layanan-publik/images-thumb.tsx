@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
-import BaseLightGallery from '../base/light-gallery';
+import LibBaseLightGallery from '../../../_libs/components/base/light-gallery';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React, { useRef, useState } from 'react';
 import { Mousewheel, Navigation } from 'swiper';
@@ -30,30 +30,28 @@ export default function LayananPublikImagesThumb({ data }) {
         <Image
           src={data.images[imageActive].url}
           alt={''}
-          width={100}
-          height={100}
-          unoptimized
+          width={400}
+          height={400}
           className="w-full h-full rounded-xl transition-all ease-in-out duration-1000"
         />
       </section>
 
       {data.images && data.images.length ? (
         <section className="flex sm:flex-col xl:flex-row gap-4 md:gap-6 sm:h-[557px] lg:h-[597px] xl:h-auto sm:order-last overflow-auto xl:overflow-hidden">
-          <BaseLightGallery
+          <LibBaseLightGallery
             onInit={(detail) => {
               lightGalleryRef.current = detail.instance;
             }}
-            imageList={data.images}
-            className="hidden"
+            elementClassNames="hidden"
           >
             {data.images.map((d, i) => {
               return (
                 <a className="" href={d.url} key={i}>
-                  <img src={d.url} />
+                  <Image alt="" sizes="100vw" fill src={d.url} className="" />
                 </a>
               );
             })}
-          </BaseLightGallery>
+          </LibBaseLightGallery>
           <div className="xl:hidden flex sm:flex-col xl:flex-row gap-4 md:gap-6 sm:h-[557px] lg:h-[597px] xl:h-auto sm:order-last overflow-auto xl:overflow-hidden">
             {data.images.map((d, i) => (
               <div
@@ -62,7 +60,10 @@ export default function LayananPublikImagesThumb({ data }) {
                 className="relative h-[150px] sm:min-h-[170px] lg:min-h-[183px] xl:min-h-0 xl:h-[150px] min-w-[224px] xl:min-w-[256px] sm:w-full xl:w-[256px]
     flex flex-col gap-6 group rounded-xl overflow-hidden group"
               >
-                <img
+                <Image
+                  alt=""
+                  width={300}
+                  height={300}
                   src={d.url}
                   className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform ease-brand duration-250"
                 />
@@ -71,7 +72,7 @@ export default function LayananPublikImagesThumb({ data }) {
           </div>
           <div className="hidden xl:block w-full">
             <Swiper
-              className=" default-swiper"
+              className="default-swiper"
               slidesPerView={3}
               spaceBetween={24}
               modules={[Navigation, Mousewheel]}
@@ -91,9 +92,8 @@ export default function LayananPublikImagesThumb({ data }) {
                     <Image
                       src={d.url}
                       alt={''}
-                      width={100}
-                      height={100}
-                      unoptimized
+                      width={300}
+                      height={300}
                       className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform ease-brand duration-250"
                     />
                   </div>

@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
 import { UIContainer, UISearchInput } from '@portal-web/shared-ui';
 import { DocumentCategoriesResource } from '@portal-web/shared-api/server';
-import DocumentListSwr from '../../components/client/document-list-swr';
+import LibSwrDocumentItems from '../../../_libs/components/swr/document-items';
 
 export async function getServerSideProps(context) {
   const { data: documentCategories } = await new DocumentCategoriesResource()
@@ -159,7 +159,15 @@ export default function DokumenPage({ documentCategories }) {
                   setSelected={(v) => setCurrentCategoryId(v)}
                 />
               </div>
-              <DocumentListSwr category={currentCategoryId} search={search} />
+              <LibSwrDocumentItems
+                search={search}
+                category={currentCategoryId}
+                listOptions={{
+                  itemOptions: {
+                    hideCategory: true,
+                  },
+                }}
+              />
             </section>
           </div>
         </UIContainer>

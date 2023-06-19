@@ -1,13 +1,12 @@
 import { serverSideHost } from '../../src/server';
-import { OrganizationDocumentsResource } from '@portal-web/shared-api/server';
-import OrganizationDocumentsListSwr from '../../components/swr/organization-documents-list-swr';
+import LibSwrDocumentItems from '../../../_libs/components/swr/document-items';
 import { UIIcon } from '@portal-web/shared-ui';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
-  const { category } = context.params;
+  const category = context.req.query.kategori;
   const website = await serverSideHost(context);
   if (!website) {
     return {
@@ -18,43 +17,44 @@ export async function getServerSideProps(context) {
       props: {},
     };
   }
-  const { data } = await new OrganizationDocumentsResource().apiResourceFetch({
-    pathQuery: ['byOrganizationId', website.organization.id],
-  });
   const _categoryText = () => {
     if (category === 'dokumen-perencanaan') return 'Dokumen Perencanaan';
     else if (category === 'laporan-keuangan') return 'Laporan Keuangan';
     else if (category === 'lainnya') return 'Lainnya';
-    else return category;
+    else return 'Semua Dokumen';
   };
   return {
     props: {
       website,
       title: `Dokumen`,
-      subTitle: `Informasi dokumen (${_categoryText()})`,
-      category: category ?? 'lainnya',
-      data,
+      subTitle: `${_categoryText()}`,
+      category: category ?? null,
     },
   };
 }
 
-export default function PageProfilSekilas(props) {
-  const { data, website, category } = props;
+export default function DokumenIndexPage(props) {
+  const { website, category } = props;
   const router = useRouter();
   const menu = [
     {
+      title: 'Semua Dokumen',
+      link: '/dokumen',
+      icon: 'mdi:file-document-outline',
+    },
+    {
       title: 'Dokumen Perencanaan',
-      link: '/dokumen/dokumen-perencanaan',
+      link: '/dokumen?kategori=dokumen-perencanaan',
       icon: 'mdi:file-document-outline',
     },
     {
       title: 'Laporan Keuangan',
-      link: '/dokumen/laporan-keuangan',
+      link: '/dokumen?kategori=laporan-keuangan',
       icon: 'mdi:file-document-outline',
     },
     {
       title: 'Lainnya',
-      link: '/dokumen/lainnya',
+      link: '/dokumen?kategori=lainnya',
       icon: 'mdi:file-document-outline',
     },
   ];
@@ -92,7 +92,7 @@ export default function PageProfilSekilas(props) {
             </ul>
           </div>
         </div>
-        <OrganizationDocumentsListSwr
+        <LibSwrDocumentItems
           organizationId={website.organization.id}
           category={category}
         />

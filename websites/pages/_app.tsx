@@ -42,6 +42,7 @@ function CustomApp({ Component, pageProps, router }: AppProps<BasePageProps>) {
       >
         <UIConfigProvider
           config={{
+            publicUrl: website?.publicUrl,
             icons: {
               APIProviders: [
                 {

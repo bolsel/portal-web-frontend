@@ -1,11 +1,12 @@
+'use client';
+
+import { UIIcon, useUIConfigContextValue } from '@portal-web/shared-ui';
 import {
   EmailShareButton,
   FacebookShareButton,
   TelegramShareButton,
   TwitterShareButton,
 } from 'react-share';
-
-import { Icon } from '@iconify/react';
 import createShareButton from 'react-share/lib/hocs/createShareButton';
 import objectToGetParams from 'react-share/lib/utils/objectToGetParams';
 
@@ -31,19 +32,35 @@ const WhatsappShareButton = createShareButton(
   (props) => ({}),
   {}
 );
-export default function NewsReadShare({
-  id,
-  apiSharedCount,
+
+export type LibBaseShareItemProps = {
+  url: string;
+  title: string;
+  quote?: string;
+  beforeOnClick?: () => Promise<void> | void;
+};
+export const LibBaseShareItem = ({
   url,
   title,
-  quote = null,
-}) {
+  quote = '',
+  beforeOnClick,
+}: LibBaseShareItemProps) => {
+  const config = useUIConfigContextValue();
+
+  if (url.startsWith('/') && config.publicUrl) {
+    url = `${config.publicUrl}${url}`;
+  }
   const networks: any = [
     {
       name: 'facebook',
       component: FacebookShareButton,
       icon: (
-        <Icon icon="mdi:facebook" color="#2196F3" inline className="w-6 h-6" />
+        <UIIcon
+          icon="mdi:facebook"
+          color="#2196F3"
+          inline
+          className="w-6 h-6"
+        />
       ),
       props: () => ({ title, quote, hashtag: 'bolselkab' }),
     },
@@ -51,19 +68,24 @@ export default function NewsReadShare({
       name: 'twitter',
       component: TwitterShareButton,
       icon: (
-        <Icon icon="mdi:twitter" color="#2196F3" inline className="w-6 h-6" />
+        <UIIcon icon="mdi:twitter" color="#2196F3" inline className="w-6 h-6" />
       ),
       props: () => ({
         title,
         quote,
-        hashtags: 'bolselkab, bolsel, portalbolsel',
+        hashtags: ['bolselkab', 'bolsel', 'portalbolsel'],
       }),
     },
     {
       name: 'whatsapp',
       component: WhatsappShareButton,
       icon: (
-        <Icon icon="mdi:whatsapp" color="#1FB767" inline className="w-6 h-6" />
+        <UIIcon
+          icon="mdi:whatsapp"
+          color="#1FB767"
+          inline
+          className="w-6 h-6"
+        />
       ),
       props: () => ({ title, quote }),
     },
@@ -71,7 +93,12 @@ export default function NewsReadShare({
       name: 'telegram',
       component: TelegramShareButton,
       icon: (
-        <Icon icon="mdi:telegram" color="#0088cc" inline className="w-6 h-6" />
+        <UIIcon
+          icon="mdi:telegram"
+          color="#0088cc"
+          inline
+          className="w-6 h-6"
+        />
       ),
       props: () => ({ title, quote }),
     },
@@ -79,7 +106,7 @@ export default function NewsReadShare({
       name: 'email',
       component: EmailShareButton,
       icon: (
-        <Icon
+        <UIIcon
           icon="mdi:email-outline"
           color="#E53935"
           inline
@@ -100,11 +127,7 @@ export default function NewsReadShare({
       hover:bg-gray-100 hover:text-gray-800 transition-colors ease-in-out duration-150"
           >
             <network.component
-              beforeOnClick={() => {
-                if (apiSharedCount) {
-                  fetch(apiSharedCount);
-                }
-              }}
+              beforeOnClick={beforeOnClick}
               className="flex flex-col gap-1 w-full h-full items-center justify-center capitalize"
               windowHeight={400}
               windowWidth={550}
@@ -120,4 +143,5 @@ export default function NewsReadShare({
       </ul>
     </>
   );
-}
+};
+export default LibBaseShareItem;
