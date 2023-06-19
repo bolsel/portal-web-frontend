@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
-  const category = context.req.query.kategori;
+  const category = context.query?.kategori;
   const website = await serverSideHost(context);
   if (!website) {
     return {
