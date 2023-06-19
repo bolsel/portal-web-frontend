@@ -31,7 +31,7 @@ export default function LibViewNewsListItem({
   linkProps,
   customComponent,
 }: LibViewNewsListItemProps) {
-  const _urlRead = urlRead ? urlRead(data) : `/berita/${data.slug}`;
+  const _urlRead = typeof urlRead !== 'undefined' ? urlRead(data) : `/berita/${data.slug}`;
   const Render = ({ name, children }) => {
     if (customComponent?.[name]) {
       return customComponent?.[name]({

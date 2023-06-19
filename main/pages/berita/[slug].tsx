@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import { Icon } from '@iconify/react';
 import React from 'react';
-import Image from 'next/image';
-import { urlAssetCdn } from '../../src/global-helpers';
 import { UIContainer } from '@portal-web/shared-ui';
 import { NewsListViewSwr } from '../../components/client/news-list-view-swr';
 import NewsReadHeader from '../../components/news/read/header';

@@ -7,9 +7,9 @@ import Head from 'next/head';
 import React from 'react';
 import { UIIcon, UINextImageBlur } from '@portal-web/shared-ui';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import LibDataNewsReadShare from '../../../_libs/components/data/news/read/share';
 import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
 import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
+import LibBaseShareItem from '../../../_libs/components/base/share-item';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -166,12 +166,13 @@ export default function BeritaSlugPage(props) {
                   />
                   Bagikan Berita
                 </p>
-                <LibDataNewsReadShare
-                  apiSharedCount={apiSharedCount}
-                  id={data.id}
+                <LibBaseShareItem
                   url={articleUrl}
                   title={data.title}
                   quote={data.description}
+                  beforeOnClick={()=>{
+                    fetch(apiSharedCount)
+                  }}
                 />
               </div>
               <LibBaseTitleWidget text="Berita Terbaru" />

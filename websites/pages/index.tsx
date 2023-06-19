@@ -83,6 +83,12 @@ export function Index({ website }) {
                     );
                   },
                 },
+                urlRead(data){
+                  return `https://bolselkab.go.id/berita/${data.slug}`
+                },
+                linkProps:()=>({
+                  target:'_blank'
+                })
               },
             }}
           />
