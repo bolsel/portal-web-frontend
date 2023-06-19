@@ -33,7 +33,7 @@ export default function BeritaPageIndex() {
                     pathQuery={
                       category ? ['byCategorySlug', category] : ['latest']
                     }
-                    paramsQuery={{ limit: 5 }}
+                    paramsQuery={{ limit: 6 }}
                     listOptions={{
                       hideViewSwitch: true,
                       viewType: 'grid',
@@ -45,7 +45,7 @@ export default function BeritaPageIndex() {
                   pathQuery={
                     category ? ['byCategorySlug', category] : ['latest']
                   }
-                  paramsQuery={{ limit: 5 }}
+                  paramsQuery={{ limit: 6 }}
                   listOptions={{
                     viewType: 'list',
                   }}

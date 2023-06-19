@@ -44,7 +44,7 @@ export default function LibSwrNewsItems({
   paramsQuery,
   hideNavigation,
 }: LibSwrNewsItemsProps) {
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(paramsQuery?.limit ?? 6);
   const [page, setPage] = useState(1);
   useEffect(() => {
     setPage(1);
@@ -92,13 +92,10 @@ export default function LibSwrNewsItems({
       )}
       pathQuery={pathQuery}
       paramsQuery={{
-        ...{
-          limit: perPage,
-          page: page,
-          search: search,
-          filter,
-        },
-        ...paramsQuery,
+        limit: perPage,
+        page: page,
+        search: search,
+        filter,
       }}
     >
       {({ data, meta }) => {
