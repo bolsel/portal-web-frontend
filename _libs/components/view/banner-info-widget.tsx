@@ -69,10 +69,16 @@ const LibViewBannerInfoWidget = forwardRef<
         );
       })}
       <div className="banner__swiper-pagination mt-8" />
-      <button className="hidden md:flex banner__navigation banner__button-prev" aria-label='Prev'>
+      <button
+        className="hidden md:flex banner__navigation banner__button-prev"
+        aria-label="Prev"
+      >
         <Icon className={'w-8 h-8'} icon="mdi:chevron-left" />
       </button>
-      <button className="hidden md:flex banner__navigation banner__button-next" aria-label='Next'>
+      <button
+        className="hidden md:flex banner__navigation banner__button-next"
+        aria-label="Next"
+      >
         <Icon className={'w-8 h-8'} icon="mdi:chevron-right" />
       </button>
     </Swiper>
