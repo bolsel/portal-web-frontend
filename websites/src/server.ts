@@ -23,3 +23,7 @@ export async function serverSideHost(context: NextPageContext) {
     return false;
   }
 }
+
+export function websiteHasModule(website, moduleId: string): boolean {
+  return (website.modules ?? []).indexOf(moduleId) >= 0;
+}

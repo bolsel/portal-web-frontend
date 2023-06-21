@@ -28,7 +28,9 @@ export function getBuildedMenuProfilList({ website }) {
 }
 
 export function getBuildedMenuList({ website }) {
-  const menuItems = [
+  const modules: string[] = website.modules ?? [];
+
+  const menuItems: any[] = [
     {
       title: 'Profil',
       link: '/',
@@ -83,6 +85,12 @@ export function getBuildedMenuList({ website }) {
       ],
     },
   ];
+  if (modules.indexOf('aduan_publik') >= 0) {
+    menuItems.push({
+      title: 'Aduan Publik',
+      link: '/aduan-publik',
+    });
+  }
 
   return menuItems;
 }

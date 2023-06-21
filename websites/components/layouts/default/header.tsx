@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { getBuildedMenuList } from '../../../src/menu';
 import LayoutsDefaultHeaderMobile from './header-mobile';
 import { Transition } from '@headlessui/react';
-import Image from 'next/image'
+import Image from 'next/image';
 
 function MenuIcon({ icon, ...props }) {
   return <UIIcon {...props} icon={`${icon}`} />;
@@ -97,7 +97,13 @@ export default function LayoutsDefaultHeader({ website }) {
         <div className="group bg-white font-roboto text-xs lg:text-lg uppercase font-bold">
           <div className="flex gap-2 justify-center items-center p-1">
             <Link href="/" className="flex gap-2 justify-center items-center">
-              <Image alt='Logo' width={50} height={60} src={'/images/logo.png'} className={'h-8 w-7'} />
+              <Image
+                alt="Logo"
+                width={50}
+                height={60}
+                src={'/images/logo.png'}
+                className={'h-8 w-7'}
+              />
               <div className="leading-6 group-hover:text-primary flex flex-col">
                 <div>{website.organization.name}</div>
               </div>

@@ -32,26 +32,39 @@ export default function LayoutsDefaultHeaderMobile({ website, show, setShow }) {
                   key={i}
                   className="navigation__sidebar__menu py-4 text-white transition-all ease-in duration-150"
                 >
-                  <div
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => {
-                      setActive(null);
-                      if (active !== i) {
-                        setActive(i);
-                      }
-                    }}
-                  >
-                    <h3>{m.title}</h3>
-                    <div className="navigation__sidebar__button h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary-600">
-                      <UIIcon
-                        icon={
-                          active === i ? 'base:chevron-up' : 'base:chevron-down'
+                  {m.items && m.items.length ? (
+                    <div
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => {
+                        if (m.items && m.items.length) {
+                          setActive(null);
+                          if (active !== i) {
+                            setActive(i);
+                          }
                         }
-                        fill="white"
-                        className="w-8 h-8 cursor-pointer transition-transform ease-in"
-                      />
+                      }}
+                    >
+                      <h3>{m.title}</h3>
+                      <div className="navigation__sidebar__button h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary-600">
+                        <UIIcon
+                          icon={
+                            active === i
+                              ? 'base:chevron-up'
+                              : 'base:chevron-down'
+                          }
+                          fill="white"
+                          className="w-8 h-8 cursor-pointer transition-transform ease-in"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <Link
+                      className="flex justify-between items-center cursor-pointer"
+                      href={m.link}
+                    >
+                      <h3>{m.title}</h3>
+                    </Link>
+                  )}
                   <Transition
                     show={active === i}
                     enter="transition-opacity duration-75"
