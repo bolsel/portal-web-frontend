@@ -170,8 +170,8 @@ export default function BeritaSlugPage(props) {
                   url={articleUrl}
                   title={data.title}
                   quote={data.description}
-                  beforeOnClick={()=>{
-                    fetch(apiSharedCount)
+                  beforeOnClick={() => {
+                    fetch(apiSharedCount);
                   }}
                 />
               </div>
