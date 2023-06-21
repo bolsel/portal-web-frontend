@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import { UINextImageBlur } from '@portal-web/shared-ui';
 import LibBaseLightGallery from '../base/light-gallery';
 import { LightGallery } from 'lightgallery/lightgallery';
+import Image from 'next/image';
 
 export type LibViewGrafikInfoWidgetProps = {
   items: Record<string, any>[];
@@ -25,7 +26,6 @@ const LibViewGrafikInfoWidget = forwardRef<
   LibViewGrafikInfoWidgetProps
 >(({ items, slideContainer, ...props }: LibViewGrafikInfoWidgetProps, ref) => {
   const lightGalleryRef = useRef<LightGallery | null>(null);
-  const itemsImagesUrl = items.map((item) => item.image.url);
   props.className = clsx(
     'banner__swiper w-full py-[50px]',
     props.className ?? ''
@@ -77,7 +77,9 @@ const LibViewGrafikInfoWidget = forwardRef<
                 width={400}
                 height={600}
                 data-src={d.image.url}
-                className="show-full cursor-zoom-in w-full h-full rounded-md block bg-gray-200"
+                className="
+                 object-cover w-full h-full
+                "
                 onClick={() => {
                   lightGalleryRef.current?.openGallery(i);
                 }}
@@ -89,7 +91,8 @@ const LibViewGrafikInfoWidget = forwardRef<
               key={i}
               data-src={d.image.url}
               className={clsx(
-                `!bg-cover !bg-center`,
+                // 'w-[400px] h-[600px] object-cover',
+                `!bg-cover !bg-center object-cover`,
                 '!w-[300px] !h-[500px] xl:!w-[400px] xl:!h-[600px]'
               )}
               {...slideContainer}
@@ -130,10 +133,17 @@ const LibViewGrafikInfoWidget = forwardRef<
           }
         }}
       >
-        {itemsImagesUrl.map((d, i) => {
+        {(items ?? []).map((d, i) => {
           return (
-            <a className="" href={d} key={i}>
-              <img alt="" src={d} className="" />
+            <a className="" href={d.image.url} key={i}>
+              <Image
+                alt=""
+                width={100}
+                height={120}
+                quality={30}
+                src={d.image.url}
+                className="object-cover"
+              />
             </a>
           );
         })}

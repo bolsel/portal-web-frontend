@@ -148,12 +148,14 @@ export default function AplikasiListWidgetSwr() {
                     <button
                       className="swiper-button-prev
               transition-all ease-brand duration-300"
+                      aria-label="Prev"
                     >
                       <Icon className={'w-8 h-8'} icon="mdi:chevron-left" />
                     </button>
                     <button
                       className="swiper-button-next
               transition-all ease-brand duration-300"
+                      aria-label="Next"
                     >
                       <Icon className={'w-8 h-8'} icon="mdi:chevron-right" />
                     </button>

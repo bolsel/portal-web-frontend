@@ -31,21 +31,6 @@ function Info() {
           </a>
         </div>
       </div>
-      {/*<div className="flex items-start gap-3">*/}
-      {/*  <Icon icon='codicon:feedback' className="py-1 w-8 h-8"/>*/}
-      {/*  <div className="flex flex-col gap-1">*/}
-      {/*    <p className="font-bold">*/}
-      {/*      Umpan Balik*/}
-      {/*    </p>*/}
-      {/*    <button*/}
-      {/*      type="button"*/}
-      {/*      className="text-sm text-left leading-6"*/}
-      {/*    >*/}
-      {/*      Isi survei performa situs web*/}
-      {/*    </button>*/}
-      {/*    /!*<Feedback :show="isFeedbackFormOpen" @close="toggleFeedbackForm" />*!/*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <div className="flex items-start gap-3">
         <UIIcon icon="base:tabler-social" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
@@ -56,6 +41,7 @@ function Info() {
                 href={settings.link_facebook}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Facebook"
                 className="hover:bg-[#1877F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
                 <UIIcon icon="base:social-facebook" className="w-6 h-6" />
@@ -66,6 +52,7 @@ function Info() {
                 href={settings.link_twitter}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Twitter"
                 className="hover:bg-[#1DA1F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
                 <UIIcon icon="base:social-twitter" className="w-6 h-6" />
@@ -76,6 +63,7 @@ function Info() {
                 href={settings.link_instagram}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Instagram"
                 className="hover:bg-[#E4405F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
                 <UIIcon icon="base:social-instagram" className="w-6 h-6" />
@@ -86,6 +74,7 @@ function Info() {
                 href={settings.link_youtube}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Youtube"
                 className="hover:bg-[#CD201F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
                 <UIIcon icon="base:social-youtube" className="w-6 h-6" />

@@ -83,7 +83,7 @@ export const NewsListView: FC<NewsListViewProps> = ({
                 {/*<div className="hidden text-sm font-lato text-gray-600 mb-2 group-hover:text-primary lg:line-clamp-2">*/}
                 {/*  {item.description}*/}
                 {/*</div>*/}
-                <div className="font-normal text-xs leading-5 text-neutral/70">
+                <div className="font-normal text-xs leading-5 text-neutral">
                   <span className="group-hover:text-neutral capitalize">
                     {item.category.name}
                   </span>
