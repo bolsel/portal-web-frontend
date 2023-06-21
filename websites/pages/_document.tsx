@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang="id">
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

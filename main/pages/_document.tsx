@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 import { GTM_ID } from '../src/gtm';
 export default function Document() {
   return (
-    <Html>
+    <Html lang="id">
       <Head>
         <meta
           name="description"
