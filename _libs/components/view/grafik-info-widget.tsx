@@ -73,7 +73,6 @@ const LibViewGrafikInfoWidget = forwardRef<
                 src={d.image.url}
                 alt={d.title}
                 title={d.title}
-                quality={100}
                 width={400}
                 height={600}
                 data-src={d.image.url}
