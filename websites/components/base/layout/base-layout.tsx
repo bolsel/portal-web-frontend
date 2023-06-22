@@ -111,6 +111,7 @@ export default function BaseLayout({
                   <div className="w-full h-72">
                     {website.organization.location_point ? (
                       <iframe
+                        title='Lokasi Kantor'
                         className="w-full h-full rounded-lg"
                         width="100%"
                         src={`https://maps.google.com/maps?width=600&height=400&hl=en&q=${website.organization.location_point.coordinates[1]},${website.organization.location_point.coordinates[0]}&t=k&z=17&ie=UTF8&iwloc=B&output=embed`}
