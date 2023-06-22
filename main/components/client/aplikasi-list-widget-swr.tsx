@@ -134,7 +134,7 @@ export default function AplikasiListWidgetSwr() {
                             <Link
                               href={item.link}
                               target="_blank"
-                              className="inline-flex bg-primary lg:bg-primary/10 lg:group-hover:bg-primary text-sm text-white rounded-lg px-3 py-1 items-center gap-4"
+                              className="inline-flex bg-primary lg:bg-primary/80 lg:group-hover:bg-primary text-sm text-white rounded-lg px-3 py-1 items-center gap-4"
                             >
                               Buka Aplikasi <Icon icon="mdi:external-link" />
                             </Link>
