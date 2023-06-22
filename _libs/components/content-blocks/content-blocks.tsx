@@ -97,8 +97,14 @@ export default function LibContentBlocks({ data }: LibContentBlocksProps) {
           key={i}
         />
       );
-    } else if(block.type === 'embed'){
-      items.push(<iframe key={i} src={block.data.embed} className='w-full h-[400px] rounded-lg my-5'></iframe>)
+    } else if (block.type === 'embed') {
+      items.push(
+        <iframe
+          key={i}
+          src={block.data.embed}
+          className="w-full h-[400px] rounded-lg my-5"
+        ></iframe>
+      );
     }
   });
   return <div className="contents-blocks">{items}</div>;
