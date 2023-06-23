@@ -20,7 +20,7 @@ export default function LibContentBlocks({ data }: LibContentBlocksProps) {
             height="0"
             sizes="100vw"
             className={clsx('rounded-sm m-0', { '!mb-7': !hasCaption })}
-            src={urlAssetCdn(block.data.file.filename_disk)}
+            src={urlAssetCdn(block.data.file)}
           />
           {hasCaption ? (
             <div className="text-center italic text-sm">{hasCaption}</div>
