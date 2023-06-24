@@ -1,9 +1,23 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import newrelic from 'newrelic';
+import {
+  Html,
+  Head,
+  Main,
+  NextScript
+} from 'next/document';
 import { GTM_ID } from '../src/gtm';
+
 export default function Document() {
+  const browserTimingHeader = newrelic.getBrowserTimingHeader({
+    hasToRemoveScriptWrapper: true,
+  });
   return (
     <Html lang="id">
       <Head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+        />
         <meta
           name="description"
           content="Portal Resmi Pemerintah Kabupaten Bolaang Mongondow Selatan"

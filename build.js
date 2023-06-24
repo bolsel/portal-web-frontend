@@ -24,6 +24,10 @@ APPS.forEach((app) => {
   );
   fs.copyFileSync('./_docker/app/Dockerfile', `${DIST_PATH}/${app}/Dockerfile`);
   fs.copyFileSync(
+    './_docker/app/newrelic.js',
+    `${DIST_PATH}/${app}/newrelic.js`
+  );
+  fs.copyFileSync(
     './_docker/app/.dockerignore',
     `${DIST_PATH}/${app}/.dockerignore`
   );
