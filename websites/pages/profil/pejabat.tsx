@@ -66,7 +66,9 @@ export default function ProfilPejabatPage(props) {
                           </button>
                         </div>
                         <div className="collapse-content w-full bg-base-200 peer-checked:p-2 rounded-box">
-                          <LibContentBlocks data={item.profil} />
+                          {item.profil ? (
+                            <LibContentBlocks {...item.profil} />
+                          ) : null}
                         </div>
                       </div>
                     </div>

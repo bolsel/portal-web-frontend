@@ -150,7 +150,7 @@ export default function BeritaSlugPage(props) {
               </div>
               {data.content && data.content.blocks && (
                 <div className="prose max-w-none">
-                  <LibContentBlocks data={data.content} />
+                  <LibContentBlocks {...data.content} />
                 </div>
               )}
             </div>

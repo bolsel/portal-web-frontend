@@ -73,7 +73,7 @@ export default function ReadBeritaPage({
             <div className="flex flex-col gap-7">
               <div className="article__body w-full min-h-screen">
                 {data.content && data.content.blocks && (
-                  <LibContentBlocks data={data.content} />
+                  <LibContentBlocks {...data.content} />
                 )}
               </div>
             </div>

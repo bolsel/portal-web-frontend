@@ -34,9 +34,9 @@ export default function ProfilVisiMisiPage(props) {
       {data.visi && data.misi ? (
         <div className="prose max-w-none">
           <h2>Visi</h2>
-          <LibContentBlocks data={data.visi} />
+          <LibContentBlocks {...data.visi} />
           <h2>Misi</h2>
-          <LibContentBlocks data={data.misi} />
+          <LibContentBlocks {...data.misi} />
         </div>
       ) : (
         <div>Belum ada data</div>

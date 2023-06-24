@@ -33,7 +33,7 @@ export default function ProfilStrukturOrganisasiPage(props) {
     <BaseLayoutProfilMenu {...props}>
       {data ? (
         <div className="prose max-w-none">
-          <LibContentBlocks data={data} />
+          <LibContentBlocks {...data} />
         </div>
       ) : (
         <div>Belum ada data</div>
