@@ -10,10 +10,12 @@ const PREV_BUILD_IDS = {
 };
 const apps_packages_json = {};
 const base_package_json = {
-  name: 'bolsel-portal-web-app',
-  dependencies: {},
+  dependencies: {
+    "@newrelic/next": "^0.5.1",
+    "newrelic": "^10.3.1"
+  },
   scripts: {
-    start: 'next start',
+    start: "NODE_OPTIONS='-r @newrelic/next' next start",
   },
 };
 APPS.forEach((app) => {
@@ -21,6 +23,10 @@ APPS.forEach((app) => {
   base_package_json.dependencies = _merge(
     base_package_json.dependencies,
     apps_packages_json[app].dependencies
+  );
+  fs.writeFileSync(
+    `${DIST_PATH}/${app}/package.json`,
+    JSON.stringify(apps_packages_json[app], null, 2)
   );
   fs.copyFileSync('./_docker/app/Dockerfile', `${DIST_PATH}/${app}/Dockerfile`);
   fs.copyFileSync(
@@ -41,6 +47,13 @@ fs.writeFileSync(
   `${DIST_PATH}/package.json`,
   JSON.stringify(base_package_json, null, 2)
 );
+// write app package.json
+APPS.forEach((app) => {
+  fs.writeFileSync(
+    `${DIST_PATH}/${app}/package.json`,
+    JSON.stringify(_merge(apps_packages_json[app], base_package_json), null, 2)
+  );
+})
 fs.copyFileSync('./_docker/base/Dockerfile', `${DIST_PATH}/Dockerfile`);
 
 CURRENT_BUILD_IDS['_base'] = crypto

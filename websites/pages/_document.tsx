@@ -1,10 +1,19 @@
-import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
-import { useRouter } from 'next/router';
+import newrelic from 'newrelic';
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
+
+  const browserTimingHeader = newrelic.getBrowserTimingHeader({
+    hasToRemoveScriptWrapper: true,
+  });
+
   return (
     <Html lang="id">
       <Head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

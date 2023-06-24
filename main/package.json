@@ -2,8 +2,5 @@
   "name": "bolsel-main",
   "description": "Bolsel PortalWeb frontend main app",
   "version": "1.0.3",
-  "dockerImage": "bolsel/portal-web-main-app",
-  "scripts": {
-    "start": "NODE_OPTIONS='-r @newrelic/next' next start"
-  }
+  "dockerImage": "bolsel/portal-web-main-app"
 }
