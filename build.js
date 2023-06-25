@@ -11,8 +11,8 @@ const PREV_BUILD_IDS = {
 const apps_packages_json = {};
 const base_package_json = {
   dependencies: {
-    "@newrelic/next": "^0.5.1",
-    "newrelic": "^10.3.1"
+    '@newrelic/next': '^0.5.1',
+    newrelic: '^10.3.1',
   },
   scripts: {
     start: "NODE_OPTIONS='-r @newrelic/next' next start",
@@ -53,7 +53,7 @@ APPS.forEach((app) => {
     `${DIST_PATH}/${app}/package.json`,
     JSON.stringify(_merge(apps_packages_json[app], base_package_json), null, 2)
   );
-})
+});
 fs.copyFileSync('./_docker/base/Dockerfile', `${DIST_PATH}/Dockerfile`);
 
 CURRENT_BUILD_IDS['_base'] = crypto
