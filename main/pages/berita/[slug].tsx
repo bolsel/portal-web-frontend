@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Icon } from '@iconify/react';
 import React from 'react';
-import { UIContainer } from '@portal-web/shared-ui';
+import { UIContainer, useUIConfigContextValue } from '@portal-web/shared-ui';
 import { NewsListViewSwr } from '../../components/client/news-list-view-swr';
 import NewsReadHeader from '../../components/news/read/header';
 import { getResourceApiUrl, NewsResource } from '@portal-web/shared-api/server';
@@ -44,13 +44,14 @@ export default function ReadBeritaPage({
   slug,
   articleUrl,
 }) {
+  const config = useUIConfigContextValue();
   return (
     <main>
       <Head>
         <LibSeoNewsHeader
           data={data}
           articleUrl={articleUrl}
-          domain="bolselkab.go.id"
+          publicUrl={config.publicUrl ?? 'https://bolselkab.go.id'}
         />
       </Head>
       <article className="article">

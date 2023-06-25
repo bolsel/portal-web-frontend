@@ -1,11 +1,11 @@
 export default function LibSeoNewsHeader({
   data,
   articleUrl,
-  domain,
+  publicUrl,
 }: {
   data: Record<string, any>;
   articleUrl: string;
-  domain: string;
+  publicUrl: string;
 }) {
   return (
     <>
@@ -24,7 +24,7 @@ export default function LibSeoNewsHeader({
               {
                 '@type': 'Person',
                 name: data.writer,
-                url: `https://${domain}`,
+                url: publicUrl,
               },
             ],
             publisher: {

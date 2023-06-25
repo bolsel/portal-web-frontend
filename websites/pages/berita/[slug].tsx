@@ -62,7 +62,7 @@ export default function BeritaSlugPage(props) {
         <LibSeoNewsHeader
           data={data}
           articleUrl={articleUrl}
-          domain={website.domain}
+          publicUrl={website.publicUrl}
         />
       </Head>
       <article className="px-5">
