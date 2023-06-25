@@ -2,7 +2,6 @@ import newrelic from 'newrelic';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
-
   const browserTimingHeader = newrelic.getBrowserTimingHeader({
     hasToRemoveScriptWrapper: true,
   });

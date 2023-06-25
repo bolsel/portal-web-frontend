@@ -76,7 +76,7 @@ export function Index({ website }) {
                     return (
                       <p
                         className="hidden md:line-clamp-2 font-lato font-normal text-sm leading-6 text-gray-600 mb-2
-                    group-hover:text-blue-gray-600 "
+          group-hover:text-blue-gray-600 "
                       >
                         {data.description}
                       </p>
@@ -114,7 +114,7 @@ export function Index({ website }) {
                 )}
                 paramsQuery={{ limit: 3 }}
                 viewOptions={{
-                  className: 'py-0 pt-5 pb-10',
+                  className: 'py-0 pt-5',
                   slideContainer: {
                     className: clsx(
                       `!bg-cover !bg-center`,

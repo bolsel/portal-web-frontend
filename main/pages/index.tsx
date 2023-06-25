@@ -27,13 +27,14 @@ export function Index() {
 
       <section className="py-6 md:py-8 xl:py-12">
         <LibSwrGrafikInfoWidget
+          paramsQuery={{ limit: 7 }}
           wrapperComponent={({ children }) => (
             <div className="container bg-gray-200 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
               {children}
             </div>
           )}
           viewOptions={{
-            className: 'py-[50px]',
+            className: 'pt-[50px]',
           }}
         />
       </section>

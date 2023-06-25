@@ -12,143 +12,156 @@ import { Icon } from '@iconify/react';
 import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react';
 import clsx from 'clsx';
 import { UINextImageBlur } from '@portal-web/shared-ui';
-import LibBaseLightGallery from '../base/light-gallery';
 import { LightGallery } from 'lightgallery/lightgallery';
-import Image from 'next/image';
+import LibViewGrafikInfoLightGallery from './grafik-info-lightgallery';
 
 export type LibViewGrafikInfoWidgetProps = {
   items: Record<string, any>[];
   slideContainer?: ComponentPropsWithoutRef<'div'>;
+  hideAllButton?: boolean;
+  noLightGallery?: boolean;
 } & SwiperProps;
 
 const LibViewGrafikInfoWidget = forwardRef<
   SwiperRef,
   LibViewGrafikInfoWidgetProps
->(({ items, slideContainer, ...props }: LibViewGrafikInfoWidgetProps, ref) => {
-  const lightGalleryRef = useRef<LightGallery | null>(null);
-  props.className = clsx(
-    'banner__swiper w-full py-[50px]',
-    props.className ?? ''
-  );
-  return (
-    <>
-      <Swiper
-        ref={ref}
-        modules={[
-          EffectCoverflow,
-          Pagination,
-          Navigation,
-          Autoplay,
-          Mousewheel,
-        ]}
-        slidesPerView={'auto'}
-        effect={'coverflow'}
-        // grabCursor={true}
-        centeredSlides={true}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        speed={750}
-        // loop
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        pagination={{
-          el: '.banner__swiper-pagination',
-          type: 'bullets',
-          clickable: true,
-        }}
-        navigation={{
-          nextEl: '.banner__button-next',
-          prevEl: '.banner__button-prev',
-        }}
-        {...props}
-      >
-        {(items ?? []).map((d, i) => {
-          const _Image = () => {
+>(
+  (
+    {
+      items,
+      slideContainer,
+      hideAllButton,
+      noLightGallery,
+      ...props
+    }: LibViewGrafikInfoWidgetProps,
+    ref
+  ) => {
+    const lightGalleryRef = useRef<LightGallery | null>(null);
+    props.className = clsx(
+      'banner__swiper w-full select-none',
+      props.className ?? ''
+    );
+    return (
+      <>
+        <Swiper
+          ref={ref}
+          modules={[
+            EffectCoverflow,
+            Pagination,
+            Navigation,
+            Autoplay,
+            Mousewheel,
+          ]}
+          slidesPerView={'auto'}
+          effect={'coverflow'}
+          // grabCursor={true}
+          centeredSlides={true}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          speed={750}
+          // loop
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          pagination={{
+            el: '.banner__swiper-pagination',
+            type: 'bullets',
+            clickable: true,
+          }}
+          navigation={{
+            nextEl: '.banner__button-next',
+            prevEl: '.banner__button-prev',
+          }}
+          {...props}
+        >
+          {(items ?? []).map((d, i) => {
+            const _Image = () => {
+              return (
+                <UINextImageBlur
+                  src={d.image.url}
+                  alt={d.title}
+                  title={d.title}
+                  width={400}
+                  height={600}
+                  data-src={d.image.url}
+                  className="object-cover w-full h-full"
+                  onClick={() => {
+                    if (!noLightGallery) {
+                      lightGalleryRef.current?.openGallery(i);
+                    }
+                  }}
+                />
+              );
+            };
             return (
-              <UINextImageBlur
-                src={d.image.url}
-                alt={d.title}
-                title={d.title}
-                width={400}
-                height={600}
+              <SwiperSlide
+                key={i}
                 data-src={d.image.url}
-                className="
-                 object-cover w-full h-full
-                "
-                onClick={() => {
-                  lightGalleryRef.current?.openGallery(i);
-                }}
-              />
+                className={clsx(
+                  // 'w-[400px] h-[600px] object-cover',
+                  `!bg-cover !bg-center object-cover`,
+                  '!w-[300px] !h-[500px] xl:!w-[400px] xl:!h-[600px]'
+                )}
+                {...slideContainer}
+              >
+                {_Image()}
+              </SwiperSlide>
             );
-          };
-          return (
-            <SwiperSlide
-              key={i}
-              data-src={d.image.url}
-              className={clsx(
-                // 'w-[400px] h-[600px] object-cover',
-                `!bg-cover !bg-center object-cover`,
-                '!w-[300px] !h-[500px] xl:!w-[400px] xl:!h-[600px]'
-              )}
-              {...slideContainer}
-            >
-              {_Image()}
-            </SwiperSlide>
-          );
-        })}
-        <div className="banner__swiper-pagination mt-8" />
-        <button
-          className="hidden md:flex banner__navigation banner__button-prev"
-          aria-label="Prev"
-        >
-          <Icon className={'w-8 h-8'} icon="mdi:chevron-left" />
-        </button>
-        <button
-          className="hidden md:flex banner__navigation banner__button-next"
-          aria-label="Next"
-        >
-          <Icon className={'w-8 h-8'} icon="mdi:chevron-right" />
-        </button>
-      </Swiper>
-      <LibBaseLightGallery
-        elementClassNames="hidden"
-        onInit={(detail) => {
-          lightGalleryRef.current = detail.instance;
-        }}
-        onAfterOpen={() => {
-          if (typeof ref !== 'function') {
-            ref?.current?.swiper.autoplay.pause();
-          }
-        }}
-        onAfterClose={() => {
-          if (typeof ref !== 'function') {
-            if (ref?.current?.swiper.autoplay.paused) {
-              ref?.current?.swiper.autoplay.resume();
-            }
-          }
-        }}
-      >
-        {(items ?? []).map((d, i) => {
-          return (
-            <a className="" href={d.image.url} key={i}>
-              <Image
-                alt=""
-                width={100}
-                height={120}
-                quality={30}
-                src={d.image.url}
-                className="object-cover"
-              />
+          })}
+          <div className="banner__swiper-pagination mt-8" />
+          <button
+            className="hidden md:flex banner__navigation banner__button-prev"
+            aria-label="Prev"
+          >
+            <Icon className={'w-8 h-8'} icon="mdi:chevron-left" />
+          </button>
+          <button
+            className="hidden md:flex banner__navigation banner__button-next"
+            aria-label="Next"
+          >
+            <Icon className={'w-8 h-8'} icon="mdi:chevron-right" />
+          </button>
+        </Swiper>
+
+        {!hideAllButton && (
+          <div className="w-full flex items-center justify-center py-5">
+            <a href="/informasi-grafik">
+              <button
+                className="btn btn-sm btn-outline btn-primary normal-case"
+                type="button"
+              >
+                Lihat Semua
+              </button>
             </a>
-          );
-        })}
-      </LibBaseLightGallery>
-    </>
-  );
-});
+          </div>
+        )}
+        {!noLightGallery ? (
+          <LibViewGrafikInfoLightGallery
+            items={items}
+            elementClassNames="hidden"
+            onInit={(detail) => {
+              lightGalleryRef.current = detail.instance;
+            }}
+            onAfterOpen={() => {
+              if (typeof ref !== 'function') {
+                ref?.current?.swiper.autoplay.pause();
+              }
+            }}
+            onAfterClose={() => {
+              if (typeof ref !== 'function') {
+                if (ref?.current?.swiper.autoplay.paused) {
+                  ref?.current?.swiper.autoplay.resume();
+                }
+              }
+            }}
+          />
+        ) : null}
+      </>
+    );
+  }
+);
 
 export default LibViewGrafikInfoWidget;

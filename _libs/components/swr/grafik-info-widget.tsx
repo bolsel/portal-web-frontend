@@ -32,7 +32,7 @@ export default function LibSwrGrafikInfoWidget<K extends never>({
   const noItemsComponent = () => (
     <UIContainer>
       <div className="mb-5 bg-base-200 w-full h-[104px] rounded-lg flex justify-center items-center">
-        Belum ada data banner
+        Belum ada data
       </div>
     </UIContainer>
   );
