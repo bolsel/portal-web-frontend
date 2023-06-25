@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import clsx from 'clsx';
 import React from 'react';
+import Head from 'next/head';
+import { useUIConfigContextValue } from '@portal-web/shared-ui';
 
 interface BaseBreadcrumbProps {
   items: {
@@ -12,8 +14,28 @@ interface BaseBreadcrumbProps {
 }
 
 export default function BaseBreadcrumb({ items }: BaseBreadcrumbProps) {
+  const config = useUIConfigContextValue();
   return (
     <div className="text-sm breadcrumbs p-0 text-white mb-6">
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: items.map((item, index) => {
+                return {
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: item.label,
+                  item: `${config.publicUrl}${item.link}`,
+                };
+              }),
+            }),
+          }}
+        />
+      </Head>
       <ul className="text-sm font-lato">
         {items.map((item, index) => (
           <li key={index} className="before:!opacity-100">
@@ -37,27 +59,5 @@ export default function BaseBreadcrumb({ items }: BaseBreadcrumbProps) {
         ))}
       </ul>
     </div>
-  );
-  return (
-    <section className="">
-      <nav className="hidden md:inline-flex">
-        {items.map((item, index) => (
-          <Link
-            href={item.link}
-            key={index}
-            className={clsx(
-              'font-lato text-sm flex items-center max-w-[35ch] line-clamp-1 md:max-w-full md:line-clamp-none',
-              {
-                'font-bold text-white': item.active,
-                'text-blue-400': !item.active,
-                capitalize: item.capitalize,
-              }
-            )}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-    </section>
   );
 }
