@@ -8,6 +8,7 @@ import { getResourceApiUrl, NewsResource } from '@portal-web/shared-api/server';
 import NewsListViewHeader from '../../components/news/list-view-header';
 import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import LibBaseShareItem from '../../../_libs/components/base/share-item';
+import LibSeoNewsHeader from '../../../_libs/components/seo/news-header';
 
 export async function getServerSideProps({ params, req }) {
   const { slug } = params;
@@ -46,21 +47,11 @@ export default function ReadBeritaPage({
   return (
     <main>
       <Head>
-        <title>{data.title}</title>
-        <meta name="title" content={data.title} />
-        <meta name="description" content={data.description} />
-
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={articleUrl} />
-        <meta property="og:title" content={data.title} />
-        <meta property="og:description" content={data.description} />
-        <meta property="og:image" content={data.image_cover.url} />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={articleUrl} />
-        <meta property="twitter:title" content={data.title} />
-        <meta property="twitter:description" content={data.description} />
-        <meta property="twitter:image" content={data.image_cover.url} />
+        <LibSeoNewsHeader
+          data={data}
+          articleUrl={articleUrl}
+          domain="bolselkab.go.id"
+        />
       </Head>
       <article className="article">
         <NewsReadHeader

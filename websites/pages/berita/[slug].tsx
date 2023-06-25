@@ -10,6 +10,7 @@ import LibContentBlocks from '../../../_libs/components/content-blocks/content-b
 import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
 import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
 import LibBaseShareItem from '../../../_libs/components/base/share-item';
+import LibSeoNewsHeader from '../../../_libs/components/seo/news-header';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -58,20 +59,11 @@ export default function BeritaSlugPage(props) {
   return (
     <>
       <Head>
-        <title>{data.title}</title>
-        <meta name="title" content={data.title} />
-        <meta name="description" content={data.description} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={articleUrl} />
-        <meta property="og:title" content={data.title} />
-        <meta property="og:description" content={data.description} />
-        <meta property="og:image" content={data.image_cover.url} />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={articleUrl} />
-        <meta property="twitter:title" content={data.title} />
-        <meta property="twitter:description" content={data.description} />
-        <meta property="twitter:image" content={data.image_cover.url} />
+        <LibSeoNewsHeader
+          data={data}
+          articleUrl={articleUrl}
+          domain={website.domain}
+        />
       </Head>
       <article className="px-5">
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
