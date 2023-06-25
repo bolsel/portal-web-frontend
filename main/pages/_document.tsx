@@ -50,6 +50,7 @@ export default class MyDocument extends Document<{ browserTimingHeader: any }> {
             href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&amp;family=Roboto:wght@400;500;600;700&amp;family=Lora:wght@400;500;600;700&amp;family=Open Sans:wght@400;500;600;700&amp;display=swap"
             rel="stylesheet"
           />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>
           <noscript>
