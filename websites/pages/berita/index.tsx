@@ -56,7 +56,7 @@ export default function BeritaIndexPage(props) {
                       },
                     },
                     urlRead(data) {
-                      return `https://bolselkab.go.id/berita/${data.slug}`;
+                      return `https://www.bolselkab.go.id/berita/${data.slug}`;
                     },
                     linkProps: () => ({
                       target: '_blank',
@@ -67,7 +67,7 @@ export default function BeritaIndexPage(props) {
 
               <div className="mt-5 flex items-center justify-center">
                 <Link
-                  href="https://bolselkab.go.id/berita"
+                  href="https://www.bolselkab.go.id/berita"
                   target="_blank"
                   className="btn btn-primary btn-sm normal-case"
                 >

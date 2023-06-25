@@ -84,7 +84,7 @@ export function Index({ website }) {
                   },
                 },
                 urlRead(data) {
-                  return `https://bolselkab.go.id/berita/${data.slug}`;
+                  return `https://www.bolselkab.go.id/berita/${data.slug}`;
                 },
                 linkProps: () => ({
                   target: '_blank',
@@ -94,7 +94,7 @@ export function Index({ website }) {
           />
           <div className="flex items-center justify-center">
             <Link
-              href="https://bolselkab.go.id/berita"
+              href="https://www.bolselkab.go.id/berita"
               target="_blank"
               className="btn btn-primary btn-sm normal-case"
             >

@@ -32,7 +32,7 @@ export default function LibSeoNewsHeader({
               name: 'Pemerintah Kabupaten Bolaang Mongondow Selatan',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://bolselkab.go.id/images/logo.png',
+                url: 'https://www.bolselkab.go.id/images/logo.png',
               },
             },
           }),

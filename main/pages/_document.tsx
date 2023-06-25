@@ -31,6 +31,17 @@ export default class MyDocument extends Document<{ browserTimingHeader: any }> {
             type="text/javascript"
             dangerouslySetInnerHTML={{ __html: this.props.browserTimingHeader }}
           />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                url: 'https://www.bolselkab.go.id',
+                logo: 'https://www.bolselkab.go.id/images/logo.png',
+              }),
+            }}
+          />
           <meta
             name="description"
             content="Portal Resmi Pemerintah Kabupaten Bolaang Mongondow Selatan"

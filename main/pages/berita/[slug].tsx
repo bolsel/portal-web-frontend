@@ -51,7 +51,7 @@ export default function ReadBeritaPage({
         <LibSeoNewsHeader
           data={data}
           articleUrl={articleUrl}
-          publicUrl={config.publicUrl ?? 'https://bolselkab.go.id'}
+          publicUrl={config.publicUrl ?? 'https://www.bolselkab.go.id'}
         />
       </Head>
       <article className="article">

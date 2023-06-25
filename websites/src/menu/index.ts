@@ -78,7 +78,7 @@ export function getBuildedMenuList({ website }) {
         },
         {
           title: 'Portal Bolsel',
-          link: 'https://bolselkab.go.id/berita',
+          link: 'https://www.bolselkab.go.id/berita',
           description: 'Lihat berita utama Portal Bolsel',
           icon: 'mdi:newspaper-variant-outline',
         },
