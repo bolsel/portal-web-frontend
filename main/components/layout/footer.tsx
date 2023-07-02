@@ -9,7 +9,7 @@ function Info() {
   return (
     <div className="min-w-0 grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between gap-6 text-white">
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:map-marker" className="py-1 w-8 h-8" />
+        <UIIcon icon="mdi:map-marker" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-roboto font-bold leading-7">
             Kompleks Perkantoran Panango
@@ -23,7 +23,7 @@ function Info() {
         </div>
       </div>
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:email" className="py-1 w-8 h-8" />
+        <UIIcon icon="mdi:email" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-roboto font-bold leading-7">Surel</p>
           <a href="mailto:info@bolselkab.go.id" className="text-sm leading-6">
@@ -32,7 +32,7 @@ function Info() {
         </div>
       </div>
       <div className="flex items-start gap-3">
-        <UIIcon icon="base:tabler-social" className="py-1 w-8 h-8" />
+        <UIIcon icon="tabler-social" className="py-1 w-8 h-8" />
         <div className="flex flex-col gap-1">
           <p className="font-bold">Media Sosial</p>
           <div className="w-full flex justify-between md:justify-start gap-6">
@@ -44,7 +44,7 @@ function Info() {
                 aria-label="Facebook"
                 className="hover:bg-[#1877F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-facebook" className="w-6 h-6" />
+                <UIIcon icon="mdi:facebook" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_twitter ? (
@@ -55,7 +55,7 @@ function Info() {
                 aria-label="Twitter"
                 className="hover:bg-[#1DA1F2] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-twitter" className="w-6 h-6" />
+                <UIIcon icon="mdi:twitter" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_instagram ? (
@@ -66,7 +66,7 @@ function Info() {
                 aria-label="Instagram"
                 className="hover:bg-[#E4405F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-instagram" className="w-6 h-6" />
+                <UIIcon icon="mdi:instagram" className="w-6 h-6" />
               </a>
             ) : null}
             {settings.link_youtube ? (
@@ -77,7 +77,7 @@ function Info() {
                 aria-label="Youtube"
                 className="hover:bg-[#CD201F] p-2 flex justify-center items-center rounded-md border border-white border-opacity-20"
               >
-                <UIIcon icon="base:social-youtube" className="w-6 h-6" />
+                <UIIcon icon="mdi:youtube" className="w-6 h-6" />
               </a>
             ) : null}
           </div>
@@ -114,7 +114,7 @@ export default function LayoutDefaultFooter() {
                         <h3 className="font-bold">{m.title}</h3>
                         <div className="h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary-600">
                           <UIIcon
-                            icon="base:chevron-down"
+                            icon="mdi:chevron-down"
                             fill="white"
                             className="w-8 h-8 cursor-pointer transition-transform ease-in duration-150"
                           />

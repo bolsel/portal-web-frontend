@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { UIContainer, UIGPRWidget } from '@portal-web/shared-ui';
+import { UIContainer, UIGPRWidget, UISwrResource } from '@portal-web/shared-ui';
 import { useState } from 'react';
 import Link from 'next/link';
-import { NewsCarouselSwr } from '../client/news-carousel-swr';
-import { NewsListViewSwr } from '../client/news-list-view-swr';
+import { UIViewNewsCarouselWidget } from '@portal-web/shared-ui';
+import NewsTerkiniList from '../news-terkini-list';
 
 export default function NewsHomeTerkini() {
   const [p, setP] = useState('latest');
@@ -29,7 +29,21 @@ export default function NewsHomeTerkini() {
             </Link>
           </div>
           <div className="w-full grid grid-cols-1 gap-8 md:grid-rows-1 lg:grid-cols-[1fr,330px]">
-            <NewsCarouselSwr />
+            <UISwrResource
+              resourceKey="news"
+              loadingComponent={() => (
+                <div className="bg-base-200 animate-pulse w-full h-full"></div>
+              )}
+              noItemsComponent={() => (
+                <div className="bg-base-200 w-full h-full">Belum ada data</div>
+              )}
+              pathQuery={['latest']}
+              paramsQuery={{
+                limit: 5,
+              }}
+            >
+              {({ data }) => <UIViewNewsCarouselWidget items={data} />}
+            </UISwrResource>
             <div className="w-full h-[518px] grid grid-cols-1 grid-rows-[38px,1fr] gap-4">
               <div
                 className="w-full h-full grid grid-cols-2 mb-4"
@@ -61,19 +75,7 @@ export default function NewsHomeTerkini() {
                   Terpopuler
                 </button>
               </div>
-
-              <NewsListViewSwr
-                paramsQuery={{ limit: 4 }}
-                pathQuery={[p]}
-                small
-                noPagination
-                imageComponent={false}
-                titleComponent={({ item, index }) => (
-                  <h2 className="mb-2 line-clamp-2 font-medium leading-7 group-hover:text-primary">
-                    {item.title}
-                  </h2>
-                )}
-              />
+              <NewsTerkiniList type={p} />
             </div>
           </div>
         </section>

@@ -2,9 +2,8 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import ModalDialog from '../../modal/modal-dialog';
 import Image from 'next/image';
-import { UIContainer } from '@portal-web/shared-ui';
+import { UIContainer, UIShareItem } from '@portal-web/shared-ui';
 import BaseBreadcrumb from '../../base/breadcrumb';
-import LibBaseShareItem from '../../../../_libs/components/base/share-item';
 
 export default function NewsReadHeader({ news, articleUrl, apiSharedCount }) {
   const breadcrumbItems = [
@@ -140,7 +139,7 @@ export default function NewsReadHeader({ news, articleUrl, apiSharedCount }) {
                       <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
                         Bagikan Melalui
                       </h2>
-                      <LibBaseShareItem
+                      <UIShareItem
                         url={articleUrl}
                         beforeOnClick={() => {
                           fetch(apiSharedCount);

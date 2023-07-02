@@ -1,10 +1,12 @@
 import Head from 'next/head';
-import { UIContainer, UIDevice } from '@portal-web/shared-ui';
+import {
+  UIContainer,
+  UIDevice,
+  UISwrResourceNewsCarouselHeadline,
+  UISwrResourceNewsListItems,
+} from '@portal-web/shared-ui';
 import { useRouter } from 'next/router';
 import NewsCategoriesListSwiperSwr from '../../components/client/news-categories-list-swiper-swr';
-import NewsCarouselHeaderSwr from '../../components/client/news-carousel-header-swr';
-import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
-import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
 
 export default function BeritaPageIndex() {
   const router = useRouter();
@@ -15,7 +17,7 @@ export default function BeritaPageIndex() {
         <title>{'Berita'}</title>
       </Head>
       <section className="relative">
-        <NewsCarouselHeaderSwr
+        <UISwrResourceNewsCarouselHeadline
           pathQuery={category ? ['byCategorySlug', category] : ['latest']}
           paramsQuery={{ limit: 4 }}
         />
@@ -29,25 +31,25 @@ export default function BeritaPageIndex() {
             {({ isMobile }) => {
               if (isMobile)
                 return (
-                  <LibSwrNewsItems
+                  <UISwrResourceNewsListItems
                     pathQuery={
                       category ? ['byCategorySlug', category] : ['latest']
                     }
                     paramsQuery={{ limit: 6 }}
                     listOptions={{
                       hideViewSwitch: true,
-                      viewType: 'grid',
+                      view: 'grid',
                     }}
                   />
                 );
               return (
-                <LibSwrNewsItems
+                <UISwrResourceNewsListItems
                   pathQuery={
                     category ? ['byCategorySlug', category] : ['latest']
                   }
                   paramsQuery={{ limit: 6 }}
                   listOptions={{
-                    viewType: 'list',
+                    view: 'list',
                   }}
                 />
               );
@@ -56,26 +58,31 @@ export default function BeritaPageIndex() {
         </section>
         <div className="sticky top-[200px]">
           <div className="w-full flex flex-col gap-2 lg:gap-4 ">
-            <LibBaseTitleWidget
-              text={`Berita Populer ${category ? `di ${category}` : ''}`}
-            />
-            <LibSwrNewsItems
+            <div className="flex w-full h-[38px] mb-6">
+              <div className="border-b-[3px] border-primary">
+                <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
+                  {`Berita Populer ${category ? `di ${category}` : ''}`}
+                </h1>
+              </div>
+              <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
+            </div>
+            <UISwrResourceNewsListItems
               hideNavigation
               pathQuery={
                 category ? ['byCategorySlugPopular', category] : ['popular']
               }
               paramsQuery={{ limit: 5 }}
-              listOptions={{
-                hideViewSwitch: true,
-                viewType: 'list',
-                itemOptions: {
-                  small: true,
-                  customComponent: {
-                    description() {
-                      return null;
-                    },
+              itemOptions={{
+                small: true,
+                customComponent: {
+                  description() {
+                    return null;
                   },
                 },
+              }}
+              listOptions={{
+                hideViewSwitch: true,
+                view: 'list',
               }}
             />
           </div>

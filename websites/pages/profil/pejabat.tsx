@@ -1,8 +1,8 @@
 import { serverSideHost } from '../../src/server';
 import { OrganizationPejabatResource } from '@portal-web/shared-api/server';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import BaseLayoutProfilMenu from '../../components/base/layout/profil-menu-layout';
 import Image from 'next/image';
+import { UIContentBlocks } from '@portal-web/shared-ui';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -67,7 +67,7 @@ export default function ProfilPejabatPage(props) {
                         </div>
                         <div className="collapse-content w-full bg-base-200 peer-checked:p-2 rounded-box">
                           {item.profil ? (
-                            <LibContentBlocks {...item.profil} />
+                            <UIContentBlocks {...item.profil} />
                           ) : null}
                         </div>
                       </div>

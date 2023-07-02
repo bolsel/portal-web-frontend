@@ -7,6 +7,18 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
+  publicRuntimeConfig: {
+    publicUrl: process.env.PUBLIC_URL,
+    cdnBaseUrl: process.env.CDN_BASE_URL,
+    resourceBaseUrl: process.env.API_RESOURCE_BASE_URL,
+    gtmId: process.env.GOOGLE_TAG_MANAGER_ID,
+  },
+  serverRuntimeConfig: {
+    directus: {
+      url: process.env.BACKEND_URL,
+      staticToken: process.env.BACKEND_TOKEN,
+    },
+  },
   images: {
     remotePatterns: [
       {

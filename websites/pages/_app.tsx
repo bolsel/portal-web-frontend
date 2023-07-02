@@ -7,6 +7,7 @@ import { UIConfigProvider } from '@portal-web/shared-ui';
 import { BasePageProps } from '../src/types';
 import { SWRConfig } from 'swr';
 import Script from 'next/script';
+import { InitializeProvider } from '@portal-web/shared-base/initialize';
 
 function CustomApp({ Component, pageProps, router }: AppProps<BasePageProps>) {
   const { title, website, subTitle } = pageProps;
@@ -39,7 +40,7 @@ function CustomApp({ Component, pageProps, router }: AppProps<BasePageProps>) {
           revalidateOnFocus: false,
         }}
       >
-        <UIConfigProvider
+        <InitializeProvider
           config={{
             publicUrl: website?.publicUrl,
             icons: {
@@ -58,7 +59,7 @@ function CustomApp({ Component, pageProps, router }: AppProps<BasePageProps>) {
           <BaseLayout {...pageProps} route={router.route}>
             <Component {...pageProps} />
           </BaseLayout>
-        </UIConfigProvider>
+        </InitializeProvider>
       </SWRConfig>
     </>
   );

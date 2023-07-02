@@ -26,14 +26,4 @@ h6 {
 }
 
 @import './themes';
-@import '../../../_libs/src/styles/main.scss';
-// .banner__swiper {
-//   &.swiper-horizontal > .swiper-pagination-bullets {
-//     position: absolute !important;
-//     z-index: 10;
-//     width: 100% !important;
-//     display: flex !important;
-//     align-items: center !important;
-//     justify-content: center !important;
-//   }
-// }
+@import '@portal-web/shared-ui/presets/default/styles/main.scss';

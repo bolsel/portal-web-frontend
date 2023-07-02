@@ -1,4 +1,4 @@
-import LibPageGrafikInfo from '../../../_libs/components/page/grafik-info-page';
+import { UIPageGrafikInfoList } from '@portal-web/shared-ui';
 import { serverSideHost } from '../../src/server';
 
 export async function getServerSideProps(context) {
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
 export default function InformasiGrafikIndexPage(props) {
   return (
     <div className="w-full p-5">
-      <LibPageGrafikInfo />
+      <UIPageGrafikInfoList />
     </div>
   );
 }

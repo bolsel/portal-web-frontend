@@ -1,8 +1,12 @@
+import Link from 'next/link';
 import HomeHero from '../components/home-hero';
 import NewsHomeTerkini from '../components/news/home-terkini';
-import AplikasiListWidgetSwr from '../components/client/aplikasi-list-widget-swr';
-import LibSwrBannerInfoWidget from '../../_libs/components/swr/banner-info-widget';
-import LibSwrGrafikInfoWidget from '../../_libs/components/swr/grafik-info-widget';
+import {
+  UIContainer,
+  UISwrResourceBannerInfoWidget,
+  UISwrResourceGrafikInfoWidget,
+} from '@portal-web/shared-ui';
+import { UISwrResourceApplicationListWidget } from '@portal-web/shared-ui';
 
 export function Index() {
   return (
@@ -15,8 +19,7 @@ export function Index() {
         <NewsHomeTerkini />
       </section>
       <section className="py-6 md:py-8 xl:py-12">
-        <LibSwrBannerInfoWidget
-          viewOptions={{}}
+        <UISwrResourceBannerInfoWidget
           wrapperComponent={({ children }) => (
             <div className="container mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6">
               {children}
@@ -26,7 +29,7 @@ export function Index() {
       </section>
 
       <section className="py-6 md:py-8 xl:py-12">
-        <LibSwrGrafikInfoWidget
+        <UISwrResourceGrafikInfoWidget
           paramsQuery={{ limit: 7 }}
           wrapperComponent={({ children }) => (
             <div className="container bg-gray-200 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
@@ -38,7 +41,29 @@ export function Index() {
           }}
         />
       </section>
-      <AplikasiListWidgetSwr />
+      <UIContainer className="relative">
+        <div className="flex flex-col md:flex-row items-center gap-1 md:gap-4 mb-8">
+          <h2 className="font-medium text-[28px] md:text-4xl leading-loose">
+            Aplikasi
+          </h2>
+          <div className="flex-1 flex justify-center flex-col text-center">
+            <div className="border-b border-gray-300" />
+          </div>
+          <Link href="/aplikasi" tabIndex={-1}>
+            <button
+              className="btn btn-sm btn-outline btn-primary normal-case"
+              type="button"
+            >
+              Lihat Semua Aplikasi
+            </button>
+          </Link>
+        </div>
+        <UISwrResourceApplicationListWidget
+          wrapperComponent={({ children }) => (
+            <UIContainer>{children}</UIContainer>
+          )}
+        />
+      </UIContainer>
     </main>
   );
 }

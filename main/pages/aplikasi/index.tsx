@@ -1,9 +1,12 @@
 import BaseJumbotron from '../../components/base/jumbotron';
 import { useState } from 'react';
-import { UIContainer, UISearchInput } from '@portal-web/shared-ui';
+import {
+  UIContainer,
+  UISearchInput,
+  UISwrResourceApplicationListItems,
+} from '@portal-web/shared-ui';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
 import AplikasiKategoriListSelectSwr from '../../components/client/aplikasi-kategori-list-select-swr';
-import AplikasiListDataSwr from '../../components/client/aplikasi-list-data-swr';
 import { ApplicationCategoriesResource } from '@portal-web/shared-api/server';
 
 export async function getServerSideProps({ params }) {
@@ -73,7 +76,7 @@ export default function AplikasiPage({ categories }) {
                     staticOptions={false}
                   />
                 </section>
-                <AplikasiListDataSwr
+                <UISwrResourceApplicationListItems
                   search={search}
                   categories={categoriesSelected}
                 />

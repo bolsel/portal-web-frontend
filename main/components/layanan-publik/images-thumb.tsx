@@ -1,12 +1,12 @@
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
-import LibBaseLightGallery from '../../../_libs/components/base/light-gallery';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React, { useRef, useState } from 'react';
 import { Mousewheel, Navigation } from 'swiper';
 import 'swiper/css/bundle';
 import clsx from 'clsx';
 import { LightGallery } from 'lightgallery/lightgallery';
+import { UILightGallery } from '@portal-web/shared-ui';
 
 export default function LayananPublikImagesThumb({ data }) {
   const lightGalleryRef = useRef<LightGallery | null>(null);
@@ -38,7 +38,7 @@ export default function LayananPublikImagesThumb({ data }) {
 
       {data.images && data.images.length ? (
         <section className="flex sm:flex-col xl:flex-row gap-4 md:gap-6 sm:h-[557px] lg:h-[597px] xl:h-auto sm:order-last overflow-auto xl:overflow-hidden">
-          <LibBaseLightGallery
+          <UILightGallery
             onInit={(detail) => {
               lightGalleryRef.current = detail.instance;
             }}
@@ -51,7 +51,7 @@ export default function LayananPublikImagesThumb({ data }) {
                 </a>
               );
             })}
-          </LibBaseLightGallery>
+          </UILightGallery>
           <div className="xl:hidden flex sm:flex-col xl:flex-row gap-4 md:gap-6 sm:h-[557px] lg:h-[597px] xl:h-auto sm:order-last overflow-auto xl:overflow-hidden">
             {data.images.map((d, i) => (
               <div

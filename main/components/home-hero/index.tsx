@@ -1,7 +1,6 @@
 import HomeHeroImage from './image';
 import styles from './styles.module.css';
 import clsx from 'clsx';
-// import HomeHeroSearch from './search';
 import { UIContainer } from '@portal-web/shared-ui';
 import localFont from '@next/font/local';
 import HomeHeroSearch from './search';
@@ -43,7 +42,6 @@ export default function HomeHero() {
               Bolaang Mongondow Selatan
             </h1>
             <HomeHeroSearch />
-            {/*<FeedbackWidget />*/}
           </div>
         </UIContainer>
       </section>

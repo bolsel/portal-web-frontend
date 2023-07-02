@@ -1,11 +1,10 @@
 import { DocumentsResource } from '@portal-web/shared-api/server';
-import LibViewDocumentItemDetail from '../../../_libs/components/view/document/item-detail';
 import Head from 'next/head';
-import { documentIcon, publicUrl } from '../../../_libs/src/global-helpers';
 import { useState } from 'react';
-import { UIContainer } from '@portal-web/shared-ui';
+import { UIContainer, UIViewDocumentItemDetail } from '@portal-web/shared-ui';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
 import BaseJumbotron from '../../components/base/jumbotron';
+import { documentIcon, publicUrl } from '@portal-web/shared-base';
 
 export async function getServerSideProps(context) {
   const { slug } = context.params;
@@ -108,7 +107,7 @@ export default function DokumenSlugPage(props) {
 
               <div className="">
                 <div className="flex flex-col gap-7 lg:sticky lg:top-[88px]">
-                  <LibViewDocumentItemDetail data={data} downloadLink />
+                  <UIViewDocumentItemDetail data={data} downloadLink />
                 </div>
               </div>
             </div>

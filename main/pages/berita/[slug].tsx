@@ -1,14 +1,15 @@
-import Head from 'next/head';
 import { Icon } from '@iconify/react';
 import React from 'react';
-import { UIContainer, useUIConfigContextValue } from '@portal-web/shared-ui';
-import { NewsListViewSwr } from '../../components/client/news-list-view-swr';
+import {
+  UIContainer,
+  UIContentBlocks,
+  UISeoNewsHead,
+  UIShareItem,
+  UISwrResourceNewsListItems,
+  useUIConfigContextValue,
+} from '@portal-web/shared-ui';
 import NewsReadHeader from '../../components/news/read/header';
 import { getResourceApiUrl, NewsResource } from '@portal-web/shared-api/server';
-import NewsListViewHeader from '../../components/news/list-view-header';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import LibBaseShareItem from '../../../_libs/components/base/share-item';
-import LibSeoNewsHeader from '../../../_libs/components/seo/news-header';
 
 export async function getServerSideProps({ params, req }) {
   const { slug } = params;
@@ -47,13 +48,11 @@ export default function ReadBeritaPage({
   const config = useUIConfigContextValue();
   return (
     <main>
-      <Head>
-        <LibSeoNewsHeader
-          data={data}
-          articleUrl={articleUrl}
-          publicUrl={config.publicUrl ?? 'https://www.bolselkab.go.id'}
-        />
-      </Head>
+      <UISeoNewsHead
+        data={data}
+        articleUrl={articleUrl}
+        publicUrl={config.publicUrl ?? 'https://www.bolselkab.go.id'}
+      />
       <article className="article">
         <NewsReadHeader
           news={data}
@@ -63,17 +62,35 @@ export default function ReadBeritaPage({
         <UIContainer className="mt-12 mb-12 mx-auto">
           <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
             <div className="flex flex-col gap-7">
-              <div className="article__body w-full min-h-screen">
+              <div className="article__body w-full">
                 {data.content && data.content.blocks && (
-                  <LibContentBlocks {...data.content} />
+                  <UIContentBlocks {...data.content} />
                 )}
               </div>
             </div>
             <section>
               <div className="flex flex-col gap-7 lg:sticky lg:top-[88px]">
-                <NewsListViewSwr
-                  noPagination
-                  small
+                <div className="flex w-full h-[38px] mb-6">
+                  <div className="border-b-[3px] border-primary">
+                    <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
+                      Berita Terkait
+                    </h1>
+                  </div>
+                  <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
+                </div>
+                <UISwrResourceNewsListItems
+                  hideNavigation
+                  itemOptions={{
+                    small: true,
+                    customComponent: {
+                      description() {
+                        return null;
+                      },
+                    },
+                  }}
+                  listOptions={{
+                    hideViewSwitch: true,
+                  }}
                   pathQuery={['byCategorySlug', data.category.slug]}
                   paramsQuery={{
                     filter: {
@@ -83,7 +100,6 @@ export default function ReadBeritaPage({
                     },
                     limit: 5,
                   }}
-                  header={<NewsListViewHeader label="Berita Terkait" />}
                 />
                 <div className="flex flex-col gap-3 w-full">
                   <p className="inline-flex gap-3 font-lato text-xs text-blue-gray-200 leading-5">
@@ -93,7 +109,7 @@ export default function ReadBeritaPage({
                     />
                     Bagikan Berita
                   </p>
-                  <LibBaseShareItem
+                  <UIShareItem
                     url={articleUrl}
                     title={data.title}
                     quote={data.description}

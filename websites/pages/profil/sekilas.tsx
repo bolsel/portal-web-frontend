@@ -1,7 +1,7 @@
 import { serverSideHost } from '../../src/server';
 import { OrganizationsResource } from '@portal-web/shared-api/server';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
 import BaseLayoutProfilMenu from '../../components/base/layout/profil-menu-layout';
+import { UIContentBlocks } from '@portal-web/shared-ui';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -33,7 +33,7 @@ export default function ProfilSekilasPage(props) {
     <BaseLayoutProfilMenu {...props}>
       {data ? (
         <div className="prose max-w-none">
-          <LibContentBlocks {...data} />
+          <UIContentBlocks {...data} />
         </div>
       ) : (
         <div>Belum ada data</div>

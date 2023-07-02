@@ -5,12 +5,14 @@ import {
 } from '@portal-web/shared-api/server';
 import Head from 'next/head';
 import React from 'react';
-import { UIIcon, UINextImageBlur } from '@portal-web/shared-ui';
-import LibContentBlocks from '../../../_libs/components/content-blocks/content-blocks';
-import LibSwrNewsItems from '../../../_libs/components/swr/news-items';
-import LibBaseTitleWidget from '../../../_libs/components/base/title-widget';
-import LibBaseShareItem from '../../../_libs/components/base/share-item';
-import LibSeoNewsHeader from '../../../_libs/components/seo/news-header';
+import {
+  UIContentBlocks,
+  UIIcon,
+  UINextImageBlur,
+  UISeoNewsHead,
+  UIShareItem,
+  UISwrResourceNewsListItems,
+} from '@portal-web/shared-ui';
 
 export async function getServerSideProps(context) {
   const website = await serverSideHost(context);
@@ -58,13 +60,12 @@ export default function BeritaSlugPage(props) {
   const { data, articleUrl, apiSharedCount, website } = props;
   return (
     <>
-      <Head>
-        <LibSeoNewsHeader
-          data={data}
-          articleUrl={articleUrl}
-          publicUrl={website.publicUrl}
-        />
-      </Head>
+      <UISeoNewsHead
+        publicUrl={website.publicUrl}
+        articleUrl={articleUrl}
+        data={data}
+      />
+      <Head></Head>
       <article className="px-5">
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
           <div className="flex flex-col gap-7">
@@ -142,7 +143,7 @@ export default function BeritaSlugPage(props) {
               </div>
               {data.content && data.content.blocks && (
                 <div className="prose max-w-none">
-                  <LibContentBlocks {...data.content} />
+                  <UIContentBlocks {...data.content} />
                 </div>
               )}
             </div>
@@ -158,7 +159,7 @@ export default function BeritaSlugPage(props) {
                   />
                   Bagikan Berita
                 </p>
-                <LibBaseShareItem
+                <UIShareItem
                   url={articleUrl}
                   title={data.title}
                   quote={data.description}
@@ -167,19 +168,26 @@ export default function BeritaSlugPage(props) {
                   }}
                 />
               </div>
-              <LibBaseTitleWidget text="Berita Terbaru" />
-              <LibSwrNewsItems
+              <div className="flex w-full h-[38px] mb-6">
+                <div className="border-b-[3px] border-primary">
+                  <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
+                    Berita Terbaru
+                  </h1>
+                </div>
+                <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
+              </div>
+              <UISwrResourceNewsListItems
                 websiteId={website.id}
                 paramsQuery={{ limit: 5 }}
                 hideNavigation
                 listOptions={{
                   hideViewSwitch: true,
-                  itemOptions: {
-                    small: true,
-                    customComponent: {
-                      description() {
-                        return null;
-                      },
+                }}
+                itemOptions={{
+                  small: true,
+                  customComponent: {
+                    description() {
+                      return null;
                     },
                   },
                 }}

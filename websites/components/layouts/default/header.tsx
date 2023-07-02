@@ -76,7 +76,7 @@ export default function LayoutsDefaultHeader({ website }) {
               title="Tutup Menu Navigasi"
               onClick={() => setHasSub(null)}
             >
-              <UIIcon icon="base:close" className="text-white w-6 h-6" />
+              <UIIcon icon="mdi:close" className="text-white w-6 h-6" />
             </button>
           </div>
         </UIContainer>
@@ -158,7 +158,7 @@ export default function LayoutsDefaultHeader({ website }) {
                       </span>
                       {menu.items && (
                         <UIIcon
-                          icon="base:chevron-down"
+                          icon="mdi:chevron-down"
                           className="w-5 h-5 font-bold"
                           aria-hidden="true"
                         />
@@ -177,12 +177,12 @@ export default function LayoutsDefaultHeader({ website }) {
               >
                 {!mobileShow ? (
                   <UIIcon
-                    icon="base:menu"
+                    icon="mdi:menu"
                     className="w-full h-full text-white"
                   />
                 ) : (
                   <UIIcon
-                    icon="base:close"
+                    icon="mdi:close"
                     className="w-full h-full text-white"
                   />
                 )}

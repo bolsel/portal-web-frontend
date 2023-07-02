@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import React from 'react';
-import { baseTitle } from '../../src/global-helpers';
 import { UIContainer } from '@portal-web/shared-ui';
+export const baseTitle = (title: string) => {
+  return title.concat(' | Portal Resmi Pemkab Bolsel');
+};
 
 export default function BaseJumbotron({
   breadcrumb,

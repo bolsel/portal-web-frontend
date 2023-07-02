@@ -1,7 +1,9 @@
 import BaseJumbotron from '../../components/base/jumbotron';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
-import { UIContainer } from '@portal-web/shared-ui';
-import LayananPublikListSwr from '../../components/client/layanan-publik-list-swr';
+import {
+  UIContainer,
+  UISwrResourcePublicServiceListItems,
+} from '@portal-web/shared-ui';
 
 export default function LayananPublikPage() {
   return (
@@ -33,7 +35,7 @@ export default function LayananPublikPage() {
           <div className="bg-white p-3 md:p-4 lg:p-6 xl:px-10 xl:py-8 rounded-xl shadow ">
             <div>
               <div className="w-full min-w-0 flex flex-col gap-6 ">
-                <LayananPublikListSwr />
+                <UISwrResourcePublicServiceListItems />
               </div>
             </div>
           </div>

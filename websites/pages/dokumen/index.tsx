@@ -1,6 +1,5 @@
 import { serverSideHost } from '../../src/server';
-import LibSwrDocumentItems from '../../../_libs/components/swr/document-items';
-import { UIIcon } from '@portal-web/shared-ui';
+import { UIIcon, UISwrResourceDocumentListItems } from '@portal-web/shared-ui';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -92,7 +91,7 @@ export default function DokumenIndexPage(props) {
             </ul>
           </div>
         </div>
-        <LibSwrDocumentItems
+        <UISwrResourceDocumentListItems
           organizationId={website.organization.id}
           category={category}
         />

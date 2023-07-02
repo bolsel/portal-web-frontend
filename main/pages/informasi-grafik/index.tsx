@@ -1,7 +1,6 @@
 import BaseJumbotron from '../../components/base/jumbotron';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
-import { UIContainer } from '@portal-web/shared-ui';
-import LibPageGrafikInfo from '../../../_libs/components/page/grafik-info-page';
+import { UIContainer, UIPageGrafikInfoList } from '@portal-web/shared-ui';
 
 export default function InformasiGrafikIndexPage({ page }) {
   return (
@@ -31,7 +30,7 @@ export default function InformasiGrafikIndexPage({ page }) {
       <section className="w-full bg-gray-200">
         <UIContainer className="relative -top-24 z-20">
           <div className="p-3 md:p-6 lg:py-8 lg:px-10 rounded-xl bg-white">
-            <LibPageGrafikInfo />
+            <UIPageGrafikInfoList />
           </div>
         </UIContainer>
       </section>

@@ -8,9 +8,10 @@ const { composePlugins, withNx } = require('@nx/next');
  **/
 const nextConfig = {
   publicRuntimeConfig: {
-    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
-    CDN_URL: process.env.CDN_URL,
-    API_RESOURCE_BASE_URL: process.env.NEXT_PUBLIC_API_RESOURCE_BASE_URL,
+    publicUrl: process.env.PUBLIC_URL,
+    cdnBaseUrl: process.env.CDN_BASE_URL,
+    resourceBaseUrl: process.env.API_RESOURCE_BASE_URL,
+    gtmId: process.env.GOOGLE_TAG_MANAGER_ID,
   },
   serverRuntimeConfig: {
     directus: {

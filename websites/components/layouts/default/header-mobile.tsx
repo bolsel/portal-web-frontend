@@ -48,9 +48,7 @@ export default function LayoutsDefaultHeaderMobile({ website, show, setShow }) {
                       <div className="navigation__sidebar__button h-6 w-6 flex items-center justify-center rounded-full hover:bg-primary-600">
                         <UIIcon
                           icon={
-                            active === i
-                              ? 'base:chevron-up'
-                              : 'base:chevron-down'
+                            active === i ? 'mdi:chevron-up' : 'mdi:chevron-down'
                           }
                           fill="white"
                           className="w-8 h-8 cursor-pointer transition-transform ease-in"

@@ -5,9 +5,12 @@ import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Icon } from '@iconify/react';
 import BaseBreadcrumb from '../../components/base/breadcrumb';
-import { UIContainer, UISearchInput } from '@portal-web/shared-ui';
+import {
+  UIContainer,
+  UISearchInput,
+  UISwrResourceDocumentListItems,
+} from '@portal-web/shared-ui';
 import { DocumentCategoriesResource } from '@portal-web/shared-api/server';
-import LibSwrDocumentItems from '../../../_libs/components/swr/document-items';
 
 export async function getServerSideProps(context) {
   const { data: documentCategories } = await new DocumentCategoriesResource()
@@ -159,13 +162,11 @@ export default function DokumenPage({ documentCategories }) {
                   setSelected={(v) => setCurrentCategoryId(v)}
                 />
               </div>
-              <LibSwrDocumentItems
+              <UISwrResourceDocumentListItems
                 search={search}
                 category={currentCategoryId}
-                listOptions={{
-                  itemOptions: {
-                    hideCategory: true,
-                  },
+                itemOptions={{
+                  hideCategory: true,
                 }}
               />
             </section>
