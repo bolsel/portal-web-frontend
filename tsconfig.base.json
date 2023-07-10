@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@portalweb/api": ["libs/api/src/index.ts"]
+      "@portalweb/api": ["libs/api/src/index.ts"],
+      "@portalweb/ui": ["libs/ui/src/index.ts"],
+      "@portalweb/ui/server": ["libs/ui/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
