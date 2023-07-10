@@ -1,6 +1,0 @@
-{
-  "name": "bolsel-main",
-  "description": "Bolsel PortalWeb frontend main app",
-  "version": "1.0.3",
-  "dockerImage": "bolsel/portal-web-main-app"
-}
