@@ -31,6 +31,20 @@
           }
         ]
       }
+    },
+    "generate-icons": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/ui/icons"
+      },
+      "configurations": {
+        "default": {
+          "commands": ["node generate.mjs"]
+        },
+        "to-dir": {
+          "commands": ["node to-dir.mjs"]
+        }
+      }
     }
   }
 }

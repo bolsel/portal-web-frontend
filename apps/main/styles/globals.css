@@ -1,0 +1,122 @@
+@import 'swiper/swiper-bundle.min.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply font-default bg-gray-50 text-blue-gray-800;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading;
+}
+details summary::-webkit-details-marker {
+  display:none;
+}
+.ui-container {
+  @apply container mx-auto px-6 xl:max-w-7xl 2xl:px-0;
+}
+
+.ui-filter{
+  &-default{
+    background: radial-gradient(56.33% 56.33% at 50.59% 43.67%, rgba(17, 0, 0,0.5) 0%, rgba(17, 0, 0, 0.7) 46.15%, rgba(6, 0, 0, 0.82) 100%)
+  }
+  &-jubbotron{
+    background: radial-gradient(
+      100% 2589.12% at 0 0,
+      rgba(40, 0, 12, 0.98) 0,
+      rgba(0, 32, 39, 0.9) 100%
+    );
+  }
+}
+.jumbotron-overlay{
+  position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: radial-gradient(100% 2589.12% at 0 0,rgba(40,0,12,.98) 0,rgba(0,32,39,.9) 100%);
+}
+
+.ui-btn{
+  @apply px-5 py-2.5 text-sm font-medium rounded-lg;
+  &.btn-xs{
+    @apply px-3 py-2 text-xs;
+  }
+  &.btn-sm{
+    @apply px-3 py-2 text-sm;
+  }
+  &.btn-lg{
+    @apply px-5 py-3 text-base;
+  }
+  &.btn-xl{
+    @apply px-6 py-3.5 text-base;
+  }
+  &.btn-outline{
+    @apply border text-primary border-primary-700 hover:bg-primary hover:text-white;
+  }
+  &.btn-primary{
+    @apply bg-primary text-white hover:bg-primary-dark;
+  }
+}
+
+.breadcrumbs {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-top: .5rem;
+  padding-bottom: .5rem
+}
+
+.breadcrumbs>ol,.breadcrumbs>ul {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-height: -moz-min-content;
+  min-height: min-content
+}
+
+.breadcrumbs>ol>li,.breadcrumbs>ul>li {
+  display: flex;
+  align-items: center
+}
+
+.breadcrumbs>ol>li>a,.breadcrumbs>ul>li>a {
+  display: flex;
+  cursor: pointer;
+  align-items: center
+}
+
+.breadcrumbs>ol>li>a:hover,.breadcrumbs>ul>li>a:hover {
+  text-decoration-line: underline
+}
+
+.breadcrumbs>ol>li>a:focus,.breadcrumbs>ul>li>a:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px
+}
+
+.breadcrumbs>ol>li>a:focus-visible,.breadcrumbs>ul>li>a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px
+}
+
+.breadcrumbs>ol>li+:before,.breadcrumbs>ul>li+:before {
+  content: "";
+  margin-left: .5rem;
+  margin-right: .75rem;
+  display: block;
+  height: .375rem;
+  width: .375rem;
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  opacity: .4;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  background-color: transparent
+}
