@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@portalweb/api": ["libs/api/src/index.ts"],
+      "@portalweb/api/server": ["libs/api/src/server.ts"],
+      "@portalweb/base": ["libs/base/src/index.ts"],
+      "@portalweb/base/server": ["libs/base/src/server.ts"],
+      "@portalweb/ui": ["libs/ui/src/index.ts"],
+      "@portalweb/ui/server": ["libs/ui/src/server.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
