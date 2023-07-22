@@ -28,11 +28,11 @@ export const UIPagination: UIPaginationType['returnType'] = (props) => {
                 {total}
               </span>{' '}
             </div>
-            <div className="inline-flex mt-2 xs:mt-0">
+            <div className="join">
               <button
                 disabled={page === 1}
                 onClick={() => setPage(page - 1)}
-                className="flex items-center justify-center px-3 h-8 text-sm font-medium border border-primary text-primary rounded-l hover:bg-primary hover:text-white"
+                className="btn font-medium btn-outline btn-sm join-item"
               >
                 <svg
                   className="w-3.5 h-3.5 mr-2"
@@ -59,7 +59,7 @@ export const UIPagination: UIPaginationType['returnType'] = (props) => {
               <button
                 disabled={page === total_pages}
                 onClick={() => setPage(page + 1)}
-                className="flex items-center justify-center px-3 h-8 text-sm font-medium border-r border-t border-b border-primary text-primary rounded-r hover:bg-primary hover:text-white"
+                className="btn font-medium btn-outline btn-sm join-item"
               >
                 Selanjutnya
                 <svg

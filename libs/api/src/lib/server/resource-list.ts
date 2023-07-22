@@ -1,7 +1,14 @@
-import { apiResourceNews, apiResourceNewsCategories } from './resources';
+import {
+  apiResourceDocumentCategories,
+  apiResourceDocuments,
+  apiResourceNews,
+  apiResourceNewsCategories,
+} from './resources';
 
 export function apiResourceItems() {
   return {
+    documents: apiResourceDocuments,
+    document_categories: apiResourceDocumentCategories,
     news: apiResourceNews,
     news_categories: apiResourceNewsCategories,
     websites: apiResourceNews,

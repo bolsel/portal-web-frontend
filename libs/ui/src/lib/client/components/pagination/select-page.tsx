@@ -8,19 +8,19 @@ export default function SelectPage({ page, setPage, totalPage }) {
     <motion.nav
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      className="drop-shadow-xl relative  min-w-[50px]"
+      className=" drop-shadow-xl relative  min-w-[50px]"
     >
       <motion.button
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-full flex items-center justify-center px-3 h-8 text-sm font-medium border-r border-t border-b border-primary text-primary hover:bg-primary hover:text-white"
+        className="join-item relative w-full flex items-center justify-center px-3 h-8 text-sm font-medium btn btn-outline btn-sm"
       >
         {page}
       </motion.button>
       <AnimatePresence>
         {isOpen && (
           <motion.ul
-            className="rounded-b-lg absolute w-full bg-white flex flex-col max-h-[200px] overflow-auto select-none"
+            className="absolute w-full bg-white flex flex-col max-h-[200px] overflow-auto select-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{
@@ -35,7 +35,7 @@ export default function SelectPage({ page, setPage, totalPage }) {
               return (
                 <motion.li
                   className={clsx(
-                    'cursor-default text-xs text-center hover:bg-primary/30 py-2',
+                    'cursor-default text-xs text-center hover:bg-primary/30 py-2 rounded-none',
                     {
                       'bg-primary/30': _i === page,
                     }

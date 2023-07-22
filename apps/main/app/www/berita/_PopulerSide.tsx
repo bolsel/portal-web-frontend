@@ -66,7 +66,7 @@ export default function PopulerSide() {
                     small: () => true,
                     fields: ({ defaults }) => ({
                       ...defaults.fields,
-                      descrition: '',
+                      description: '',
                     }),
                   }}
                 />

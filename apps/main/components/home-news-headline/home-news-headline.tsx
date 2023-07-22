@@ -31,14 +31,12 @@ export default function HomeNewsHeadline() {
                 <div className="flex flex-1 flex-col justify-center text-center">
                   <div className="border-b border-gray-300" />
                 </div>
-                <Link href="/berita" tabIndex={-1}>
-                  <motion.button
-                    aria-label="Lihat Semua Berita"
-                    className="rounded-lg border border-primary px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white"
-                    whileTap={{ scale: 0.96 }}
-                  >
-                    Lihat Semua Berita
-                  </motion.button>
+                <Link
+                  href="/berita"
+                  tabIndex={-1}
+                  className="normal-case font-medium btn btn-sm btn-outline btn-primary"
+                >
+                  Lihat Semua Berita
                 </Link>
               </div>
               <div className="grid w-full grid-cols-1 gap-8 md:grid-rows-1 lg:grid-cols-[1fr,330px]">

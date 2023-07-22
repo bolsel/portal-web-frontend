@@ -22,6 +22,16 @@ export function imageFile(data: FileType) {
   };
 }
 
+export function fileObject(data: FileType) {
+  return {
+    url: urlAssetCdn(data),
+    type: data.type,
+    filesize: data.filesize,
+    title: data.title,
+    description: data.description,
+  };
+}
+
 export function contentBlocks(data: any): {
   time: number;
   blocks: Record<string, any>[];

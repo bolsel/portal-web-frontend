@@ -22,7 +22,7 @@ export type UIBaseViewNewsListItemType<Item extends Record<string, any>> =
         title: string;
         slug: string;
         category_name: string;
-        descrition: string;
+        description: string;
         cover_image_url: string;
         publish_date: string;
       };
@@ -39,7 +39,7 @@ export const UIBaseViewNewsListItem = <Item extends Record<string, any>>(
         title: item.title,
         slug: item.slug,
         category_name: item.category_name,
-        descrition: item.description,
+        description: item.description,
         cover_image_url: item.image_cover?.url,
         publish_date: item.publish_date_format ?? item.publish_date,
       }),
@@ -138,7 +138,7 @@ export const UIBaseViewNewsListItem = <Item extends Record<string, any>>(
               </h1>
             </Link>
             <p className="font-lato font-normal text-sm leading-6 text-gray-600 mb-2 group-hover:text-blue-gray-600 line-clamp-2">
-              {fields.descrition}
+              {fields.description}
             </p>
             <p className="font-normal text-xs leading-5 text-gray-500">
               <span className="capitalize flex items-center justify-center gap-2">

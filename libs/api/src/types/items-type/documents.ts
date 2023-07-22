@@ -6,13 +6,13 @@ export type Documents = {
   id: string;
   status: DirectusStatusType;
   publish_date: Date;
-  category: string | DocumentCategories;
-  file: string | FileType;
+  category: DocumentCategories;
+  file: FileType;
   title: string;
   description: string;
   slug: string;
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };
