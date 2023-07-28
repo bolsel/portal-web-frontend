@@ -7,21 +7,22 @@ export type PublicServices = {
   sort: number;
   title: string;
   description: string;
-  logo: string | FileType;
-  organization?: string | Organizations;
+  logo: FileType;
+  organization?: Organizations;
 
-  type: 'online' | 'offline';
+  type: ('online' | 'offline')[];
+  slug: string;
   address: string;
   phones: { number: string; description: string }[];
   email: string;
   links: { name: string; link: string }[];
   operational_hours: { day: number; open: boolean; start: Date; end: Date }[];
-  images: FileType[];
+  images: { id: string; image: FileType; sort: number }[];
   social_media: { name: string; link: string }[];
   informations: { title: string; item: string[] }[];
 
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

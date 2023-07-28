@@ -35,7 +35,7 @@ export default function NewsList({
           customizes={{
             noViewSwitch: () => true,
           }}
-          Component={({ data: item }) => (
+          Component={({ item: item }) => (
             <UIBaseViewNewsListSimple item={item} />
           )}
         />

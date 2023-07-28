@@ -11,6 +11,9 @@ export interface IUIBaseCreateCustomizableDefine<
     customizes?: Partial<CustomizeType<IUIBaseCreateCustomizableDefine<P, C>>>;
   };
   customizes: C;
+  customizesProps: Partial<
+    CustomizeType<IUIBaseCreateCustomizableDefine<P, C>>
+  >;
   returnType: FC<
     P & {
       customizes?: Partial<

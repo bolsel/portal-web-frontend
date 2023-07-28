@@ -34,7 +34,7 @@ export default function HomeNewsHeadline() {
                 <Link
                   href="/berita"
                   tabIndex={-1}
-                  className="normal-case font-medium btn btn-sm btn-outline btn-primary"
+                  className="normal-case btn btn-sm btn-outline btn-primary"
                 >
                   Lihat Semua Berita
                 </Link>

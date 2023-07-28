@@ -6,10 +6,10 @@ export type BannerInfo = {
   status: DirectusStatusType;
   title: string;
   sort: number;
-  image: string | FileType;
+  image: FileType;
   link?: string;
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

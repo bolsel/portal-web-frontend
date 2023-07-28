@@ -42,7 +42,7 @@ export default function CategorySwiper() {
                   <Link href="/berita">
                     <button
                       className={clsx(
-                        'px-6 py-2 rounded-full font-roboto uppercase cursor-pointer hover:bg-primary hover:text-white text-gray-600',
+                        'px-6 py-2 rounded-full font-heading uppercase cursor-pointer hover:bg-primary hover:text-white text-gray-600',
                         {
                           'bg-primary text-white': !categoryActive,
                         }
@@ -58,7 +58,7 @@ export default function CategorySwiper() {
                     <Link href={`/berita/?kategori=${item.slug}`}>
                       <button
                         className={clsx(
-                          'px-6 py-2 rounded-full font-roboto uppercase cursor-pointer hover:bg-primary hover:text-white text-gray-600',
+                          'px-6 py-2 rounded-full font-heading uppercase cursor-pointer hover:bg-primary hover:text-white text-gray-600',
                           {
                             'bg-primary text-white':
                               categoryActive === item.slug,

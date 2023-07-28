@@ -9,20 +9,20 @@ export default function MenuItems() {
   const mainLayout = useMainLayoutContext();
   const menu = mainLayout.headerCurrentMenu;
   return (
-    <section className="bg-primary w-full absolute top-full left-0 border-t border-primary-400">
+    <section className="bg-primary w-full absolute top-full left-0 border-t border-primary-400 font-menu">
       <div className="ui-container">
         <div className="flex mx-auto items-start pt-6 pb-10 bg-no-repeat">
           <div className="flex flex-col gap-8 flex-grow">
             {menu.link ? (
               <Link
                 href={menu.link}
-                className="text-white font-roboto font-medium text-3xl leading-10"
+                className="text-white font-medium text-3xl leading-10"
                 onClick={() => mainLayout.setHeaderCurrentMenu(null)}
               >
                 {menu.title}
               </Link>
             ) : (
-              <h1 className="text-white font-roboto font-medium text-3xl leading-10">
+              <h1 className="font-menu text-white font-medium text-3xl leading-10">
                 {menu.title}
               </h1>
             )}
@@ -59,10 +59,10 @@ export default function MenuItems() {
                           />
                         </div>
                         <div className="w-full ml-4 group-hover:border-b-primary-900 rounded-lg group-hover:bg-opacity-40">
-                          <h2 className="text-lg font-bold text-gray-50 mb-1">
+                          <h2 className="font-menu text-lg font-bold text-gray-50 mb-1">
                             {m.title}
                           </h2>
-                          <div className="text-sm text-gray-50 font-roboto opacity-80 line-clamp-1">
+                          <div className="text-sm text-gray-50 opacity-80 line-clamp-1">
                             {m.description}
                           </div>
                         </div>

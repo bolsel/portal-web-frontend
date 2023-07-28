@@ -71,14 +71,14 @@ export async function getMenuList() {
               title: d.title,
               link: `/layanan-publik/${d.id}`,
               description: d.description,
-              icon: 'base:layanan-publik',
+              icon: 'layanan-publik',
             }))
           : []),
         ...[
           {
             title: 'Semua Layanan Publik',
             link: '/layanan-publik',
-            icon: 'base:menu-default',
+            icon: 'menu-default',
             description: 'Lihat daftar layanan publik lengkap',
           },
         ],

@@ -133,13 +133,15 @@ export const UIBaseViewNewsListItem = <Item extends Record<string, any>>(
               aria-label={fields.title}
               title={fields.title}
             >
-              <h1 className="font-lato font-medium text-lg leading-7 text-blue-gray-800 mb-[6px] group-hover:text-primary-700 line-clamp-2">
+              <h1 className="font-default font-medium text-lg leading-7 text-blue-gray-800 mb-[6px] group-hover:text-primary-700 line-clamp-2">
                 {fields.title}
               </h1>
             </Link>
-            <p className="font-lato font-normal text-sm leading-6 text-gray-600 mb-2 group-hover:text-blue-gray-600 line-clamp-2">
-              {fields.description}
-            </p>
+            {fields.description ? (
+              <p className="font-normal text-sm leading-6 text-gray-600 mb-2 group-hover:text-blue-gray-600 line-clamp-2">
+                {fields.description}
+              </p>
+            ) : null}
             <p className="font-normal text-xs leading-5 text-gray-500">
               <span className="capitalize flex items-center justify-center gap-2">
                 <UIBaseIcon icon="calendar" className="w-4 h-4" />

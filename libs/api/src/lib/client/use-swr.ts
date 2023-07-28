@@ -32,5 +32,8 @@ export function useApiResourceSWR<
   const url = `${baseResourceUrl}/${resourceKey}${pathQueryStringBuild(
     pathQuery as string[]
   )}${paramsQueryStringBuild(paramsQuery)}`;
-  return useSWR<ApiResourceGetItemReturnTypeByParams<R, P>>(url, fetcherBase);
+  return useSWR<ApiResourceGetItemReturnTypeByParams<R, P>>(url, {
+    fetcher: fetcherBase,
+    revalidateOnFocus: false,
+  });
 }

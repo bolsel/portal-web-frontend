@@ -4,10 +4,10 @@ export type GrafikInfo = {
   id: string;
   status: string;
   title: string;
-  image: string | FileType;
+  image: FileType;
   publish_date: Date;
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

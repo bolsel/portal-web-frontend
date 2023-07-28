@@ -2,12 +2,14 @@ import { Metadata } from 'next';
 import Lists from './_Lists';
 import Headline from './_Headline';
 import CategorySwiper from './_CategorySwiper';
-import PopulerSide from './_PopulerSide';
+import PopulerSide from './_PopularSide';
 
-export const metadata: Metadata = {
-  title: 'Berita Bolsel',
-  description: 'Berita Pemerintah Kabupaten Bolaang Mongondow Selatan',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Berita Bolsel | ${process.env.NEXT_PUBLIC_MAIN_TITLE}`,
+    description: 'Berita Pemerintah Kabupaten Bolaang Mongondow Selatan',
+  };
+}
 export default function MainBeritaIndexPage(props) {
   return (
     <main className="">

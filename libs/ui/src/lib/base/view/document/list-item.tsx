@@ -26,10 +26,11 @@ export type UIBaseViewDocumentListItemType<Item extends Record<string, any>> =
         slug: string;
         file: Record<string, any>;
         category_name: string;
-        descrition: string;
+        description: string;
         cover_image_url: string;
         publish_date: string;
       };
+      itemAction?: (item: Item) => void;
       documentIcon: ReactNode;
     }
   >;
@@ -46,7 +47,7 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
         slug: item.slug,
         file: item.file,
         category_name: item.category_name,
-        descrition: item.description,
+        description: item.description,
         cover_image_url: item.image_cover?.url,
         publish_date: item.publish_date_format ?? item.publish_date,
       }),
@@ -98,13 +99,14 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
               {fields.title}
             </h3>
             <p className="font-lato font-normal text-sm text-blue-gray-800 line-clamp-2">
-              {fields.descrition}
+              {fields.description}
             </p>
             <div className="mt-5 flex  gap-2 items-start md:items-center">
               <button
                 type="button"
                 onClick={() => {
-                  // if (itemAction) itemAction(data);
+                  const itemAction = render('itemAction');
+                  if (itemAction) itemAction(item);
                 }}
                 className="font-lato gap-2 normal-case btn btn-outline btn-sm btn-primary"
               >

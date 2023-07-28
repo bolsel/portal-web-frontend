@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client';
 
 import { ReactNode } from 'react';
@@ -17,18 +18,36 @@ export function UISwrResource<
   paramsQuery,
   children,
   loadingComponent,
+  emptyComponent,
 }: P & {
   resourceKey: R;
-  children: (props: Res) => ReactNode;
-  loadingComponent: (props: Res) => ReactNode;
+  // @ts-ignore
+  children: (props: Res & { data: NonNullable<Res['data']> }) => ReactNode;
+  loadingComponent?: (props: Res) => ReactNode;
+  emptyComponent?: (props: Res) => ReactNode;
 }) {
+  // @ts-ignore
   const swrRes = useApiResourceSWR({
     resourceKey,
     pathQuery,
     paramsQuery,
   });
+  const loading = loadingComponent ? (
+    loadingComponent(swrRes as Res)
+  ) : (
+    <div>Loading</div>
+  );
+  const empty = emptyComponent ? (
+    emptyComponent(swrRes as Res)
+  ) : (
+    <div>Belum ada data.</div>
+  );
   if (swrRes.isLoading) {
-    return loadingComponent(swrRes as Res);
+    return loading;
   }
-  return children(swrRes as Res);
+  if (!swrRes.data) {
+    return empty;
+  }
+  //@ts-ignore
+  return children(swrRes);
 }

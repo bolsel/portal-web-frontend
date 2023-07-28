@@ -1,3 +1,5 @@
+'use client';
+
 import { useScript } from '../hooks';
 import { useRef } from 'react';
 

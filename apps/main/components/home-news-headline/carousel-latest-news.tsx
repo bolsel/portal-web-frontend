@@ -95,7 +95,7 @@ export default function CarouselLatestNews() {
                                   <Link href={`/berita/${item.slug}`}>
                                     <h2
                                       title={item.title}
-                                      className="line-clamp-3 md:line-clamp-2 font-intro font-bold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3"
+                                      className="line-clamp-3 md:line-clamp-2 font-heading font-bold text-xl md:text-2xl leading-9 md:leading-10 max-h-[108px] md:max-h-[90px] mb-3"
                                     >
                                       {item.title}
                                     </h2>

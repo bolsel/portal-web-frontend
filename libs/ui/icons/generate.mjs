@@ -34,12 +34,12 @@ import * as path from 'path';
 
       // Assume icon is monotone: replace color with currentColor, add if missing
       // If icon is not monotone, remove this code
-      await parseColors(svg, {
-        defaultColor: 'currentColor',
-        callback: (attr, colorStr, color) => {
-          return !color || isEmptyColor(color) ? colorStr : 'currentColor';
-        },
-      });
+      // await parseColors(svg, {
+      //   // defaultColor: 'currentColor',
+      //   callback: (attr, colorStr, color) => {
+      //     return !color || isEmptyColor(color) ? colorStr : 'currentColor';
+      //   },
+      // });
 
       // Optimise
       await runSVGO(svg);

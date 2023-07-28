@@ -5,7 +5,7 @@ export type News = {
   id: string;
   title: string;
   slug: string;
-  publish_date: Date;
+  publish_date: string;
   category: NewsCategories;
   image_cover: FileType;
   status: DirectusStatusType;

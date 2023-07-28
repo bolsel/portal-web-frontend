@@ -52,10 +52,10 @@ export default function Headline() {
                         <div className="ui-container relative grid grid-cols-1 xl:grid-cols-9">
                           <div className="flex flex-col justify-end h-full lg:col-span-6 xl:pr-32 pb-6 md:pb-10">
                             <div>
-                              <p className="font-roboto uppercase leading-relaxed tracking-wider opacity-80 mb-1">
+                              <p className="font-heading uppercase leading-relaxed tracking-wider opacity-80 mb-1">
                                 {item.category_name}
                               </p>
-                              <h3 className="line-clamp-3 md:line-clamp-2 lg:line-clamp-3 text-[23px] font-lora font-bold md:text-3xl lg:text-4xl leading-9 md:!leading-[48px] mb-6 max-h-[108px] lg:max-h-full">
+                              <h3 className="line-clamp-3 md:line-clamp-2 lg:line-clamp-3 text-[23px] font-content-title font-bold md:text-3xl lg:text-4xl leading-9 md:!leading-[48px] mb-6 max-h-[108px] lg:max-h-full">
                                 {item.title}
                               </h3>
                               <div className="flex flex-col md:flex-row gap-2 opacity-100 md:opacity-60 text-sm mb-6">

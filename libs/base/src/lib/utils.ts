@@ -62,10 +62,17 @@ export function humanFileSize(bytes: any, si = false, dp = 1) {
   return bytes.toFixed(dp) + ' ' + units[u];
 }
 
-export const toDateString = (date: any) => {
-  return new Date(date).toLocaleDateString('id-ID', {
-    month: 'short',
+export function dateToLocaleDateString(
+  date: number | string | Date,
+  options: Intl.DateTimeFormatOptions
+) {
+  return new Date(date).toLocaleDateString('id-ID', options);
+}
+
+export const toDateString = (date: number | string | Date) => {
+  return dateToLocaleDateString(date, {
     day: 'numeric',
+    month: 'long',
     year: 'numeric',
   });
 };

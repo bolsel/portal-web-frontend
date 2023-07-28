@@ -36,7 +36,7 @@ export default function PopulerSide() {
             customizes={{
               noViewSwitch: () => true,
             }}
-            Component={({ data, view }) => (
+            Component={({ item: data, view }) => (
               <UIBaseViewNewsListItem
                 skeleton
                 item={[]}
@@ -58,7 +58,7 @@ export default function PopulerSide() {
               customizes={{
                 noViewSwitch: () => true,
               }}
-              Component={({ data, view }) => (
+              Component={({ item: data, view }) => (
                 <UIBaseViewNewsListItem
                   item={data}
                   view={view}

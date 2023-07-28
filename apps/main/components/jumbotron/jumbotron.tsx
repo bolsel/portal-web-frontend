@@ -30,7 +30,7 @@ export default function Jumbotron({
       <div className="ui-container relative pt-24 pb-40 z-10">
         {breadcrumb && <Breadcrumb items={breadcrumb} />}
         {title && (
-          <h1 className="font-lora font-bold text-3xl leading-relaxed text-primary-500 mb-2">
+          <h1 className="font-content-title font-bold text-3xl leading-relaxed text-primary-500 mb-2">
             {title}
           </h1>
         )}
@@ -38,7 +38,7 @@ export default function Jumbotron({
           {subtitle && (
             <h2
               className={clsx(
-                'font-lato text-sm leading-6 text-white line-clamp-4',
+                'font-default text-sm leading-6 text-white line-clamp-4',
                 {
                   'sm:col-span-4': suffix,
                   'sm:col-span-2': !suffix,

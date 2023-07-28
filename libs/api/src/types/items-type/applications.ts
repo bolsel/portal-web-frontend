@@ -10,15 +10,15 @@ export type Applications = {
   slug: string;
   title: string;
   description?: string;
-  logo?: string | FileType;
-  categories: { id: string; category: ApplicationCategories[] };
+  logo?: FileType;
+  categories: { id: string; category: ApplicationCategories }[];
   link?: string;
   links?: { link: string; name: string }[];
   social_media?: { link: string; name: string }[];
-  organization?: string | Organizations;
+  organization?: Organizations;
 
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

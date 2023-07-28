@@ -49,7 +49,6 @@ export const UIPagination: UIPaginationType['returnType'] = (props) => {
                     d="M13 5H1m0 0 4 4M1 5l4-4"
                   />
                 </svg>
-                Sebelumnya
               </button>
               <SelectPage
                 totalPage={total_pages}
@@ -61,7 +60,6 @@ export const UIPagination: UIPaginationType['returnType'] = (props) => {
                 onClick={() => setPage(page + 1)}
                 className="btn font-medium btn-outline btn-sm join-item"
               >
-                Selanjutnya
                 <svg
                   className="w-3.5 h-3.5 ml-2"
                   aria-hidden="true"

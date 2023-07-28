@@ -20,7 +20,7 @@ export type UIListItemsType<
 > = IUIBaseCreateCustomizableDefine<
   {
     items: number | Item[];
-    Component: FC<{ data: Item; view: UIBaseListViewType }>;
+    Component: FC<{ item: Item; view: UIBaseListViewType }>;
     view: UIBaseListViewType;
     setView: Dispatch<SetStateAction<UIBaseListViewType>>;
   },
@@ -99,7 +99,7 @@ export function UIListItems<I extends Record<string, any>>(
           >
             {_items.map((item, index) => {
               return Component ? (
-                <Component key={index} view={view} data={item} />
+                <Component key={index} view={view} item={item} />
               ) : null;
             })}
           </UIBaseListItems>

@@ -37,3 +37,12 @@ export type ApiResourceGetItemReturnTypeByParams<
   ApiResourceGetItemTypePaths<R>,
   Params['pathQuery']['0']
 >;
+
+export type ApiResourceGetNormalizerType<
+  R extends keyof ApiResourceItemsListType,
+  Path extends keyof ApiResourceGetItemTypePaths<R>,
+  NormalizerReturn = ReturnType<
+    // @ts-ignore
+    ReturnType<ApiResourceGetItemTypePaths<R>[Path]>['normalizer']
+  >
+> = NormalizerReturn;

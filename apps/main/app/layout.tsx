@@ -1,15 +1,9 @@
+import '@portalweb/ui/presets/base/main.css';
 import '../styles/globals.css';
 import type { Metadata } from 'next';
-import {
-  cal,
-  lato,
-  lora,
-  inter,
-  intro,
-  heading,
-  raleway,
-} from '../styles/fonts';
+import { variableClass } from '../styles/fonts';
 import clsx from 'clsx';
+import { UIModalProvider } from '@portalweb/ui';
 
 export const metadata: Metadata = {
   title: 'Portal Resmi Pemkab Bolsel',
@@ -23,18 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body
-        className={clsx(
-          raleway.variable,
-          heading.variable,
-          cal.variable,
-          lato.variable,
-          lora.variable,
-          inter.variable,
-          intro.variable
-        )}
-      >
-        {children}
+      <body className={clsx(variableClass)}>
+        <UIModalProvider>{children}</UIModalProvider>
       </body>
     </html>
   );

@@ -1,10 +1,15 @@
+import { STATUS_PUBLISHED } from '../../constants';
 import { apiBaseResource } from '../base-resource';
 import { apiNormalizerDocuments } from '../normalizers';
 
 export const apiResourceDocuments = () => {
   return apiBaseResource({
     resourceKey: 'documents',
-    baseFilter: {},
+    baseFilter: {
+      status: {
+        _eq: STATUS_PUBLISHED,
+      },
+    },
     defaultQuery: {
       fields: [
         'id',
@@ -20,6 +25,19 @@ export const apiResourceDocuments = () => {
       ],
     },
     paths: {
+      bySlug({ query, pathQuery: [slug], errorThrow }) {
+        if (!slug) errorThrow('Slug dibutuhkan');
+        return {
+          isItem: true,
+          query: {
+            fields: query.fields,
+            filter: { slug },
+          },
+          normalizer(data) {
+            return apiNormalizerDocuments.base(data);
+          },
+        };
+      },
       latest({ query }) {
         return {
           query: {
@@ -32,7 +50,7 @@ export const apiResourceDocuments = () => {
         };
       },
       latestByCategorySlug({ query, pathQuery: [slug], errorThrow }) {
-        if (!slug) errorThrow('Slug dibutuhkan');
+        if (!slug) errorThrow('Kategori Slug dibutuhkan');
         return {
           query: {
             fields: [...query.fields],

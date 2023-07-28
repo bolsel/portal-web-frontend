@@ -1,3 +1,5 @@
+'use client';
+
 import { Icon as MainIcon, IconProps as MainIconProps } from '@iconify/react';
 export type UIIconProps = MainIconProps;
 

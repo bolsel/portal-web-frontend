@@ -23,7 +23,7 @@ export default function Lists() {
           loadingComponent={() => (
             <UIListItems
               items={limit}
-              Component={({ data, view }) => (
+              Component={({ item: data, view }) => (
                 <UIBaseViewNewsListItem skeleton item={[]} view={view} />
               )}
               view={isMobile ? 'grid' : view}
@@ -43,7 +43,7 @@ export default function Lists() {
               <>
                 <UIListItems
                   items={data?.data ?? []}
-                  Component={({ data, view }) => (
+                  Component={({ item: data, view }) => (
                     <UIBaseViewNewsListItem item={data} view={view} />
                   )}
                   view={isMobile ? 'grid' : view}

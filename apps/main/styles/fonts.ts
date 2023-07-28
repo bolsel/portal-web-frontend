@@ -1,68 +1,34 @@
 import localFont from 'next/font/local';
-import {
-  Inter,
-  Lora,
-  Work_Sans,
-  Lato,
-  Roboto,
-  Raleway,
-} from 'next/font/google';
+import { Lora, Lato, Roboto } from 'next/font/google';
+import clsx from 'clsx';
 
-export const heading = Roboto({
-  variable: '--font-heading',
-  weight: '500',
-  subsets: ['latin', 'cyrillic', 'greek'],
+export const lato = Lato({
+  variable: '--font-lato',
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '700', '900'],
 });
-export const raleway = Raleway({
-  variable: '--font-raleway',
+
+export const roboto = Roboto({
+  variable: '--font-roboto',
+  subsets: ['latin'],
   weight: ['100', '300', '400', '500', '700', '900'],
-  subsets: ['latin', 'cyrillic'],
 });
+
+export const lora = Lora({
+  variable: '--font-lora',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
 export const intro = localFont({
   src: './intro.otf',
   variable: '--font-intro',
   weight: '600',
-  display: 'swap',
-});
-export const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
 });
 
-export const cal = localFont({
-  src: './CalSans-SemiBold.otf',
-  variable: '--font-cal',
-  weight: '600',
-  display: 'swap',
-});
-
-export const calTitle = localFont({
-  src: './CalSans-SemiBold.otf',
-  variable: '--font-title',
-  weight: '600',
-  display: 'swap',
-});
-export const lato = Lato({
-  variable: '--font-lato',
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
-export const lora = Lora({
-  variable: '--font-title',
-  subsets: ['latin'],
-  weight: '600',
-  display: 'swap',
-});
-export const work = Work_Sans({
-  variable: '--font-title',
-  subsets: ['latin'],
-  weight: '600',
-  display: 'swap',
-});
-
-export const fontMapper = {
-  'font-cal': calTitle.variable,
-  'font-lora': lora.variable,
-  'font-work': work.variable,
-} as Record<string, string>;
+export const variableClass = clsx(
+  intro.variable,
+  lora.variable,
+  lato.variable,
+  roboto.variable
+);
