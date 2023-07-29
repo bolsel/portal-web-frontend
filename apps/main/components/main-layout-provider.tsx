@@ -7,12 +7,16 @@ export type MainLayoutContextType = {
   settings: Record<string, any>;
   headerCurrentMenu: any;
   setHeaderCurrentMenu: any;
+  mobileMenuShow: boolean
+  setMobileMenuShow: any
 };
 export const MainLayoutContext = createContext<MainLayoutContextType>({
   menuList: [],
   settings: {},
   headerCurrentMenu: null,
   setHeaderCurrentMenu: null,
+  mobileMenuShow: false,
+  setMobileMenuShow: null
 });
 
 export function useMainLayoutContext() {
@@ -27,6 +31,7 @@ export function MainLayoutProvider({
   value: Pick<MainLayoutContextType, 'menuList' | 'settings'>;
 }) {
   const [headerCurrentMenu, setHeaderCurrentMenu] = useState(null);
+  const [mobileMenuShow, setMobileMenuShow] = useState(false);
 
   return (
     <MainLayoutContext.Provider
@@ -34,6 +39,8 @@ export function MainLayoutProvider({
         ...value,
         headerCurrentMenu,
         setHeaderCurrentMenu,
+        mobileMenuShow,
+        setMobileMenuShow
       }}
     >
       {children}

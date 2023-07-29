@@ -4,6 +4,29 @@ import { UIBaseIcon } from '@portalweb/ui';
 import { useState } from 'react';
 import MenuItems from './menu-items';
 import { useMainLayoutContext } from '../../components/main-layout-provider';
+
+const MobileMenu = () => {
+  const { mobileMenuShow, setMobileMenuShow } = useMainLayoutContext();
+  return (
+    <div className="lg:hidden">
+      <div className="min-w-0 flex gap-4">
+        <button
+          className="w-7 h-7 flex items-center justify-center"
+          onClick={() => setMobileMenuShow?.(!mobileMenuShow)}
+        >
+          {!mobileMenuShow ? (
+            <UIBaseIcon icon="menu" className="w-full h-full text-white" />
+          ) : (
+            <UIBaseIcon icon="close" className="w-full h-full text-white" />
+          )}
+          <span className="sr-only">
+            {mobileMenuShow ? 'Tutup Menu' : 'Buka Menu'}
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+};
 export default function MenuList() {
   const mainLayout = useMainLayoutContext();
   return (
@@ -28,7 +51,7 @@ export default function MenuList() {
         </ul>
         {mainLayout.headerCurrentMenu && <MenuItems />}
       </div>
-      {/* <MobileMenu /> */}
+      <MobileMenu />
     </>
   );
 }

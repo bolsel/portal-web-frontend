@@ -58,9 +58,8 @@ export default async function BaseOgImage({
               {images.length ? (
                 <div tw="flex w-full flex-1 rounded-lg">
                   <img
-                    tw={`h-full w-[${
-                      images.length <= 1 ? '100%' : '70%'
-                    }] rounded-xl shadow-sm`}
+                    tw={`h-full w-[${images.length <= 1 ? '100%' : '70%'
+                      }] rounded-xl shadow-sm`}
                     style={{ objectFit: 'cover' }}
                     src={images.shift()}
                   />

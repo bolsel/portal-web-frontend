@@ -1,6 +1,6 @@
 export default {
 	"prefix": "base",
-	"lastModified": 1690438087,
+	"lastModified": 1690608043,
 	"icons": {
 		"apps": {
 			"body": "<path fill=\"currentColor\" d=\"M16 18H6a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2zM6 6v10h10V6zm20 6v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm0 12v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm-10 2v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2z\"/>",
@@ -157,6 +157,9 @@ export default {
 		},
 		"map-pin": {
 			"body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/></g>"
+		},
+		"menu": {
+			"body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 12h16M4 6h16M4 18h16\"/>"
 		},
 		"menu-default": {
 			"body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path d=\"M8.3 10a.7.7 0 01-.626-1.079L11.4 3a.7.7 0 011.198-.043L16.3 8.9a.7.7 0 01-.572 1.1Z\"/><rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\"/><circle cx=\"17.5\" cy=\"17.5\" r=\"3.5\"/></g>"

@@ -6,6 +6,8 @@ import MenuList from './menu-list';
 import clsx from 'clsx';
 import { useMainLayoutContext } from '../main-layout-provider';
 import { useCallback, useEffect, useState } from 'react';
+import HeaderMobile from './header-mobile';
+import { usePathname, useParams, useSearchParams } from 'next/navigation';
 
 export default function HeaderMain() {
   const mainLayout = useMainLayoutContext();
@@ -14,7 +16,6 @@ export default function HeaderMain() {
     const { scrollY } = window;
     setWindowScrollY(scrollY);
   }, []);
-
   useEffect(() => {
     //add eventlistener to window
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -23,6 +24,14 @@ export default function HeaderMain() {
       window.removeEventListener('scroll', onScroll);
     };
   });
+  const pathName = usePathname()
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    mainLayout.setHeaderCurrentMenu(null);
+    mainLayout.setMobileMenuShow(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathName, searchParams])
+
 
   return (
     <header
@@ -40,8 +49,7 @@ export default function HeaderMain() {
             <BaseLogo />
           </Link>
           <MenuList />
-          {/* <LayoutDefaultHeaderMenu />
-          <LayoutDefaultHeaderMobile /> */}
+          <HeaderMobile />
         </nav>
       </div>
     </header>
