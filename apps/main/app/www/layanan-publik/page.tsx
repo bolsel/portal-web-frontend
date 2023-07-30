@@ -1,12 +1,23 @@
+import { titleWithMainTitle } from '../../../lib/helper';
 import PageWithContainer from '../../../components/pages/page-with-container';
 import Lists from './_Lists';
+import { Metadata } from 'next';
 
-export default function MainLayananPublikPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: titleWithMainTitle('Layanan Publik'),
+    description: 'Cari tahu Informasi layanan publik yang ada di Bolsel',
+    openGraph: {
+      images: ['/og-image/layanan-publik'],
+    },
+  };
+}
+export default async function MainLayananPublikPage() {
   return (
     <PageWithContainer
       jumbotron={{
         title: 'Layanan Publik',
-        subtitle: 'Informasi layanan publik yang ada di Bolsel',
+        subtitle: 'Cari tahu informasi layanan publik yang ada di Bolsel',
         breadcrumb: [
           {
             label: 'Beranda',

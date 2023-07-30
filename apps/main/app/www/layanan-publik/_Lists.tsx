@@ -28,7 +28,7 @@ export default function Lists() {
       ) : (
         <UIBaseIcon
           icon="layanan-publik"
-          className="text-primary-base"
+          className="text-primary"
           width={48}
           height={48}
         />

@@ -16,6 +16,10 @@ export async function GET(req: NextRequest) {
       description:
         'Akses dan unduh dokumen resmi dari Pemkab Bolaang Mongondow Selatan',
     },
+    'layanan-publik': {
+      title: 'Layanan Publik',
+      description: 'Cari tahu informasi layanan publik yang ada di Bolsel',
+    },
   };
   if (!ogTypes[type]) {
     return new Response('Tidak ditemukan.!', { status: 404 });

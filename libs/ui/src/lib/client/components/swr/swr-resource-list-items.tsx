@@ -31,6 +31,8 @@ export function UISwrResourceListItems<
     view: UIBaseListViewType;
   }>;
 }) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const swrRes = useApiResourceSWR({
     resourceKey,
     pathQuery,

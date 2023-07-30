@@ -4,7 +4,11 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <PageWithContainer>
+    <PageWithContainer
+      jumbotron={{
+        title: 'Halaman Tidak Ditemukan',
+      }}
+    >
       <Image
         src="/images/404.svg"
         width="295"

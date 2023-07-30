@@ -9,7 +9,10 @@ export function UIBaseIcon({
   icon,
   fallback,
   ...props
-}: IconProps & { icon: UIBaseIconNamesType; fallback?: UIBaseIconNamesType }) {
+}: IconProps & {
+  icon: UIBaseIconNamesType;
+  fallback?: UIBaseIconNamesType;
+}) {
   if (!collections.icons[icon] && fallback) {
     icon = fallback;
   }

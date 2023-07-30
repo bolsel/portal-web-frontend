@@ -12,7 +12,7 @@ export async function getMenuList() {
   const { data: publicServices } =
     await apiResourcePublicServices().itemHandler.readByQuery({
       limit: 5,
-      fields: ['id', 'title', 'description'],
+      fields: ['id', 'title', 'description', 'slug'],
     });
 
   const mainMenu = [
@@ -67,9 +67,9 @@ export async function getMenuList() {
       link: '/layanan-publik',
       items: [
         ...(publicServices
-          ? publicServices.map((d: any) => ({
+          ? publicServices.map((d) => ({
               title: d.title,
-              link: `/layanan-publik/${d.id}`,
+              link: `/layanan-publik/${d.slug}`,
               description: d.description,
               icon: 'layanan-publik',
             }))

@@ -24,6 +24,7 @@ export const apiResourcePublicServices = () => {
         'links',
         'social_media',
         'address',
+        'email',
         'phones',
         'operational_hours',
         'type',

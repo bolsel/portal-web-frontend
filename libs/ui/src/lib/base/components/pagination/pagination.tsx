@@ -22,7 +22,7 @@ export const UIBasePagination: UIBasePaginationType['returnType'] = (props) => {
                 className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
               >
                 <span className="sr-only">Previous</span>
-                <UIBaseIcon icon="chevronLeft" />
+                <UIBaseIcon icon="chevron-left" />
               </a>
             </li>
             <li>
@@ -39,7 +39,7 @@ export const UIBasePagination: UIBasePaginationType['returnType'] = (props) => {
                 className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
               >
                 <span className="sr-only">Next</span>
-                <UIBaseIcon icon="chevronRight" />
+                <UIBaseIcon icon="chevron-right" />
               </a>
             </li>
           </ul>

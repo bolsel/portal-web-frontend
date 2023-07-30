@@ -1,3 +1,4 @@
+import { toDateString } from '@portalweb/base';
 import { apiNormalizerBase } from '.';
 import { ApiItemsType } from '../../../types';
 
@@ -18,6 +19,8 @@ export function bySlug(data: ApiItemsType['public_services']) {
     phones,
     social_media,
     organization,
+    date_updated,
+    date_created,
   } = data;
   const _organization = organization
     ? {
@@ -31,7 +34,7 @@ export function bySlug(data: ApiItemsType['public_services']) {
     title,
     slug,
     description,
-    logo: apiNormalizerBase.imageFile(logo),
+    logo: logo ? apiNormalizerBase.imageFile(logo) : null,
     type,
     address,
     email,
@@ -43,6 +46,7 @@ export function bySlug(data: ApiItemsType['public_services']) {
     operational_hours,
     phones,
     social_media,
+    date_updated: new Date(date_updated ?? date_created),
     ..._organization,
   };
 }
@@ -55,6 +59,6 @@ export function listSimple(data: ApiItemsType['public_services']) {
     slug,
     description,
     type,
-    logo: apiNormalizerBase.imageFile(logo),
+    logo: logo ? apiNormalizerBase.imageFile(logo) : null,
   };
 }

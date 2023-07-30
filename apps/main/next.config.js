@@ -7,6 +7,7 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
+  transpilePackages: ['@portalweb/ui', '@portalweb/api'],
   images: {
     remotePatterns: [
       {
