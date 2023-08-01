@@ -6,7 +6,7 @@ import {
   IUIBaseCreateCustomizableDefine,
   UIBaseCreateCustomizable,
 } from '../../../base/create/customize';
-import UIBlurImage from '../blur-image';
+import {UIBlurImage} from '../blur-image';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type ItemType<I extends Record<string, any>> = { image: string } & I;

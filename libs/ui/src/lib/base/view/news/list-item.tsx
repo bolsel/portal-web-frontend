@@ -145,7 +145,7 @@ export const UIBaseViewNewsListItem = <Item extends Record<string, any>>(
             <p className="font-normal text-xs leading-5 text-gray-500">
               <span className="capitalize flex items-center justify-center gap-2">
                 <UIBaseIcon icon="calendar" className="w-4 h-4" />
-                {fields.publish_date} | {fields.category_name}
+                {fields.publish_date}{fields.category_name ? ` | ${fields.category_name}` : null}
               </span>
             </p>
           </div>

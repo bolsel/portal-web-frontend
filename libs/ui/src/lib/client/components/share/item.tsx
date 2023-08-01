@@ -9,7 +9,6 @@ import {
 import createShareButton from 'react-share/lib/hocs/createShareButton';
 import objectToGetParams from 'react-share/lib/utils/objectToGetParams';
 import { UIBaseIcon } from '../../../base';
-import { UIIcon } from '../icon/icon';
 
 function whatsappLink(
   url: string,

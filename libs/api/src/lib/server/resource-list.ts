@@ -7,7 +7,12 @@ import {
   apiResourceGrafikInfo,
   apiResourceNews,
   apiResourceNewsCategories,
+  apiResourceOrganizationDocuments,
+  apiResourceOrganizationPejabat,
+  apiResourceOrganizations,
   apiResourcePublicServices,
+  apiResourceWebNews,
+  apiResourceWebsites,
 } from './resources';
 
 export function apiResourceItems() {
@@ -18,10 +23,14 @@ export function apiResourceItems() {
     documents: apiResourceDocuments,
     document_categories: apiResourceDocumentCategories,
     grafik_info: apiResourceGrafikInfo,
-    news: apiResourceNews,
     news_categories: apiResourceNewsCategories,
+    news: apiResourceNews,
+    organization_documents: apiResourceOrganizationDocuments,
+    organization_pejabat: apiResourceOrganizationPejabat,
+    organizations: apiResourceOrganizations,
     public_services: apiResourcePublicServices,
-    websites: apiResourceNews,
+    web_news: apiResourceWebNews,
+    websites: apiResourceWebsites,
   };
 }
 export function apiResourceGet(key: string) {

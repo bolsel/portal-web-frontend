@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <PageWithContainer
       jumbotron={{
-        title: 'Halaman Tidak Ditemukan',
+        title: '',
       }}
     >
       <Image
@@ -25,7 +25,7 @@ export default function NotFound() {
         </p>
       </div>
       <Link href="/" tabIndex={-1}>
-        <button className="ui-btn btn-primary">Kembali Ke Beranda</button>
+        <button className="btn btn-primary">Kembali Ke Beranda</button>
       </Link>
     </PageWithContainer>
   );

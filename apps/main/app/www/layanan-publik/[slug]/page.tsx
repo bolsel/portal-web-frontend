@@ -6,7 +6,27 @@ import Images from './_Images';
 import Info from './_Info';
 import Details from './_Details';
 import Image from 'next/image';
+import { Metadata } from 'next';
+import { titleWithMainTitle } from '../../../../lib/helper';
 
+export async function generateMetadata({
+  params: { slug },
+}): Promise<Metadata> {
+  const item = await apiResourcePublicServices()
+    .fetch({
+      pathQuery: ['bySlug', slug],
+    })
+    .catch(() => null);
+  if (!item) return notFound();
+
+  return {
+    title: titleWithMainTitle(`${item.title} - Layanan Publik`),
+    description: item.description,
+    openGraph: {
+      images: [`/og-image/layanan-publik/${item.slug}`, item.images[0].url],
+    },
+  };
+}
 export default async function MainLayananPublikSlugPage({ params: { slug } }) {
   const item = await apiResourcePublicServices()
     .fetch({

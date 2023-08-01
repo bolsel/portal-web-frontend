@@ -54,7 +54,7 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
       documentIcon: ({ render }) => {
         return (
           <UIBaseIconDocument
-            className="font-lora w-[30px] h-[30px] md:w-[60px] md:h-[60px] fill-primary text-white"
+            className="font-default w-[30px] h-[30px] md:w-[60px] md:h-[60px] fill-primary text-white"
             text={
               render('fields').file.type === 'application/pdf' ? 'PDF' : '.'
             }
@@ -95,10 +95,10 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
                 </span>
               </div>
             )}
-            <h3 className="font-lato text-left font-medium text-lg text-blue-gray-800 mb-2 line-clamp-2">
+            <h3 className="font-default text-left font-medium text-lg text-blue-gray-800 mb-2 line-clamp-2">
               {fields.title}
             </h3>
-            <p className="font-lato font-normal text-sm text-blue-gray-800 line-clamp-2">
+            <p className="font-default font-normal text-sm text-blue-gray-800 line-clamp-2">
               {fields.description}
             </p>
             <div className="mt-5 flex  gap-2 items-start md:items-center">
@@ -108,7 +108,7 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
                   const itemAction = render('itemAction');
                   if (itemAction) itemAction(item);
                 }}
-                className="font-lato gap-2 normal-case btn btn-outline btn-sm btn-primary"
+                className="font-default gap-2 normal-case btn btn-outline btn-sm btn-primary"
               >
                 <UIBaseIcon icon="eye" fontSize="18px" />
                 Selengkapnya
@@ -118,7 +118,7 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
                 target="_blank"
                 title={fields.title}
                 download
-                className="font-lato gap-2 normal-case btn text-white btn-sm btn-primary"
+                className="font-default gap-2 normal-case btn text-white btn-sm btn-primary"
               >
                 <UIBaseIcon icon="download" fontSize="18px" />
                 Unduh

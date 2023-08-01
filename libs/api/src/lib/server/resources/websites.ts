@@ -11,17 +11,27 @@ export const apiResourceWebsites = () => {
       },
     },
     defaultQuery: {
-      fields: ['id', 'subdomain', 'domain_alias', 'slug', 'name'],
+      fields: ['id', 'domain', 'domain_alias', 'slug', 'name'],
     },
     paths: {
-      bySubdomain({ query, errorThrow, pathQuery: [subdomain] }) {
-        if (!subdomain) errorThrow('subdomain dibutuhkan');
+      byDomain({ query, errorThrow, pathQuery: [domain] }) {
+        if (!domain) errorThrow('subdomain dibutuhkan');
         return {
           isItem: true,
           query: {
-            fields: [...query.fields],
+            fields: [
+              'id',
+              'domain',
+              'domain_alias',
+              'slug',
+              'name',
+              'modules',
+              'organization.id',
+              'organization.name',
+              'organization.slug',
+            ],
             filter: {
-              subdomain,
+              domain,
             },
           },
           normalizer(data) {

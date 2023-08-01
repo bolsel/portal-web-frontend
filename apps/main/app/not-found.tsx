@@ -19,8 +19,8 @@ export default function NotFoundGlobal() {
           sementara waktu.
         </p>
       </div>
-      <Link href="/" tabIndex={-1}>
-        <button className="ui-btn btn-primary">Kembali Ke Beranda</button>
+      <Link href="/" tabIndex={-1} className='mt-3'>
+        <button className="btn btn-primary">Kembali Ke Beranda</button>
       </Link>
     </div>
   );

@@ -1,26 +1,26 @@
 import { DirectusStatusType } from '../index';
-import { FileType, UserType } from '../system-types';
+import { UserType } from '../system-types';
+import { OrganizationTypes } from './organization_types';
 
 export type Organizations = {
   id: string;
   status: DirectusStatusType;
   name: string;
-  type: string | Organizations;
+  type: OrganizationTypes;
   slug: string;
 
   email: string;
   phone: string;
   address: string;
-  location_point: any;
-  social_media: any;
+  location_point: { type: 'Point'; coordinates: [number, number] };
+  social_media: { name: string; link: string }[];
   structure: string;
   sekilas: string;
   visi: string;
   misi: string;
 
-  // websites: any,
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

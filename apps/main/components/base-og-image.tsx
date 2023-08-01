@@ -10,17 +10,18 @@ const truncate = (str: string, num: number) => {
   return str.slice(0, num) + '...';
 };
 
+export type BaseOgImagePropsType = {
+  title: string;
+  description: string;
+  images: string[];
+  req: NextRequest;
+};
 export default async function BaseOgImage({
   title,
   description,
   images,
   req,
-}: {
-  title: string;
-  description: string;
-  images: string[];
-  req: NextRequest;
-}) {
+}: BaseOgImagePropsType) {
   const host = req.headers.get('host')!;
   const baseUrl = `https://${host}`;
 
@@ -58,8 +59,9 @@ export default async function BaseOgImage({
               {images.length ? (
                 <div tw="flex w-full flex-1 rounded-lg">
                   <img
-                    tw={`h-full w-[${images.length <= 1 ? '100%' : '70%'
-                      }] rounded-xl shadow-sm`}
+                    tw={`h-full w-[${
+                      images.length <= 1 ? '100%' : '70%'
+                    }] rounded-xl shadow-sm`}
                     style={{ objectFit: 'cover' }}
                     src={images.shift()}
                   />

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { UIContentBlocksItemProps } from '../_base';
 import clsx from 'clsx';
-import UIBlurImage from '../../blur-image';
+import {UIBlurImage} from '../../blur-image';
 
 const ImageTool: FC<
   UIContentBlocksItemProps<{

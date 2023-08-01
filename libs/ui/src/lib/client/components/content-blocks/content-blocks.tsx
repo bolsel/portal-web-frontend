@@ -13,6 +13,7 @@ import QuoteTool from './tools/quote';
 import DelimiterTool from './tools/delimiter';
 import RawTool from './tools/raw';
 import ChecklistTool from './tools/checklist';
+import clsx from 'clsx';
 
 const tools = {
   paragraph: ParagraphTool,
@@ -30,7 +31,13 @@ const tools = {
   checklist: ChecklistTool,
 };
 
-export function UIContentBlocks({ time, blocks }: UIContentBlocksBaseProps) {
+export function UIContentBlocks({
+  time,
+  blocks,
+  className,
+}: UIContentBlocksBaseProps & {
+  className?: string;
+}) {
   const items: any = [];
   blocks = blocks ?? [];
   if (!blocks.length) {
@@ -42,5 +49,5 @@ export function UIContentBlocks({ time, blocks }: UIContentBlocksBaseProps) {
       items.push(<Comp key={i} {...block} />);
     }
   });
-  return <div className="contents-blocks">{items}</div>;
+  return <div className={clsx('contents-blocks', className)}>{items}</div>;
 }

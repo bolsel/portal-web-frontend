@@ -21,7 +21,7 @@ class CustomTransport extends Transport {
       async () => super.request(method, path, data, options),
       tags,
       {
-        revalidate: 1000000,
+        revalidate: 1,
         tags: tags,
       }
     )();

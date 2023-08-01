@@ -1,15 +1,14 @@
 /* eslint-disable */
 
 import BaseOgImage from '../../../components/base-og-image';
-import { ImageResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
-
-  const type = searchParams.get('type')!;
+export async function GET(
+  req: NextRequest,
+  { params: { type } }: { params: { type: string } }
+) {
   const ogTypes = {
     dokumen: {
       title: 'Arsip dan Dokumen',

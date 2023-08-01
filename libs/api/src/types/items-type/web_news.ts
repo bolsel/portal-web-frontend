@@ -7,8 +7,8 @@ export type WebNews = {
   title: string;
   slug: string;
   publish_date: Date;
-  website: string | Websites;
-  image_cover: string | FileType;
+  website: Websites;
+  image_cover: FileType;
   status: DirectusStatusType;
   description: string;
   view_count: number;
@@ -17,12 +17,12 @@ export type WebNews = {
   tags?: string[];
   content: {
     time: number;
-    blocks: Record<string, any>[];
+    blocks: JSON;
     version: string;
   };
 
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

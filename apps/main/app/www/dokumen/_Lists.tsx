@@ -42,7 +42,7 @@ hover:text-primary-700 hover:bg-primary-100"
             >
               {item.category_name}
             </span>
-            <h1 className="font-roboto font-medium text-[21px] leading-[34px] text-primary-700">
+            <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
               {item.title}
             </h1>
           </section>

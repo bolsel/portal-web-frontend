@@ -6,7 +6,7 @@ export type OrganizationPejabat = {
   name: string;
   nip: string;
   jabatan: string;
-  organization: string | Organizations;
-  image: string | FileType;
+  organization: Organizations;
+  image: FileType;
   profil: string;
 };

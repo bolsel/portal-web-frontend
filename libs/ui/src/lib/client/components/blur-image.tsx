@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import type { ComponentProps } from 'react';
 
-export default function UIBlurImage(props: ComponentProps<typeof Image>) {
+export function UIBlurImage(props: ComponentProps<typeof Image>) {
   const [isLoading, setLoading] = useState(true);
 
   return (

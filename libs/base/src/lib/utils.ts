@@ -6,23 +6,7 @@ export function rightTrimSlashes(str: string) {
   return str.replace(/\/$/, '');
 }
 
-export const documentIcon = (mimeType: string) => {
-  switch (mimeType) {
-    case 'application/pdf':
-      return '/icons/document/pdf.svg';
-
-    case 'application/msword':
-      return '/icons/document/doc.svg';
-
-    case 'application/vnd.ms-excel':
-      return '/icons/document/xls.svg';
-
-    default:
-      return '/icons/document/pdf.svg';
-  }
-};
-
-export function mimeTypeLabel(mimeType: string) {
+export function documentMimeTypeLabel(mimeType: string) {
   switch (mimeType) {
     case 'application/pdf':
       return 'Portable Document Format (PDF)';
@@ -34,7 +18,7 @@ export function mimeTypeLabel(mimeType: string) {
       return 'Microsoft Excel';
 
     default:
-      return '-';
+      return `Dokumen (${mimeType})`;
   }
 }
 // https://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable-string

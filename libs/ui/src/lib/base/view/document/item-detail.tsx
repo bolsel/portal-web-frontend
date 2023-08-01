@@ -9,6 +9,7 @@ import UIBaseIconDocument from '../../icon/icons/document';
 import { UIShareItem } from '../../../client/components/share/item';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { documentMimeTypeLabel } from '@portalweb/base/server';
 
 export type UIBaseViewDocumentItemDetailType<Item extends Record<string, any>> =
   IUIBaseCreateCustomizableDefine<
@@ -51,7 +52,7 @@ export const UIBaseViewDocumentItemDetail = <Item extends Record<string, any>>(
       documentIcon: ({ render }) => {
         return (
           <UIBaseIconDocument
-            className="font-lora w-[30px] h-[30px] md:w-[60px] md:h-[60px] fill-primary text-white"
+            className="font-default w-[30px] h-[30px] md:w-[60px] md:h-[60px] fill-primary text-white"
             text={
               render('fields').file.type === 'application/pdf' ? 'PDF' : '.'
             }
@@ -89,7 +90,7 @@ export const UIBaseViewDocumentItemDetail = <Item extends Record<string, any>>(
               />
             </div>
             <div>
-              <h2 className="font-lato text-xs text-blue-gray-400 mb-1 leading-5">
+              <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                 Deskripsi Dokumen
               </h2>
 
@@ -112,14 +113,14 @@ export const UIBaseViewDocumentItemDetail = <Item extends Record<string, any>>(
               />
             </div>
             <div>
-              <h2 className="font-lato text-xs text-blue-gray-400 mb-1 leading-5">
+              <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                 Format Dokumen
               </h2>
               <p
                 className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
 hover:text-primary-700 hover:bg-primary-100"
               >
-                {fields.file.type}
+                {documentMimeTypeLabel(fields.file.type)}
               </p>
             </div>
           </section>
@@ -132,7 +133,7 @@ hover:text-primary-700 hover:bg-primary-100"
                 />
               </div>
               <div>
-                <h2 className="font-lato text-xs text-blue-gray-400 mb-1 leading-5">
+                <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                   Tanggal Publish
                 </h2>
                 <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
@@ -148,7 +149,7 @@ hover:text-primary-700 hover:bg-primary-100"
                 />
               </div>
               <div>
-                <h2 className="font-lato text-xs text-blue-gray-400 mb-1 leading-5">
+                <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                   Diupdate pada
                 </h2>
                 <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
@@ -166,7 +167,7 @@ hover:text-primary-700 hover:bg-primary-100"
               />
             </div>
             <div className="overflow-auto">
-              <h2 className="font-lato text-xs text-blue-gray-400 mb-1 leading-5">
+              <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                 Bagikan Dokumen
               </h2>
               <UIShareItem

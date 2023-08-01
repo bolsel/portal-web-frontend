@@ -157,3 +157,34 @@ details summary::-webkit-details-marker {
     }
   }
 }
+
+.prose {
+  @apply font-content text-gray-800;
+  h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6{
+      @apply font-content-title;
+    }
+  p {
+    @apply text-lg leading-7 mb-7;
+  }
+
+  img {
+    @apply w-full h-auto;
+  }
+
+  figure figcaption {
+    @apply text-center leading-7 text-gray-600;
+  }
+
+  blockquote {
+    @apply border-l-8 border-gray-300 px-6;
+  }
+
+  blockquote p {
+    @apply font-content text-base leading-6 text-gray-600 italic;
+  }
+}

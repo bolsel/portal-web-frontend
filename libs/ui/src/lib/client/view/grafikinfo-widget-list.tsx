@@ -16,7 +16,7 @@ import {
 } from 'swiper/modules';
 import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import { useRef } from 'react';
-import UIBlurImage from '../components/blur-image';
+import {UIBlurImage} from '../components/blur-image';
 import clsx from 'clsx';
 import { useUIModal } from '../components';
 

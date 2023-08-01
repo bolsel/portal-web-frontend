@@ -8,13 +8,13 @@ export type Websites = {
   sort: number;
   name: string;
   slug: string;
-  subdomain: string;
+  domain: string;
   domain_alias?: string;
-  organization?: string | Organizations;
+  organization?: Organizations;
   modules?: string[];
 
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };

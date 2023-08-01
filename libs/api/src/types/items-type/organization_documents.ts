@@ -6,15 +6,15 @@ export type OrganizationDocuments = {
   id: string;
   status: DirectusStatusType;
   publish_date: Date;
-  organization: string | Organizations;
+  organization: Organizations;
   category: string;
   title: string;
   description?: string;
   slug?: string;
-  file: string | FileType;
+  file: FileType;
 
-  user_created: string | UserType;
-  user_updated: string | UserType;
+  user_created: UserType;
+  user_updated: UserType;
   date_updated?: Date;
   date_created: Date;
 };
