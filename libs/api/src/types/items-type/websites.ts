@@ -10,7 +10,7 @@ export type Websites = {
   slug: string;
   domain: string;
   domain_alias?: string;
-  organization?: Organizations;
+  organization: Organizations;
   modules?: string[];
 
   user_created: UserType;

@@ -17,7 +17,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { kategoryText } from './lib';
 
-export default function Lists() {
+export default function Lists({ organizationId }) {
   const searchParams = useSearchParams();
   const kategori = searchParams.get('kategori');
   const [view, setView] = useUIListItemsViewState('list');
@@ -35,22 +35,22 @@ export default function Lists() {
       contentClassName: ({ defaults }) =>
         clsx(defaults.contentClassName, ' max-w-[510px] lg:w-[510px]'),
       header: () => () =>
-        (
-          <section className="p-6 pb-0 w-full">
-            <span
-              className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
+      (
+        <section className="p-6 pb-0 w-full">
+          <span
+            className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
 hover:text-primary-700 hover:bg-primary-100"
-            >
-              {item.category}
-            </span>
-            <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
-              {item.title}
-            </h1>
-          </section>
-        ),
+          >
+            {item.category}
+          </span>
+          <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
+            {item.title}
+          </h1>
+        </section>
+      ),
       footer:
         () =>
-        ({ closeModal }) =>
+          ({ closeModal }) =>
           (
             <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
               <Link
@@ -76,7 +76,7 @@ hover:text-primary-700 hover:bg-primary-100"
     <>
       <UISwrResource
         resourceKey="organization_documents"
-        pathQuery={kategori ? ['latestByCategory', kategori] : ['latest']}
+        pathQuery={kategori ? ['latestByCategory', organizationId, kategori] : ['latest', organizationId]}
         paramsQuery={{ page, limit }}
         emptyComponent={() => <div>Belum ada data.</div>}
         loadingComponent={() => (

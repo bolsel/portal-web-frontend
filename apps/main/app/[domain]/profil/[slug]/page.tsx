@@ -16,7 +16,7 @@ export async function generateMetadata({
   if (!site) notFound();
   const orgInfo = await apiResourceOrganizations()
     .fetch({
-      pathQuery: ['info', site.organization_slug!],
+      pathQuery: ['info', site.organization_slug],
     })
     .catch(() => null);
   if (!orgInfo) notFound();
@@ -64,7 +64,7 @@ export default async function SiteProfilPage({ params: { slug, domain } }) {
         />
       );
     } else if (slug === 'pejabat') {
-      return <Pejabat />;
+      return <Pejabat organizationId={site.organization_id} />;
     }
     return <div>Belum ada data.</div>;
   };

@@ -36,18 +36,25 @@ export const apiResourceOrganizationDocuments = () => {
           },
         };
       },
-      latest({ query }) {
+      latest({ query, pathQuery: [organizationId], errorThrow }) {
+        if (!organizationId) errorThrow('ID Organisasi diperlukan.');
         return {
           query: {
             fields: [...query.fields],
             sort: ['-publish_date'],
+            filter: {
+              organization: {
+                id: organizationId
+              }
+            }
           },
           normalizer(data) {
             return apiNormalizerOrganizationDocuments.base(data);
           },
         };
       },
-      latestByCategory({ query, pathQuery: [category], errorThrow }) {
+      latestByCategory({ query, pathQuery: [organizationId, category], errorThrow }) {
+        if (!organizationId) errorThrow('ID Organisasi diperlukan.');
         if (!category) errorThrow('Kategori dibutuhkan');
         return {
           query: {
@@ -55,6 +62,9 @@ export const apiResourceOrganizationDocuments = () => {
             sort: ['-publish_date'],
             filter: {
               category,
+              organization: {
+                id: organizationId
+              }
             },
           },
           normalizer(data) {

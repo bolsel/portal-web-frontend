@@ -47,7 +47,7 @@ export default async function SiteDokumenPage({ params: { domain } }) {
           </div>
         </div>
         <div className="w-full max-w-none">
-          <Lists />
+          <Lists organizationId={site.organization_id} />
         </div>
       </div>
     </SiteLayout>

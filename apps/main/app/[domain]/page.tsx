@@ -46,27 +46,9 @@ export default async function SiteIndexPage({ params: { domain } }) {
             </div>
             <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
           </div>
-          <BeritaLists webId={site.id}/>
-          <div className="flex w-full h-[38px] mt-5">
-            <div className="border-b-[3px] border-primary">
-              <h1 className="whitespace-nowrap font-lato text-sm font-bold leading-6 uppercase text-blue-gray-800">
-                Berita Terbaru di Portal Bolsel
-              </h1>
-            </div>
-            <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
-          </div>
-
-          <MainBeritaLists/>
-          <div className="flex items-center justify-center">
-            <Link
-              href="https://www.bolselkab.go.id/berita"
-              target="_blank"
-              className="btn btn-primary btn-sm normal-case"
-            >
-              Berita Portal Bolsel
-            </Link>
-          </div>
+          <BeritaLists webId={site.id} />
         </div>
+        <MainBeritaLists />
         <section className="w-full max-w-full">
           <div className="flex flex-col gap-7 lg:sticky lg:top-[70px]">
             <div className="w-full">
@@ -79,7 +61,7 @@ export default async function SiteIndexPage({ params: { domain } }) {
                 <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
               </div>
               <div className="px-0 lg:px-5 bg-primary-50 w-full rounded-lg">
-              <GrafikInfoList/>
+                <GrafikInfoList />
               </div>
               {/* <UISwrResourceGrafikInfoWidget
                 wrapperComponent={({ children }) => (

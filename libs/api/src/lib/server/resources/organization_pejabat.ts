@@ -18,10 +18,14 @@ export const apiResourceOrganizationPejabat = () => {
       ],
     },
     paths: {
-      list({ query }) {
+      list({ query, pathQuery: [organizationId], errorThrow }) {
+        if (!organizationId) errorThrow('ID Organisasi diperlukan.');
         return {
           query: {
             fields: query.fields,
+            filter: {
+              organization: { id: organizationId }
+            }
           },
           normalizer(data) {
             const { id, name, image, jabatan, nip, profil, organization } =

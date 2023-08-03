@@ -2,10 +2,10 @@ import { apiResourceOrganizationPejabat } from '@portalweb/api/server';
 import { UIContentBlocks } from '@portalweb/ui';
 import Image from 'next/image';
 
-export default async function Pejabat() {
+export default async function Pejabat({ organizationId }) {
   const pejabat = await apiResourceOrganizationPejabat()
     .fetch({
-      pathQuery: ['list'],
+      pathQuery: ['list', organizationId],
     })
     .catch(() => null);
   if (!pejabat) return <div>Belum ada data.</div>;
