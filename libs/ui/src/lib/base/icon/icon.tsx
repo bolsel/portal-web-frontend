@@ -16,5 +16,5 @@ export function UIBaseIcon({
   if (!collections.icons[icon] && fallback) {
     icon = fallback;
   }
-  return <Icon icon={`base:${icon}`} {...props} />;
+  return <Icon icon={`base:${icon}`} {...props} id={`icon-${icon}`} />;
 }
