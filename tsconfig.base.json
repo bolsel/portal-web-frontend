@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "#/main/*": ["apps/main/*"],
       "@portalweb/api": ["libs/api/src/index.ts"],
       "@portalweb/api/server": ["libs/api/src/server.ts"],
       "@portalweb/base": ["libs/base/src/index.ts"],
