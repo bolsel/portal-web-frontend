@@ -47,8 +47,8 @@ export default async function SiteIndexPage({ params: { domain } }) {
             <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
           </div>
           <BeritaLists webId={site.id} />
+          <MainBeritaLists />
         </div>
-        <MainBeritaLists />
         <section className="w-full max-w-full">
           <div className="flex flex-col gap-7 lg:sticky lg:top-[70px]">
             <div className="w-full">

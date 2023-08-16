@@ -11,5 +11,6 @@ export * from './organization_pejabat';
 export * from './organizations';
 export * from './portal_web_settings';
 export * from './public_services';
+export * from './web_aduan_publik';
 export * from './web_news';
 export * from './websites';

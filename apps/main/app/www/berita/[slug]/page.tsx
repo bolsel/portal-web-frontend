@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { UIBaseIcon, UIContentBlocks, UIShareItem } from '@portalweb/ui';
 import Terkait from './_Terkait';
+import { getResourceApiUrl } from '@portalweb/api';
 
 type Props = {
   params: { slug: string };
@@ -49,8 +50,10 @@ export default async function BeritaSlugPage({ params: { slug } }) {
   if (!item) {
     return notFound();
   }
+  await apiResourceNews().itemHandler.updateOne(item.id, {
+    view_count: item.view_count + 1,
+  });
   const articleUrl = `https://www.bolselkab.go.id/berita/${item.slug}`;
-
   return (
     <main>
       <NewsHeaderRead item={item} />

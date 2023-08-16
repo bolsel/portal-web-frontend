@@ -15,14 +15,15 @@ import {
   EffectCoverflow,
 } from 'swiper/modules';
 import { ApiResourceGetNormalizerType } from '@portalweb/api';
-import { useRef } from 'react';
-import {UIBlurImage} from '../components/blur-image';
+import { ComponentPropsWithoutRef, useRef } from 'react';
+import { UIBlurImage } from '../components/blur-image';
 import clsx from 'clsx';
 import { useUIModal } from '../components';
 
 type Props = {
   items?: ApiResourceGetNormalizerType<'grafik_info', 'listWidget'>[];
   skeleton?: true;
+  slideContainer?: ComponentPropsWithoutRef<'div'>;
 };
 
 export type UIViewGrafikInfoWidgetListType = IUIBaseCreateCustomizableDefine<
@@ -37,7 +38,7 @@ export const UIViewGrafikInfoWidgetList: UIViewGrafikInfoWidgetListType['returnT
         lightGallery: () => true,
         showAllButton: () => true,
       },
-      Component({ swiper, items, render, skeleton }) {
+      Component({ swiper, slideContainer, items, render, skeleton }) {
         const swiperRef = useRef<SwiperRef>(null);
         const modal = useUIModal();
         swiper = {
@@ -140,7 +141,7 @@ export const UIViewGrafikInfoWidgetList: UIViewGrafikInfoWidgetListType['returnT
                           `!bg-cover !bg-center object-cover`,
                           '!w-[300px] !h-[500px] xl:!w-[400px] xl:!h-[600px]'
                         )}
-                        // {...slideContainer}
+                        {...slideContainer}
                       >
                         {_Image()}
                       </SwiperSlide>

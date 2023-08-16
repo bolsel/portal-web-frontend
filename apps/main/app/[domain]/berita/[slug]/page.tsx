@@ -1,26 +1,34 @@
-import { notFound } from "next/navigation";
-import { getSiteData } from "../../../../lib/site";
-import SiteLayout from "../../../../components/layout/site/layout";
-import { apiResourceWebNews } from "@portalweb/api/server";
-import { UIBaseIcon, UIBlurImage, UIContentBlocks, UIShareItem } from "@portalweb/ui";
-import Latest from "./_Latest";
+import { notFound } from 'next/navigation';
+import { getSiteData } from '../../../../lib/site';
+import SiteLayout from '#/main/components/layout/site/layout';
+import { apiResourceWebNews } from '@portalweb/api/server';
+import { UIBaseIcon, UIBlurImage, UIContentBlocks } from '@portalweb/ui';
+import Latest from './_Latest';
+import Share from './_Share';
 
-export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
+export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
   const site = await getSiteData(domain);
   if (!site) notFound();
-  const item = await apiResourceWebNews().fetch({
-    pathQuery:['bySlugWebId', slug, site.id]
-  }).catch(()=>null)
-  if(!item) notFound();
+  const item = await apiResourceWebNews()
+    .fetch({
+      pathQuery: ['bySlugWebId', slug, site.id],
+    })
+    .catch(() => null);
+  if (!item) notFound();
   await apiResourceWebNews().itemHandler.updateOne(item.id, {
     view_count: item.view_count + 1,
   });
-  const articleUrl = `https://${domain}/berita/${slug}`
-  return <SiteLayout site={site} jumbotron={{
-    title:item.title,
-    subtitle: `Berita ${site.organization_name}`
-  }}>
-    <article className="px-5">
+  const articleUrl = `https://${domain}/berita/${slug}`;
+
+  return (
+    <SiteLayout
+      site={site}
+      jumbotron={{
+        title: item.title,
+        subtitle: `Berita ${site.organization_name}`,
+      }}
+    >
+      <article className="px-5">
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">
           <div className="flex flex-col gap-7">
             <div className="w-full min-h-screen">
@@ -38,12 +46,13 @@ export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
                     <div className="flex items-center gap-1">
                       <UIBaseIcon icon="calendar" className="w-4 h-4" />
                       <p className="text-sm">
-                      {item.publish_date.toLocaleDateString('id-ID', {
-                  weekday: 'long',
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}</p>
+                        {item.publish_date.toLocaleDateString('id-ID', {
+                          weekday: 'long',
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </p>
                     </div>
                     <div className="flex items-center gap-1">
                       <UIBaseIcon icon="eye" className="w-4 h-4" />
@@ -76,11 +85,7 @@ export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
                       <span className="capitalize italic">{item.writer}</span>
                     </p>
                     <div className="hidden lg:flex items-center gap-2">
-                      |{' '}
-                      <UIBaseIcon
-                        icon="camera"
-                        className="w-4 h-4"
-                      />
+                      | <UIBaseIcon icon="camera" className="w-4 h-4" />
                       <p className="text-sm">
                         Peliput:{' '}
                         <span className="capitalize italic">
@@ -90,10 +95,7 @@ export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
                     </div>
                   </div>
                   <div className="lg:hidden flex items-center gap-2">
-                    <UIBaseIcon
-                      icon="camera"
-                      className="w-4 h-4"
-                    />
+                    <UIBaseIcon icon="camera" className="w-4 h-4" />
                     <p className="text-sm">
                       Peliput:{' '}
                       <span className="capitalize italic">{item.reporter}</span>
@@ -119,15 +121,11 @@ export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
                   />
                   Bagikan Berita
                 </p>
-                <UIShareItem
+                <Share
+                  item={item}
                   url={articleUrl}
                   title={item.title}
                   quote={item.description}
-                  // beforeOnClick={() => {
-                  //   console.log('as');
-
-                  //   fetch(apiSharedCount);
-                  // }}
                 />
               </div>
               <div className="flex w-full h-[38px] mb-6">
@@ -138,10 +136,11 @@ export default async function SiteBeritaSlugPage({params:{domain,slug}}) {
                 </div>
                 <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
               </div>
-              <Latest webId={site.id}/>
+              <Latest webId={site.id} />
             </div>
           </section>
         </section>
       </article>
-  </SiteLayout>
+    </SiteLayout>
+  );
 }

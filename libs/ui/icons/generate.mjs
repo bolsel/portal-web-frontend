@@ -5,6 +5,7 @@ import {
   runSVGO,
   parseColors,
   isEmptyColor,
+
 } from '@iconify/tools';
 import * as path from 'path';
 

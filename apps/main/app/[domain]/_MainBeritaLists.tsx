@@ -60,7 +60,7 @@ export default function MainBeritaLists({ side }: { side?: boolean }) {
                     Component={({ item: data, view }) => (
                       <UIBaseViewNewsListItem item={data} view={view} customizes={{
                         small: () => side ?? false,
-                        fields: ({ defaults }) => ({ ...defaults.fields, description: '' })
+                        fields: ({ defaults }) => ({ ...defaults.fields, description: side ? '':data.description })
                       }} />
                     )}
                     view={isMobile ? 'grid' : view}

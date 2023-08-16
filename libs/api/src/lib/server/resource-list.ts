@@ -11,6 +11,7 @@ import {
   apiResourceOrganizationPejabat,
   apiResourceOrganizations,
   apiResourcePublicServices,
+  apiResourceWebAduanPublik,
   apiResourceWebNews,
   apiResourceWebsites,
 } from './resources';
@@ -29,6 +30,7 @@ export function apiResourceItems() {
     organization_pejabat: apiResourceOrganizationPejabat,
     organizations: apiResourceOrganizations,
     public_services: apiResourcePublicServices,
+    web_aduan_publik: apiResourceWebAduanPublik,
     web_news: apiResourceWebNews,
     websites: apiResourceWebsites,
   };

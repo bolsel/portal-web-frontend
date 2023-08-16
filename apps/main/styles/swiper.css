@@ -1,4 +1,9 @@
-.default-swiper {
+
+.swiper-button-disabled {
+  @apply !bg-primary-50 !text-primary-200;
+}
+
+.swiper {
   &.swiper-horizontal > .swiper-pagination-bullets {
     position: relative !important;
     width: 100% !important;
@@ -159,10 +164,11 @@
   }
 
   .swiper-pagination-bullet-active {
-    @apply bg-primary;
+    @apply !bg-primary;
     width: 16px !important;
     height: 16px !important;
   }
+
 }
 
 .banner__button-prev,

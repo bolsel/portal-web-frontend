@@ -72,6 +72,28 @@ export const apiResourceWebNews = () => {
           normalizer: apiNormalizerNews.baseWeb,
         };
       },
+      share: ({ errorThrow, pathQuery: [id], itemHandler }) => {
+        if (!id) errorThrow('ID dibutuhkan.');
+        return {
+          isItem: true,
+          query: {
+            fields: ['shared_count'],
+            filter: {
+              id,
+            },
+          },
+          normalizer(data) {
+            const shared_count = (data.shared_count ?? 0) + 1;
+            itemHandler.updateOne(id, {
+              shared_count,
+            });
+            return {
+              success: 1,
+              shared_count,
+            };
+          },
+        };
+      },
     },
   });
 };
