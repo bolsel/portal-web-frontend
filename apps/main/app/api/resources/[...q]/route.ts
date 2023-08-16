@@ -36,3 +36,28 @@ export async function GET(
     }
   }
 }
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { q: string[] } }
+) {
+  const [resourceKey, ...pathQuery] = params.q;
+  try {
+    const apiResource = apiResourceGet(resourceKey);
+    if (!apiResource) {
+      throw new Error(`Api resource tidak ada: ${resourceKey}`);
+    }
+
+    const t = await apiResource().post({
+      pathQuery: pathQuery,
+      data: await request.json(),
+    });
+    return NextResponse.json(t);
+  } catch (e: any) {
+    if (process.env.NODE_ENV === 'development') {
+      if (e && e['errors']) return sendError(e['errors']);
+      else if (e && e['message']) return sendError(e['message']);
+    } else {
+      return sendError('Terjadi kesalahan');
+    }
+  }
+}

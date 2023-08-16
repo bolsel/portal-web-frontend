@@ -23,11 +23,21 @@ type PathsType<I extends Item, ItemType, DefaultQuery> = Record<
     query: DefaultQuery;
     pathQuery: string[];
     errorThrow: (msg: string) => void;
+    itemHandler: IItems<I>;
   }) => {
     isItem?: true;
     query: QueryMany<I>;
     normalizer: NormalizerFnType<ItemType>;
   }
+>;
+type PostPathsType<I extends Item, ItemType, DefaultQuery> = Record<
+  string,
+  (props: {
+    data: Record<string, any>;
+    itemHandler: IItems<I>;
+    pathQuery: string[];
+    errorThrow: (msg: string) => void;
+  }) => any
 >;
 
 export type CollectionMetaType = {
@@ -40,6 +50,7 @@ export type CollectionMetaType = {
 export function apiBaseResource<
   RK extends keyof ApiItemsType,
   Paths extends PathsType<I, ItemType, DefaultQuery>,
+  PostPaths extends PostPathsType<I, ItemType, DefaultQuery>,
   DefaultQuery extends QueryMany<I>,
   ItemType = ApiItemsType[RK],
   I extends Item = TypeOf<ApiItemsType, RK>
@@ -47,12 +58,14 @@ export function apiBaseResource<
   resourceKey,
   paths,
   defaultQuery,
+  postPaths,
   baseFilter,
   singleton = false,
 }: {
   resourceKey: RK;
   paths: Paths;
   defaultQuery: DefaultQuery;
+  postPaths?: PostPaths;
   baseFilter?: QueryMany<I>['filter'];
   singleton?: boolean;
 }) {
@@ -81,6 +94,7 @@ export function apiBaseResource<
       query: defaultQuery,
       pathQuery: _p,
       errorThrow,
+      itemHandler,
     });
     let _query = { ...defaultQuery, ...query };
 
@@ -160,12 +174,30 @@ export function apiBaseResource<
       }
     )();
   }
+  async function _post<K extends keyof PostPaths>({
+    pathQuery: [pathKey, ..._p],
+    data,
+  }: {
+    pathQuery: [K, ...Parameters<PostPaths[K]>['0']['pathQuery']];
+    data: Record<string, any>;
+  }): Promise<ReturnType<PostPaths[K]>> {
+    if (!postPaths) throw new Error('Post path tidak ada untuk resource ini.');
+    if (!postPaths[pathKey])
+      throw new Error(`Path resource tidak ada: ${pathKey as string} (post)`);
+    return postPaths[pathKey]({
+      data: data ?? {},
+      errorThrow,
+      itemHandler,
+      pathQuery: _p,
+    });
+  }
 
   return {
     itemHandler,
     paths,
     fetch: _fetch,
     fetchCache: _fetchCache,
+    post: _post,
     singleton: apiInstance().singleton(resourceKey),
   };
 }
