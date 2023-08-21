@@ -20,9 +20,10 @@
       "@portalweb/api/server": ["libs/api/src/server.ts"],
       "@portalweb/base": ["libs/base/src/index.ts"],
       "@portalweb/base/server": ["libs/base/src/server.ts"],
+      "@portalweb/plugin": ["libs/plugin/src/index.ts"],
       "@portalweb/ui": ["libs/ui/src/index.ts"],
-      "@portalweb/ui/server": ["libs/ui/src/server.ts"],
       "@portalweb/ui/presets/*": ["libs/ui/presets/*"],
+      "@portalweb/ui/server": ["libs/ui/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
