@@ -1,10 +1,10 @@
 import { apiResourceNews } from '@portalweb/api/server';
-import NewsHeaderRead from '../../../../components/news/header-read';
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { UIBaseIcon, UIContentBlocks, UIShareItem } from '@portalweb/ui';
+import { UIBaseIcon, UIContentBlocks } from '@portalweb/ui';
 import Terkait from './_Terkait';
-import { getResourceApiUrl } from '@portalweb/api';
+import NewsHeaderRead from '#/main/components/news-header-read';
+import NewsShareItem from '#/main/components/news-share-item';
 
 type Props = {
   params: { slug: string };
@@ -53,7 +53,6 @@ export default async function BeritaSlugPage({ params: { slug } }) {
   await apiResourceNews().itemHandler.updateOne(item.id, {
     view_count: item.view_count + 1,
   });
-  const articleUrl = `https://www.bolselkab.go.id/berita/${item.slug}`;
   return (
     <main>
       <NewsHeaderRead item={item} />
@@ -77,14 +76,7 @@ export default async function BeritaSlugPage({ params: { slug } }) {
                   />
                   Bagikan Berita
                 </p>
-                <UIShareItem
-                  url={articleUrl}
-                  title={item.title}
-                  quote={item.description}
-                  // beforeOnClick={() => {
-                  //   fetch(apiSharedCount);
-                  // }}
-                />
+                <NewsShareItem item={item} />
               </div>
             </div>
           </section>

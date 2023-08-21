@@ -7,6 +7,7 @@ export function base(data: ApiItemsType['news']) {
     data.user_created.content_author_name ??
     `${data.user_created.first_name} ${data.user_created.last_name}`;
   const reporter = data.reporter ?? writer;
+  const editor = data.editor ?? writer;
   return {
     id: data.id,
     title: data.title,
@@ -14,7 +15,8 @@ export function base(data: ApiItemsType['news']) {
     slug: data.slug,
     publish_date: new Date(data.publish_date),
     publish_date_format: toDateString(data.publish_date),
-    reporter: reporter,
+    reporter,
+    editor,
     category_name: data.category.name,
     category_slug: data.category.slug,
     category_id: data.category.id,
@@ -47,6 +49,7 @@ export function baseWeb(data: ApiItemsType['web_news']) {
     shared_count: data.shared_count,
     writer,
     image_cover: apiNormalizerBase.imageFile(data.image_cover),
+    website_id: data.website.id,
   };
 }
 export const baseWebWithContent = (data: ApiItemsType['web_news']) => ({

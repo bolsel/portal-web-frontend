@@ -12,7 +12,8 @@ export type News = {
   description: string;
   view_count: number;
   shared_count: number;
-  reporter: string;
+  reporter?: string;
+  editor?: string;
   content: {
     time: number;
     blocks: JSON;

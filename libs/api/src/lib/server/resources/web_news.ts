@@ -24,6 +24,7 @@ export const apiResourceWebNews = () => {
         'user_created.*',
         'view_count',
         'shared_count',
+        'website.id',
       ],
     },
     paths: {

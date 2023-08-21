@@ -104,13 +104,6 @@ export const UIModal: UIModalType['returnType'] = (props) =>
           closeModal();
         }
       };
-      const content = (
-        <div className="flex flex-col justify-between w-full h-full overflow-y-auto">
-          {render('header')?.({ closeModal })}
-          <div className="overflow-y-auto h-full flex-1">{children}</div>
-          {render('footer')?.({ closeModal })}
-        </div>
-      );
       const mobileView = (
         <section
           className={clsx(

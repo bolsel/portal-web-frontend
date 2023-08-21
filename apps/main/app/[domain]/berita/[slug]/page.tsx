@@ -4,7 +4,7 @@ import SiteLayout from '#/main/components/layout/site/layout';
 import { apiResourceWebNews } from '@portalweb/api/server';
 import { UIBaseIcon, UIBlurImage, UIContentBlocks } from '@portalweb/ui';
 import Latest from './_Latest';
-import Share from './_Share';
+import NewsShareItem from '#/main/components/news-share-item';
 
 export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
   const site = await getSiteData(domain);
@@ -18,7 +18,6 @@ export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
   await apiResourceWebNews().itemHandler.updateOne(item.id, {
     view_count: item.view_count + 1,
   });
-  const articleUrl = `https://${domain}/berita/${slug}`;
 
   return (
     <SiteLayout
@@ -121,12 +120,7 @@ export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
                   />
                   Bagikan Berita
                 </p>
-                <Share
-                  item={item}
-                  url={articleUrl}
-                  title={item.title}
-                  quote={item.description}
-                />
+                <NewsShareItem item={item} />
               </div>
               <div className="flex w-full h-[38px] mb-6">
                 <div className="border-b-[3px] border-primary">

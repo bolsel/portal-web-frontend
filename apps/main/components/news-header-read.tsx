@@ -1,7 +1,8 @@
 import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import { UIBaseIcon } from '@portalweb/ui';
 import Image from 'next/image';
-import Breadcrumb from '../breadcrumb/breadcrumb';
+import Breadcrumb from './breadcrumb/breadcrumb';
+import NewsShareButton from './news-share-button';
 
 export default function NewsHeaderRead({
   item,
@@ -57,6 +58,8 @@ export default function NewsHeaderRead({
               <UIBaseIcon icon="pencil" className="w-4 h-4" />
               <p className="text-sm">
                 Penulis: <span className="capitalize">{item.writer}</span>
+                {' | '}
+                Editor: <span className="capitalize ">{item.editor}</span>
               </p>
               <div className="hidden lg:flex items-center gap-2">
                 | <UIBaseIcon icon="camera" className="w-4 h-4" />
@@ -97,62 +100,7 @@ export default function NewsHeaderRead({
                 </div>
               </div>
             </div>
-            {/* <div className="flex items-end justify-end">
-              <ModalDialog
-                button={
-                  <button className="btn btn-primary btn-sm w-[fit-content] flex gap-2">
-                    Bagikan Berita
-                    <Icon icon="mdi:share-all-outline" className="h-5 w-5" />
-                  </button>
-                }
-                header={
-                  <h1 className="px-6 py-2 font-medium text-2xl text-primary leading-relaxed">
-                    Bagikan Berita
-                  </h1>
-                }
-              >
-                <div className="py-4 px-6 max-w-[510px]">
-                  <section className="flex gap-4 mb-4">
-                    <Icon
-                      icon="mdi:info-outline"
-                      className="self-start text-primary w-6 h-6"
-                    />
-                    <div>
-                      <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                        Judul Berita
-                      </h2>
-                      <p className="text-gray-800 font-bold leading-relaxed">
-                        {news.title}
-                      </p>
-                    </div>
-                  </section>
-                  <section className="flex gap-4">
-                    <Icon
-                      icon="mdi:share-variant-outline"
-                      className="self-start text-primary w-6 h-6"
-                    />
-                    <div className="w-full">
-                      <h2 className="font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                        Bagikan Melalui
-                      </h2>
-                      <UIShareItem
-                        url={articleUrl}
-                        beforeOnClick={() => {
-                          fetch(apiSharedCount);
-                        }}
-                        title={news.title}
-                        quote={news.description}
-                      />
-
-                      <h2 className="mt-3 font-lato text-xs text-blue-gray-200 mb-1 leading-5">
-                        Telah dibagikan sebanyak{' '}
-                        <strong>{news.shared_count}</strong>x
-                      </h2>
-                    </div>
-                  </section>
-                </div>
-              </ModalDialog>
-            </div> */}
+            <NewsShareButton item={item} />
           </div>
         </div>
       </div>

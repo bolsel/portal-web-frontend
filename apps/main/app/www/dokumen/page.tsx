@@ -4,7 +4,7 @@ import KategoriList from './_Kategori';
 import Lists from './_Lists';
 import KategoriName from './_KategoriName';
 import { Metadata } from 'next';
-import { baseUrlTo, titleWithMainTitle } from '../../../lib/helper';
+import { titleWithMainTitle } from '../../../lib/helper';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

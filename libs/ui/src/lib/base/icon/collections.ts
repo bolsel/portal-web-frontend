@@ -1,6 +1,6 @@
 export default {
 	"prefix": "base",
-	"lastModified": 1692163784,
+	"lastModified": 1692165614,
 	"icons": {
 		"apps": {
 			"body": "<path fill=\"currentColor\" d=\"M16 18H6a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2zM6 6v10h10V6zm20 6v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm0 12v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm-10 2v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2z\"/>",
@@ -226,6 +226,9 @@ export default {
 		},
 		"share": {
 			"body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><circle cx=\"18\" cy=\"5\" r=\"3\"/><circle cx=\"6\" cy=\"12\" r=\"3\"/><circle cx=\"18\" cy=\"19\" r=\"3\"/><path d=\"m8.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98\"/></g>"
+		},
+		"share-all-outline": {
+			"body": "<path fill=\"currentColor\" d=\"M13 9.8v.9l-1.7.2c-2.6.4-4.5 1.4-5.9 2.7 1.7-.5 3.5-.8 5.6-.8h2v1.3l2.2-2.1L13 9.8M11 5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11m6-1V5l7 7-7 7v-3l4-4\"/>"
 		},
 		"sitemap": {
 			"body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M3 17a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2zm12 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zM9 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zM6 15v-1a2 2 0 012-2h8a2 2 0 012 2v1m-6-6v3\"/>"
