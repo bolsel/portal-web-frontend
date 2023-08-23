@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
 jobs:
-  build-app:
+  build-app-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,4 +39,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build App Image
-        run: yarn run main:build-app-image --push
+        run: yarn run nx main:build-app-image --push
