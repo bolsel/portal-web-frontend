@@ -73,6 +73,7 @@
     },
     "build-app-image":{
       "executor": "@portalweb/plugin:build-app-image",
+      "options": {},
       "configurations": {
         "push":{
           "push":true
