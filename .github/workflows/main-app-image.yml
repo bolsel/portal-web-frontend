@@ -13,7 +13,7 @@ jobs:
 
       - name: 'Create apps/main/.env.local file'
         run: |
-          echo BACKEND_URL=${{ secrets.BACKEND_TOKEN }} >> apps/main/.env.local
+          echo BACKEND_URL=${{ secrets.BACKEND_URL }} >> apps/main/.env.local
           echo BACKEND_TOKEN=${{ secrets.BACKEND_TOKEN }} >> apps/main/.env.local
           echo NEW_RELIC_APP_NAME=${{ secrets.NEW_RELIC_APP_NAME }} >> apps/main/.env.local
           echo NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }} >> apps/main/.env.local
