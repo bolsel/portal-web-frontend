@@ -24,6 +24,6 @@ export default async function Sitemap() {
       url: `https://${domain}`,
       lastModified: new Date(),
     },
-    ...beritaUrls,
+    ...(beritaUrls ?? []),
   ];
 }

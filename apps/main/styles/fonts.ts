@@ -21,7 +21,7 @@ export const lora = Lora({
 });
 
 export const intro = localFont({
-  src: './intro.otf',
+  src: './Intro.otf',
   variable: '--font-intro',
   weight: '600',
 });
