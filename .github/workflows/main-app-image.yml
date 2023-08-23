@@ -39,4 +39,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build App Image
-        run: yarn run nx main:build-app-image --push
+        run: yarn nx run main:build-app-image --push
