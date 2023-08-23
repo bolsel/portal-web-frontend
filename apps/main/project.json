@@ -70,6 +70,14 @@
           "apps/main/**/*.{ts,tsx,js,jsx}"
         ]
       }
+    },
+    "build-app-image":{
+      "executor": "@portalweb/plugin:build-app-image",
+      "configurations": {
+        "push":{
+          "push":true
+        }
+      }
     }
   },
   "tags": []

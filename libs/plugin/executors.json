@@ -1,9 +1,9 @@
 {
   "executors": {
-    "echo": {
-      "implementation": "./src/executors/echo/executor",
-      "schema": "./src/executors/echo/schema.json",
-      "description": "echo executor"
+    "build-app-image": {
+      "implementation": "./src/executors/build-app-image/executor",
+      "schema": "./src/executors/build-app-image/schema.json",
+      "description": "build-app-image executor"
     }
   }
 }
