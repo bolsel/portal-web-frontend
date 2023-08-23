@@ -11,6 +11,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: 'Create apps/main/.env.local file'
+        run: |
+          echo BACKEND_URL=${{ secrets.BACKEND_TOKEN }} >> apps/main/.env.local
+          echo BACKEND_TOKEN=${{ secrets.BACKEND_TOKEN }} >> apps/main/.env.local
+          echo NEW_RELIC_APP_NAME=${{ secrets.NEW_RELIC_APP_NAME }} >> apps/main/.env.local
+          echo NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }} >> apps/main/.env.local
+          echo NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID }} >> apps/main/.env.local
+          echo NEXT_PUBLIC_MAIN_TITLE="Portal Resmi Pemkab Bolsel" >> apps/main/.env.local
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
