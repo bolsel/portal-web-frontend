@@ -60,6 +60,13 @@ export default async function ciBuildExecutor(
       cwd: distBuildBasePath,
       stdio: ['inherit', 'inherit', 'inherit'],
     });
+
+    // push base image
+    if (options.push) {
+      execa.commandSync(`docker push ${appImageNameBase}`, {
+        stdio: ['inherit', 'inherit', 'inherit'],
+      });
+    }
     // save build id
     fs.writeFileSync(`${distBuildBasePath}/BUILD_ID`, buildIdBaseCurrent);
   }
@@ -70,9 +77,6 @@ export default async function ciBuildExecutor(
     stdio: ['inherit', 'inherit', 'inherit'],
   });
   if (options.push) {
-    execa.commandSync(`docker push ${appImageNameBase}`, {
-      stdio: ['inherit', 'inherit', 'inherit'],
-    });
     execa.commandSync(`docker push ${appImageName}`, {
       stdio: ['inherit', 'inherit', 'inherit'],
     });
