@@ -26,7 +26,8 @@ export default async function middleware(req: NextRequest) {
 
   if (
     hostname === 'localhost:4200' ||
-    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
+    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN ||
+    hostname === `www.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
   ) {
     // rewrite ke www site
     return NextResponse.rewrite(new URL(`/www${path}`, req.url));
