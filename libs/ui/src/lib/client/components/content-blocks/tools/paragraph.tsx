@@ -16,7 +16,7 @@ const ParagraphTool: FC<
   const textAlign = tunesAlignmentClass(tunes);
   return (
     <p
-      className={`text-${textAlign}`}
+      className={`text-${textAlign} text-justify`}
       dangerouslySetInnerHTML={{ __html: data.text }}
     />
   );
