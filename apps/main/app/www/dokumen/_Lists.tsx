@@ -39,7 +39,7 @@ hover:text-primary-700 hover:bg-primary-100"
             >
               {item.category.name}
             </span>
-            <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
+            <h1 className="font-heading font-medium text-[21px] leading-[34px] text-primary-700">
               {item.title}
             </h1>
           </section>
@@ -80,12 +80,6 @@ hover:text-primary-700 hover:bg-primary-100"
             ? { category: { slug: { _eq: currentKategoriSlug } } }
             : undefined,
         }}
-        // pathQuery={
-        //   currentKategoriSlug
-        //     ? ['latestByCategorySlug', currentKategoriSlug]
-        //     : ['latest']
-        // }
-        // paramsQuery={{ page, limit }}
         loadingComponent={() => (
           <UIListItems
             view={view}
@@ -102,7 +96,7 @@ hover:text-primary-700 hover:bg-primary-100"
             <UIListItems
               view={view}
               setView={setView}
-              items={data!.data}
+              items={data?.data ?? []}
               Component={({ item: data, view }) => (
                 <UIBaseViewDocumentListItem
                   item={data}
@@ -110,9 +104,6 @@ hover:text-primary-700 hover:bg-primary-100"
                   customizes={{
                     hideCategory: () => currentKategoriSlug !== '',
                     itemAction: () => (item) => {
-                      // console.log('aa');
-                      // setDialogShow(true);
-
                       showModal(item);
                     },
                   }}

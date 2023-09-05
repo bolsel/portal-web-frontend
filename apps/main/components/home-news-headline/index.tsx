@@ -32,7 +32,7 @@ export default async function HomeNewsHeadline() {
                   <div className="border-b border-gray-300" />
                 </div>
                 <Link
-                  href="/berita"
+                  href="/berita/kategori/terbaru"
                   tabIndex={-1}
                   className="normal-case btn btn-sm btn-outline btn-primary"
                 >

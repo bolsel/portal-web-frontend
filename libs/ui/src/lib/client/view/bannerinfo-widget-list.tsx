@@ -59,7 +59,7 @@ export const UIViewBannerInfoWidgetList: UIViewBannerInfoWidgetListType['returnT
               }}
               breakpoints={{
                 1280: {
-                  slidesPerView: 1.2,
+                  slidesPerView: items?.length && items.length === 1 ? 1 : 1.2,
                 },
               }}
               passiveListeners={true}

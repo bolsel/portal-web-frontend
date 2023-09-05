@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import BeritaLists from './_BeritaLists';
 import MainBeritaLists from './_MainBeritaLists';
 import GrafikInfoList from './_GrafikInfoList';
+import HomeBannerInfoList from '#/main/components/home-banner-info-list';
 
 export async function generateMetadata({
   params: { domain },
@@ -29,7 +30,7 @@ export default async function SiteIndexPage({ params: { domain } }) {
       }}
     >
       <section className="p-1 lg:p-2">
-        <SwrBannerList
+        <HomeBannerInfoList
           swiper={{
             breakpoints: {},
           }}
