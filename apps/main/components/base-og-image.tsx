@@ -96,14 +96,14 @@ export default async function BaseOgImage({
                   style={{
                     filter: 'drop-shadow(0px 0px 2px #000)',
                   }}
-                  src="http://localhost:4200/images/bupati.png"
+                  src="https://www.bolselkab.go.id/images/bupati.png"
                 />
                 <img
                   tw="w-[150px] rounded-md mr-4"
                   style={{
                     filter: 'drop-shadow(0px 0px 2px #000)',
                   }}
-                  src="http://localhost:4200/images/wabup.png"
+                  src="https://www.bolselkab.go.id/images/wabup.png"
                 />
               </div>
               <h2 tw="m-0 mt-3">Pemerintah Kabupaten</h2>

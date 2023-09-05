@@ -38,7 +38,10 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      images: [`/og-image/berita/${item.slug}`, item.image_cover.url],
+      images: [
+        `https://www.bolselkab.go.id/og-image/berita/${item.slug}`,
+        item.image_cover.url,
+      ],
     },
     twitter: {
       card: 'summary_large_image',
