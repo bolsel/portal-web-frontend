@@ -1,14 +1,11 @@
-import {
-  ApiResourceGetNormalizerType,
-  getResourceApiUrl,
-} from '@portalweb/api';
+import { TApiResourcePathReturn, getResourceApiUrl } from '@portalweb/api';
 
 export type NewsOrWebNewsItemType =
-  | ApiResourceGetNormalizerType<'news', 'bySlug'>
-  | ApiResourceGetNormalizerType<'web_news', 'bySlugWebId'>;
+  | TApiResourcePathReturn<'news'>['read']['bySlug']
+  | TApiResourcePathReturn<'web_news'>['read']['bySlug'];
 
 export const newsItemIsWeb = (item: NewsOrWebNewsItemType) =>
-  (item as ApiResourceGetNormalizerType<'web_news', 'bySlugWebId'>).website_id
+  (item as TApiResourcePathReturn<'web_news'>['read']['bySlug']).website
     ? true
     : false;
 
@@ -27,8 +24,8 @@ export function getArticleUrl(
 }
 
 export async function fetchNewsShareCount(item: NewsOrWebNewsItemType) {
-  const url = newsItemIsWeb(item)
-    ? `web_news/share/${item.id}`
-    : `news/share/${item.id}`;
+  const url = `${newsItemIsWeb(item) ? 'web_news' : 'news'}/shareAndViewCount/${
+    item.slug
+  }/share`;
   return fetch(getResourceApiUrl(url));
 }

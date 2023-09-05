@@ -10,8 +10,7 @@ import {
 } from '@portalweb/ui';
 import { useState } from 'react';
 
-export default function BeritaLists({webId}) {
-
+export default function BeritaLists({ webId }) {
   const [view, setView] = useUIListItemsViewState('grid');
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
@@ -29,9 +28,15 @@ export default function BeritaLists({webId}) {
               setView={setView}
             />
           )}
-          resourceKey="web_news"
-          pathQuery={['latestByWebId', webId]}
-          paramsQuery={{ limit: limit, page }}
+          collection="web_news"
+          path="itemsMeta"
+          query={{
+            filter: {
+              website: { _eq: webId },
+            },
+            limit,
+            page,
+          }}
         >
           {({ data }) => {
             return (

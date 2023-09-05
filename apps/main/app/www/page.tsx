@@ -1,9 +1,9 @@
-import HomeNewsHeadline from '../../components/home-news-headline/home-news-headline';
 import HomeHero from '../../components/home-hero/home-hero';
-import AplikasiList from './_AplikasiList';
 import Link from 'next/link';
-import BannerList from './_BannerList';
-import GrafikInfoList from './_GrafikInfoList';
+import HomeBannerInfoList from '#/main/components/home-banner-info-list';
+import HomeGrafikInfoList from '#/main/components/home-grafik-info-list';
+import HomeApplicationList from '#/main/components/home-application-list';
+import HomeNewsHeadline from '#/main/components/home-news-headline';
 
 export default async function MainIndexPage() {
   return (
@@ -13,13 +13,13 @@ export default async function MainIndexPage() {
 
       <section className="py-6 md:py-8 xl:py-12">
         <div className="container mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6">
-          <BannerList />
+          <HomeBannerInfoList />
         </div>
       </section>
 
       <section className="py-6 md:py-8 xl:py-12">
         <div className="container bg-gray-200 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
-          <GrafikInfoList />
+          <HomeGrafikInfoList />
         </div>
       </section>
       <section className="ui-container mb-10">
@@ -39,7 +39,7 @@ export default async function MainIndexPage() {
             </button>
           </Link>
         </div>
-        <AplikasiList />
+        <HomeApplicationList />
       </section>
     </main>
   );

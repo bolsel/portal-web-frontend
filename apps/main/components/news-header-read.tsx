@@ -1,4 +1,4 @@
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { UIBaseIcon } from '@portalweb/ui';
 import Image from 'next/image';
 import Breadcrumb from './breadcrumb/breadcrumb';
@@ -7,14 +7,14 @@ import NewsShareButton from './news-share-button';
 export default function NewsHeaderRead({
   item,
 }: {
-  item: ApiResourceGetNormalizerType<'news', 'bySlug'>;
+  item: TApiResourcePathReturn<'news'>['read']['bySlug'];
 }) {
   const breadcrumbItems = [
     { link: '/', label: 'Beranda' },
     { link: '/berita', label: 'Berita' },
     {
-      link: `/berita?kategori=${item.category_slug}`,
-      label: item.category_name,
+      link: `/berita/kategori/${item.category.slug}`,
+      label: item.category.name,
       active: true,
     },
   ];
@@ -46,7 +46,7 @@ export default function NewsHeaderRead({
             <div className="flex items-center gap-2">
               <UIBaseIcon icon="calendar" className="w-4 h-4" />
               <p className="text-sm">
-                {item.publish_date.toLocaleDateString('id-ID', {
+                {item.publish_date_date.toLocaleDateString('id-ID', {
                   weekday: 'long',
                   day: 'numeric',
                   month: 'long',

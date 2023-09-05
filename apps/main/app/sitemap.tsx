@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
-import { apiResourceNews } from '@portalweb/api/server';
+import { apiResourceItemRead } from '@portalweb/api/server';
 
 export default async function Sitemap() {
   const headersList = headers();
@@ -8,11 +8,13 @@ export default async function Sitemap() {
       .get('host')
       ?.replace('.localhost:4200', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) ??
     'vercel.pub';
-  const { data: berita } = await apiResourceNews().itemHandler.readByQuery({
-    limit: -1,
-    fields: ['slug'],
-    sort: ['-publish_date'],
-  });
+  const berita = await apiResourceItemRead('news')
+    .setQuery({
+      limit: -1,
+    })
+    .items({
+      normalizer: [['slug'], (data) => data],
+    });
   const beritaUrls = berita
     ? berita.map(({ slug }) => ({
         url: `https://${domain}/berita/${slug}`,

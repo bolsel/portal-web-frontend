@@ -4,33 +4,39 @@ import { getSiteData } from '../../../../lib/site';
 import { notFound } from 'next/navigation';
 import { UIBaseIcon, UIBaseViewDocumentItemDetail } from '@portalweb/ui';
 import { Metadata } from 'next';
-import { apiResourceOrganizationDocuments } from '@portalweb/api/server';
 import DocumentFrame from '../../../../components/document-frame';
 import { kategoryText } from '../lib';
+import { apiResourceItemRead } from '@portalweb/api/server';
 
+const getItem = async (slug) => {
+  return await apiResourceItemRead('organization_documents')
+    .setQuery({
+      filter: { slug: { _eq: slug } },
+    })
+    .items({ single: true })
+    .catch(() => null);
+};
 export async function generateMetadata({
   params: { domain, slug },
 }): Promise<Metadata> {
   const site = await getSiteData(domain);
   if (!site) notFound();
 
-  const item = await apiResourceOrganizationDocuments().fetch({
-    pathQuery: ['bySlug', slug]
-  }).catch(() => null)
-  if (!item) notFound()
+  const item = await getItem(slug);
+  if (!item) notFound();
 
   return {
-    title: `${item.title} | ${site.organization_name}`,
-    description: `Dokumen (${kategoryText(item.category)}) ${site.organization_name}`,
+    title: `${item.title} | ${site.organization.name}`,
+    description: `Dokumen (${kategoryText(item.category)}) ${
+      site.organization.name
+    }`,
   };
 }
 export default async function SiteDokumenPage({ params: { domain, slug } }) {
   const site = await getSiteData(domain);
   if (!site) notFound();
-  const item = await apiResourceOrganizationDocuments().fetch({
-    pathQuery: ['bySlug', slug]
-  }).catch(() => null)
-  if (!item) notFound()
+  const item = await getItem(slug);
+  if (!item) notFound();
 
   return (
     <SiteLayout

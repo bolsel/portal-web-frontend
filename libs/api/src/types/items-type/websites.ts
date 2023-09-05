@@ -1,20 +1,19 @@
-import { FileType, UserType } from '../system-types';
+import { TDirectusStatusField, TDirectusUser } from '../system-types';
 import { Organizations } from './organizations';
-import { DirectusStatusType } from '../index';
 
-export type Websites = {
+export interface Websites {
   id: string;
-  status: DirectusStatusType;
+  status: TDirectusStatusField;
   sort: number;
   name: string;
   slug: string;
   domain: string;
   domain_alias?: string;
-  organization: Organizations;
+  organization: string | Organizations;
   modules?: string[];
 
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}

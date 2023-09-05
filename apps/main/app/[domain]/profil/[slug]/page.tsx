@@ -5,18 +5,18 @@ import { siteMenuProfilItems } from '../../../../components/layout/site/menu';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
-import { apiResourceOrganizations } from '@portalweb/api/server';
 import Pejabat from './_Pejabat';
 import { Metadata } from 'next';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
 
 export async function generateMetadata({
   params: { domain, slug },
 }): Promise<Metadata> {
   const site = await getSiteData(domain);
   if (!site) notFound();
-  const orgInfo = await apiResourceOrganizations()
-    .fetch({
-      pathQuery: ['info', site.organization_slug],
+  const orgInfo = await apiResourceItemPathRead('organizations')
+    .infoBySlug({
+      paths: [site.organization.slug],
     })
     .catch(() => null);
   if (!orgInfo) notFound();
@@ -33,9 +33,9 @@ export default async function SiteProfilPage({ params: { slug, domain } }) {
   const site = await getSiteData(domain);
   if (site === null) notFound();
   const menuList = siteMenuProfilItems(site);
-  const orgInfo = await apiResourceOrganizations()
-    .fetch({
-      pathQuery: ['info', site.organization_slug!],
+  const orgInfo = await apiResourceItemPathRead('organizations')
+    .infoBySlug({
+      paths: [site.organization.slug],
     })
     .catch(() => null);
   if (!orgInfo) notFound();
@@ -64,7 +64,7 @@ export default async function SiteProfilPage({ params: { slug, domain } }) {
         />
       );
     } else if (slug === 'pejabat') {
-      return <Pejabat organizationId={site.organization_id} />;
+      return <Pejabat organizationId={site.organization.id} />;
     }
     return <div>Belum ada data.</div>;
   };

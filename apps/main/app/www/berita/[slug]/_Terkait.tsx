@@ -1,17 +1,16 @@
 'use client';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import {
   UIBaseViewNewsListItem,
   UIListItems,
   UISwrResource,
   useUIListItemsViewState,
 } from '@portalweb/ui';
-import { useSearchParams } from 'next/navigation';
 
 export default function Terkait({
   item,
 }: {
-  item: ApiResourceGetNormalizerType<'news', 'bySlug'>;
+  item: TApiResourcePathReturn<'news'>['read']['bySlug'];
 }) {
   const [view, setView] = useUIListItemsViewState('list');
   return (
@@ -19,15 +18,25 @@ export default function Terkait({
       <div className="flex w-full h-[38px] mb-6">
         <div className="border-b-[3px] border-primary">
           <h1 className="whitespace-nowrap font-default text-sm font-bold leading-6 uppercase text-blue-gray-800">
-            Berita Terkait ({item.category_name})
+            Berita Terkait ({item.category.name})
           </h1>
         </div>
         <div className="w-full h-full border-b-[3px] border-blue-gray-50" />
       </div>
       <UISwrResource
-        resourceKey="news"
-        pathQuery={['byCategorySlug', item.category_slug]}
-        paramsQuery={{ limit: 5, filter: { slug: { _neq: item.slug } } }}
+        collection="news"
+        path="items"
+        query={{
+          filter: {
+            _and: [
+              { category: { slug: { _eq: item.category.slug } } },
+              { slug: { _neq: item.slug } },
+            ],
+          },
+          limit: 5,
+        }}
+        // pathQuery={['byCategorySlug', item.category_slug]}
+        // paramsQuery={{ limit: 5, filter: { slug: { _neq: item.slug } } }}
         loadingComponent={() => (
           <UIListItems
             items={5}
@@ -52,7 +61,7 @@ export default function Terkait({
         {({ data }) => {
           return (
             <UIListItems
-              items={data!.data}
+              items={data ?? []}
               customizes={{
                 noViewSwitch: () => true,
               }}

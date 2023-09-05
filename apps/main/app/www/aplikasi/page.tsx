@@ -1,4 +1,4 @@
-import { apiResourceApplicationCategories } from '@portalweb/api/server';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
 import PageWithContainer from '../../../components/pages/page-with-container';
 import KategoriList from './_Kategori';
 import Lists from './_Lists';
@@ -12,9 +12,12 @@ export const metadata: Metadata = {
 };
 
 export default async function MainAplikasiPage() {
-  const { data: categories } = await apiResourceApplicationCategories().fetch({
-    pathQuery: ['all'],
+  const categories = await apiResourceItemPathRead(
+    'application_categories'
+  ).items({
+    limit: -1,
   });
+
   return (
     <PageWithContainer
       jumbotron={{

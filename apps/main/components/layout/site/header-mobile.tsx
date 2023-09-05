@@ -4,14 +4,14 @@ import Link from 'next/link';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { UIBaseIcon } from '@portalweb/ui';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import { siteMenu } from './menu';
+import { TApiResourcePathReturn } from '@portalweb/api';
 
 export default function HeaderMobile({
   site,
   show,
 }: {
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>;
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain'];
   show: boolean;
 }) {
   const [active, setActive] = useState<number | null>(null);
@@ -114,7 +114,7 @@ export default function HeaderMobile({
             </section>
             <section className="mt-auto pt-4 border-t border-primary-500">
               <p className="font-lato text-sm font-normal leading-6 text-white text-center">
-                {site.organization_name}
+                {site.organization.name}
               </p>
             </section>
           </div>

@@ -1,19 +1,23 @@
-import { FileType, UserType } from '../system-types';
+import {
+  TDirectusFile,
+  TDirectusStatusField,
+  TDirectusUser,
+} from '../system-types';
 import { Websites } from './websites';
-import { DirectusStatusType } from '../index';
 
-export type WebNews = {
+export interface WebNews {
   id: string;
   title: string;
   slug: string;
   publish_date: Date;
-  website: Websites;
-  image_cover: FileType;
-  status: DirectusStatusType;
+  website: string | Websites;
+  image_cover: string | TDirectusFile;
+  status: TDirectusStatusField;
   description: string;
   view_count: number;
   shared_count: number;
   reporter: string;
+  editor?: string;
   tags?: string[];
   content: {
     time: number;
@@ -21,8 +25,8 @@ export type WebNews = {
     version: string;
   };
 
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}

@@ -7,14 +7,14 @@ export default function SwrBannerList({ swiper }: { swiper?: SwiperProps }) {
   return (
     <>
       <UISwrResource
-        resourceKey="banner_info"
-        pathQuery={['listWidget']}
+        collection="banner_info"
+        path="items"
         loadingComponent={() => (
           <UIViewBannerInfoWidgetList skeleton swiper={swiper} />
         )}
       >
         {({ data }) => (
-          <UIViewBannerInfoWidgetList swiper={swiper} items={data.data} />
+          <UIViewBannerInfoWidgetList swiper={swiper} items={data ?? []} />
         )}
       </UISwrResource>
     </>

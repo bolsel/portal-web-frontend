@@ -5,7 +5,7 @@
   "scripts": {},
   "private": true,
   "dependencies": {
-    "@directus/sdk": "^10.3.5",
+    "@directus/sdk": "^11.0.3",
     "@headlessui/react": "^1.7.15",
     "@iconify/react": "^4.1.1",
     "@nx/devkit": "16.7.2",
@@ -13,7 +13,6 @@
     "clsx": "^1.2.1",
     "framer-motion": "^10.12.18",
     "lightgallery": "^2.7.1",
-    "lucide-react": "^0.259.0",
     "next": "13.4.12",
     "qs": "^6.11.2",
     "react": "18.2.0",

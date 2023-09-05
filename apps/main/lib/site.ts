@@ -1,7 +1,9 @@
-import { apiResourceWebsites } from '@portalweb/api/server';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
 
 export async function getSiteData(domain: string) {
-  return await apiResourceWebsites()
-    .fetch({ pathQuery: ['byDomain', domain] })
+  return await apiResourceItemPathRead('websites')
+    .byDomain({
+      paths: [domain],
+    })
     .catch(() => null);
 }

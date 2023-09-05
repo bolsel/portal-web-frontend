@@ -1,15 +1,18 @@
-import { FileType, UserType } from '../system-types';
-import { DirectusStatusType } from '../index';
+import {
+  TDirectusFile,
+  TDirectusStatusField,
+  TDirectusUser,
+} from '../system-types';
 
-export type BannerInfo = {
+export interface BannerInfo {
   id: string;
-  status: DirectusStatusType;
+  status: TDirectusStatusField;
   title: string;
   sort: number;
-  image: FileType;
+  image: string | TDirectusFile;
   link?: string;
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}

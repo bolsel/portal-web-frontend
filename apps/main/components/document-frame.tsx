@@ -1,11 +1,13 @@
 'use client';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { useState } from 'react';
 
 export default function DocumentFrame({
   item,
 }: {
-  item: ApiResourceGetNormalizerType<'documents', 'bySlug'> | ApiResourceGetNormalizerType<'organization_documents', 'bySlug'>;
+  item:
+    | TApiResourcePathReturn<'documents'>['read']['items'][0]
+    | TApiResourcePathReturn<'organization_documents'>['read']['items'][0];
 }) {
   const [show, setShow] = useState(false);
 

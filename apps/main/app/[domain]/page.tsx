@@ -3,7 +3,6 @@ import SiteLayout from '../../components/layout/site/layout';
 import { getSiteData } from '../../lib/site';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import Link from 'next/link';
 import BeritaLists from './_BeritaLists';
 import MainBeritaLists from './_MainBeritaLists';
 import GrafikInfoList from './_GrafikInfoList';
@@ -15,7 +14,7 @@ export async function generateMetadata({
   if (!site) notFound();
   return {
     title: site.name,
-    description: site.organization_name,
+    description: site.organization.name,
   };
 }
 export default async function SiteIndexPage({ params: { domain } }) {
@@ -63,23 +62,6 @@ export default async function SiteIndexPage({ params: { domain } }) {
               <div className="px-0 lg:px-5 bg-primary-50 w-full rounded-lg">
                 <GrafikInfoList />
               </div>
-              {/* <UISwrResourceGrafikInfoWidget
-                wrapperComponent={({ children }) => (
-                  <div className="px-0 lg:px-5 bg-primary-50 w-full rounded-lg">
-                    {children}
-                  </div>
-                )}
-                paramsQuery={{ limit: 3 }}
-                viewOptions={{
-                  className: 'py-0 pt-5',
-                  slideContainer: {
-                    className: clsx(
-                      `!bg-cover !bg-center`,
-                      '!w-[300px] !h-[500px] lg:!w-full'
-                    ),
-                  },
-                }}
-              /> */}
             </div>
           </div>
         </section>

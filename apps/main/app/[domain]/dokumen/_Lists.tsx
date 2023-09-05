@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import {
   UIBaseIcon,
   UIBaseViewDocumentItemDetail,
@@ -16,6 +15,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { kategoryText } from './lib';
+import { TApiResourcePathReturn } from '@portalweb/api';
 
 export default function Lists({ organizationId }) {
   const searchParams = useSearchParams();
@@ -29,28 +29,28 @@ export default function Lists({ organizationId }) {
   }, [kategori]);
 
   const showModal = (
-    item: ApiResourceGetNormalizerType<'organization_documents', 'latest'>
+    item: TApiResourcePathReturn<'organization_documents'>['read']['items'][0]
   ) => {
     modal?.show(<UIBaseViewDocumentItemDetail item={item} />, {
       contentClassName: ({ defaults }) =>
         clsx(defaults.contentClassName, ' max-w-[510px] lg:w-[510px]'),
       header: () => () =>
-      (
-        <section className="p-6 pb-0 w-full">
-          <span
-            className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
+        (
+          <section className="p-6 pb-0 w-full">
+            <span
+              className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
 hover:text-primary-700 hover:bg-primary-100"
-          >
-            {item.category}
-          </span>
-          <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
-            {item.title}
-          </h1>
-        </section>
-      ),
+            >
+              {item.category}
+            </span>
+            <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
+              {item.title}
+            </h1>
+          </section>
+        ),
       footer:
         () =>
-          ({ closeModal }) =>
+        ({ closeModal }) =>
           (
             <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
               <Link
@@ -75,9 +75,16 @@ hover:text-primary-700 hover:bg-primary-100"
   return (
     <>
       <UISwrResource
-        resourceKey="organization_documents"
-        pathQuery={kategori ? ['latestByCategory', organizationId, kategori] : ['latest', organizationId]}
-        paramsQuery={{ page, limit }}
+        collection="organization_documents"
+        path="itemsMeta"
+        query={{
+          page,
+          limit,
+          filter: {
+            organization: { id: { _eq: organizationId } },
+            ...(kategori ? { category: { _eq: kategori } } : {}),
+          },
+        }}
         emptyComponent={() => <div>Belum ada data.</div>}
         loadingComponent={() => (
           <UIListItems
@@ -91,7 +98,7 @@ hover:text-primary-700 hover:bg-primary-100"
         )}
       >
         {({ data }) =>
-          data.data.length ? (
+          data ? (
             <>
               <UIListItems
                 view={view}

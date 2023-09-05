@@ -9,12 +9,12 @@ import {
 } from '../../base';
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Mousewheel, Autoplay } from 'swiper/modules';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { useRef } from 'react';
 import Image from 'next/image';
 
 type Props = {
-  items?: ApiResourceGetNormalizerType<'banner_info', 'listWidget'>[];
+  items?: TApiResourcePathReturn<'banner_info'>['read']['items'];
   skeleton?: true;
 };
 

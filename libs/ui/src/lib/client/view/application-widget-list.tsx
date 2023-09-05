@@ -9,11 +9,11 @@ import {
 } from '../../base';
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Mousewheel, Autoplay } from 'swiper/modules';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { useRef } from 'react';
 
 type Props = {
-  items?: ApiResourceGetNormalizerType<'applications', 'listWidget'>[];
+  items?: TApiResourcePathReturn<'applications'>['read']['items'];
   skeleton?: true;
 };
 

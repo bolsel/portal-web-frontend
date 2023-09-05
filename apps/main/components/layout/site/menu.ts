@@ -1,4 +1,4 @@
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { UIBaseIconNamesType } from '@portalweb/ui';
 
 type Menu = {
@@ -7,67 +7,67 @@ type Menu = {
   items?: (Menu & { description: string; icon: UIBaseIconNamesType })[];
 };
 export function siteMenuProfilItems(
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain']
 ): Menu['items'] {
   return [
     {
       title: 'Sekilas',
       link: '/profil/sekilas',
-      description: `Sekilas tentang ${site.organization_name}`,
+      description: `Sekilas tentang ${site.organization.name}`,
       icon: 'info',
     },
     {
       title: 'Visi Misi',
       link: '/profil/visi-misi',
-      description: `Visi & Misi ${site.organization_name}`,
+      description: `Visi & Misi ${site.organization.name}`,
       icon: 'visi-misi',
     },
     {
       title: 'Struktur Organisasi',
       link: '/profil/struktur-organisasi',
-      description: `Struktur Organisasi ${site.organization_name}`,
+      description: `Struktur Organisasi ${site.organization.name}`,
       icon: 'sitemap',
     },
     {
       title: 'Profil Pejabat',
       link: '/profil/pejabat',
-      description: `Profil pejabat ${site.organization_name}`,
+      description: `Profil pejabat ${site.organization.name}`,
       icon: 'users',
     },
   ];
 }
 export function siteMenuDokumenItems(
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain']
 ): Menu['items'] {
   return [
     {
       title: 'Semua Dokumen',
       link: '/dokumen',
-      description: `Informasi Dokumen ${site.organization_name}`,
+      description: `Informasi Dokumen ${site.organization.name}`,
       icon: 'document-file',
     },
     {
       title: 'Dokumen Perencanaan',
       link: '/dokumen?kategori=dokumen-perencanaan',
-      description: `Dokumen Perencanaan ${site.organization_name}`,
+      description: `Dokumen Perencanaan ${site.organization.name}`,
       icon: 'document-file',
     },
     {
       title: 'Laporan Keuangan',
       link: '/dokumen?kategori=laporan-keuangan',
-      description: `Laporan Keuangan ${site.organization_name}`,
+      description: `Laporan Keuangan ${site.organization.name}`,
       icon: 'document-file',
     },
     {
       title: 'Dokumen lainnya',
       link: '/dokumen?kategori=lainnya',
-      description: `Dokumen lainnya ${site.organization_name}`,
+      description: `Dokumen lainnya ${site.organization.name}`,
       icon: 'document-file',
     },
   ];
 }
 export function siteMenu(
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain']
 ) {
   const modules: string[] = site.modules ?? [];
 
@@ -89,7 +89,7 @@ export function siteMenu(
         {
           title: 'Berita Terbaru',
           link: '/berita',
-          description: `Berita terbaru ${site.organization_name}`,
+          description: `Berita terbaru ${site.organization.name}`,
           icon: 'newspaper',
         },
         {

@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 import Header from './header';
-import { getSiteData } from '../../../lib/site';
 import Footer from './footer';
 import '../../../styles/globals.css';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import Jumbotron, { JumbotronProps } from './jumbotron';
+import { TApiResourcePathReturn } from '@portalweb/api';
 
 export default async function SiteLayout({
   children,
@@ -12,7 +11,7 @@ export default async function SiteLayout({
   jumbotron,
 }: {
   children: ReactNode;
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>;
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain'];
   jumbotron?: JumbotronProps;
 }) {
   return (

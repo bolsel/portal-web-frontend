@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import {
   UIBaseIcon,
   UIBaseViewDocumentItemDetail,
@@ -27,9 +26,7 @@ export default function Lists() {
   useEffect(() => {
     setPage(1);
   }, [currentKategoriSlug]);
-  const showModal = (
-    item: ApiResourceGetNormalizerType<'documents', 'latest'>
-  ) => {
+  const showModal = (item) => {
     modal?.show(<UIBaseViewDocumentItemDetail item={item} />, {
       contentClassName: ({ defaults }) =>
         clsx(defaults.contentClassName, ' max-w-[510px] lg:w-[510px]'),
@@ -40,7 +37,7 @@ export default function Lists() {
               className="inline-block rounded-md px-[10px] py-2 text-xs font-normal text-gray-700 bg-gray-100 mb-4
 hover:text-primary-700 hover:bg-primary-100"
             >
-              {item.category_name}
+              {item.category.name}
             </span>
             <h1 className="font-content-title font-medium text-[21px] leading-[34px] text-primary-700">
               {item.title}
@@ -74,13 +71,21 @@ hover:text-primary-700 hover:bg-primary-100"
   return (
     <>
       <UISwrResource
-        resourceKey="documents"
-        pathQuery={
-          currentKategoriSlug
-            ? ['latestByCategorySlug', currentKategoriSlug]
-            : ['latest']
-        }
-        paramsQuery={{ page, limit }}
+        collection="documents"
+        path="itemsMeta"
+        query={{
+          limit,
+          page,
+          filter: currentKategoriSlug
+            ? { category: { slug: { _eq: currentKategoriSlug } } }
+            : undefined,
+        }}
+        // pathQuery={
+        //   currentKategoriSlug
+        //     ? ['latestByCategorySlug', currentKategoriSlug]
+        //     : ['latest']
+        // }
+        // paramsQuery={{ page, limit }}
         loadingComponent={() => (
           <UIListItems
             view={view}

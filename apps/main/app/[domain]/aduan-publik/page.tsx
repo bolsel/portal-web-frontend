@@ -10,22 +10,12 @@ import Menu from './_Menu';
 export default async function SiteAduanPublikPage({ params: { domain } }) {
   const site = await getSiteData(domain);
   if (site === null) notFound();
-  // const menuList = siteMenuProfilItems(site);
-  // const orgInfo = await apiResourceOrganizations()
-  //   .fetch({
-  //     pathQuery: ['info', site.organization_slug!],
-  //   })
-  //   .catch(() => null);
-  // if (!orgInfo) notFound();
-  // const menu = menuList?.find((m) => m.link === `/profil/${slug}`);
-  // if (!menu) notFound();
-
   return (
     <SiteLayout
       site={site}
       jumbotron={{
         title: 'Aduan Publik',
-        subtitle: `Kirimkan aduan anda ke ${site.organization_name}`,
+        subtitle: `Kirimkan aduan anda ke ${site.organization.name}`,
       }}
     >
       <div className="p-3 md:p-4 lg:py-8 lg:px-10 w-full xl:grid xl:grid-cols-[268px,1fr] xl:grid-rows-[1fr,auto] lg:gap-6">

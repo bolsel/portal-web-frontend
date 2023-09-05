@@ -4,7 +4,8 @@ import HeaderMain from '../../components/header/main-header';
 import { getMenuList } from '../../lib/menu-list';
 import { MainLayoutProvider } from '../../components/main-layout-provider';
 import MainFooter from '../../components/footer/main-footer';
-import { apiResourcePortalWebSettings } from '@portalweb/api/server';
+import { apiClient } from '@portalweb/api/server';
+import { readSingleton } from '@directus/sdk';
 
 export default async function MainLayout({
   children,
@@ -12,11 +13,9 @@ export default async function MainLayout({
   children: ReactNode;
 }) {
   const menuList = await getMenuList();
-  // const settings =
-  //   (await apiResourcePortalWebSettings().singleton.read()) ?? {};
-  const settings = await apiResourcePortalWebSettings().fetch({
-    pathQuery: ['all'],
-  });
+  const settings = await apiClient().request(
+    readSingleton('portal_web_settings')
+  );
 
   return (
     <MainLayoutProvider value={{ menuList, settings }}>

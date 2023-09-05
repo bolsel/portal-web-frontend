@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import {
   UIBaseIcon,
   UIBaseViewApplicationItemDetail,
@@ -29,7 +29,7 @@ export default function Lists() {
     setPage(1);
   }, [currentKategoriSlug]);
   const showModal = (
-    item: ApiResourceGetNormalizerType<'applications', 'listPage'>
+    item: TApiResourcePathReturn<'applications'>['read']['items'][0]
   ) => {
     modal?.show(<UIBaseViewApplicationItemDetail item={item} />, {
       contentClassName: ({ defaults }) =>
@@ -78,13 +78,19 @@ export default function Lists() {
   return (
     <>
       <UISwrResource
-        resourceKey="applications"
-        pathQuery={
-          currentKategoriSlug
-            ? ['listPageByCategorySlug', currentKategoriSlug]
-            : ['listPage']
-        }
-        paramsQuery={{ page, limit }}
+        collection="applications"
+        path="itemsMeta"
+        query={{
+          page,
+          limit,
+          filter: currentKategoriSlug
+            ? {
+                categories: {
+                  category: { slug: { _eq: currentKategoriSlug } },
+                },
+              }
+            : undefined,
+        }}
         loadingComponent={() => (
           <UIListItems
             view={view}

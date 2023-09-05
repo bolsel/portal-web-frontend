@@ -7,14 +7,14 @@ import { Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { siteMenu } from './menu';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import { UIBaseIcon } from '@portalweb/ui';
 import HeaderMobile from './header-mobile';
+import { TApiResourcePathReturn } from '@portalweb/api';
 
 export default function Header({
   site,
 }: {
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>;
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain'];
 }) {
   const [hasSub, setHasSub] = useState<number | null>(null);
   const [mobileShow, setMobileShow] = useState(false);
@@ -114,7 +114,7 @@ export default function Header({
                 className={'h-8 w-7'}
               />
               <div className="leading-6 group-hover:text-primary flex flex-col">
-                <div className="font-intro">{site.organization_name}</div>
+                <div className="font-intro">{site.organization.name}</div>
               </div>
             </Link>
           </div>

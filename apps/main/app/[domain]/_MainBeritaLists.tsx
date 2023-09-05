@@ -3,16 +3,13 @@
 import {
   UIBaseDevice,
   UIBaseViewNewsListItem,
-  UIBaseViewNewsListItemType,
   UIListItems,
   UISwrResource,
   useUIListItemsViewState,
 } from '@portalweb/ui';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 export default function MainBeritaLists({ side }: { side?: boolean }) {
-  const searchParams = useSearchParams();
   const [view, setView] = useUIListItemsViewState('list');
   return (
     <div className="flex flex-col gap-7">
@@ -31,42 +28,50 @@ export default function MainBeritaLists({ side }: { side?: boolean }) {
               <UIListItems
                 items={6}
                 Component={({ item: data, view }) => (
-                  <UIBaseViewNewsListItem skeleton item={[]} view={view} customizes={{
-                    small: () => side ?? false,
-                  }} />
+                  <UIBaseViewNewsListItem
+                    skeleton
+                    item={[]}
+                    view={view}
+                    customizes={{
+                      small: () => side ?? false,
+                    }}
+                  />
                 )}
                 view={isMobile ? 'grid' : view}
                 setView={setView}
                 customizes={{
                   noViewSwitch: () => true,
-
-
                 }}
               />
             )}
-            resourceKey="news"
-            pathQuery={
-              searchParams.has('kategori')
-                ? ['byCategorySlug', searchParams.get('kategori')!]
-                : ['latest']
-            }
-            paramsQuery={{ limit: 6, page: 1 }}
+            collection="news"
+            path="items"
+            query={{
+              limit: 6,
+            }}
           >
             {({ data }) => {
               return (
                 <>
                   <UIListItems
-                    items={data?.data ?? []}
+                    items={data ?? []}
                     Component={({ item: data, view }) => (
-                      <UIBaseViewNewsListItem item={data} view={view} customizes={{
-                        small: () => side ?? false,
-                        fields: ({ defaults }) => ({ ...defaults.fields, description: side ? '':data.description })
-                      }} />
+                      <UIBaseViewNewsListItem
+                        item={data}
+                        view={view}
+                        customizes={{
+                          small: () => side ?? false,
+                          fields: ({ defaults }) => ({
+                            ...defaults.fields,
+                            description: side ? '' : data.description,
+                          }),
+                        }}
+                      />
                     )}
                     view={isMobile ? 'grid' : view}
                     setView={setView}
                     customizes={{
-                      noViewSwitch: () => true
+                      noViewSwitch: () => true,
                     }}
                   />
 

@@ -1,12 +1,50 @@
-import { DirectusStatusType } from '../index';
-import { UserType } from '../system-types';
-import { OrganizationTypes } from './organization_types';
+import {
+  TDirectusFile,
+  TDirectusStatusField,
+  TDirectusUser,
+} from '../system-types';
 
-export type Organizations = {
+export interface OrganizationTypes {
   id: string;
-  status: DirectusStatusType;
   name: string;
-  type: OrganizationTypes;
+}
+
+export interface OrganizationDocuments {
+  id: string;
+  status: TDirectusStatusField;
+  publish_date: string;
+  organization: string | Organizations;
+  category: string;
+  title: string;
+  description?: string;
+  slug?: string;
+  file: string | TDirectusFile;
+
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}
+
+export interface OrganizationPejabat {
+  id: string;
+  name: string;
+  nip: string;
+  jabatan: string;
+  organization: string | Organizations;
+  image: string | TDirectusFile;
+  profil: {
+    time: number;
+    blocks: JSON;
+    version: string;
+  };
+}
+
+export interface Organizations {
+  id: string;
+  status: TDirectusStatusField;
+  name: string;
+  type: string | OrganizationTypes;
   slug: string;
 
   email: string;
@@ -19,8 +57,8 @@ export type Organizations = {
   visi: string;
   misi: string;
 
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}

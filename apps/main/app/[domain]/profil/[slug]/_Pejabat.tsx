@@ -1,30 +1,34 @@
-import { apiResourceOrganizationPejabat } from '@portalweb/api/server';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
 import { UIContentBlocks } from '@portalweb/ui';
 import Image from 'next/image';
 
 export default async function Pejabat({ organizationId }) {
-  const pejabat = await apiResourceOrganizationPejabat()
-    .fetch({
-      pathQuery: ['list', organizationId],
+  const pejabat = await apiResourceItemPathRead('organization_pejabat')
+    .items({
+      filter: {
+        organization: { _eq: organizationId },
+      },
     })
     .catch(() => null);
   if (!pejabat) return <div>Belum ada data.</div>;
 
   return (
     <div className="flex flex-col divide-y gap-4 list-none">
-      {pejabat.data && pejabat.data.length ? (
-        pejabat.data.map((item, index) => {
+      {pejabat ? (
+        pejabat.map((item, index) => {
           return (
             <div key={index} className="group flex flex-col">
               <div className="flex items-start p-3 gap-4 ">
                 <div className="w-24 h-24">
-                  <Image
-                    className="mask mask-squircle w-full h-full"
-                    src={item.image.url}
-                    alt={item.name}
-                    width={50}
-                    height={50}
-                  />
+                  {item.image ? (
+                    <Image
+                      className="mask mask-squircle w-full h-full"
+                      src={item.image.url}
+                      alt={item.name}
+                      width={50}
+                      height={50}
+                    />
+                  ) : null}
                 </div>
                 <div className="flex flex-1 flex-col">
                   <div className="italic uppercase font-heading">

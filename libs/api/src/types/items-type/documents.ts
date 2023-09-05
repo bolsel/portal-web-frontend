@@ -1,18 +1,27 @@
-import { FileType, UserType } from '../system-types';
-import { DirectusStatusType } from '../index';
-import { DocumentCategories } from './document_categories';
-
+import {
+  TDirectusFile,
+  TDirectusStatusField,
+  TDirectusUser,
+} from '../system-types';
+export interface DocumentCategories {
+  id: string;
+  name: string;
+  description?: string;
+  slug: string;
+  sort: number;
+}
 export type Documents = {
   id: string;
-  status: DirectusStatusType;
-  publish_date: Date;
-  category: DocumentCategories;
-  file: FileType;
+  status: TDirectusStatusField;
+  publish_date: string;
+  category: string | DocumentCategories;
+  file: string | TDirectusFile;
   title: string;
   description: string;
   slug: string;
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
+
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
 };

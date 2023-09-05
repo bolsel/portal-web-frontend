@@ -7,9 +7,11 @@ export default function GrafikInfoList() {
   return (
     <>
       <UISwrResource
-        resourceKey="grafik_info"
-        pathQuery={['listWidget']}
-        paramsQuery={{ limit: 3 }}
+        collection="grafik_info"
+        path="items"
+        query={{
+          limit: 3,
+        }}
         loadingComponent={() => (
           <UIViewGrafikInfoWidgetList
             skeleton
@@ -25,7 +27,7 @@ export default function GrafikInfoList() {
       >
         {({ data }) => (
           <UIViewGrafikInfoWidgetList
-            items={data.data}
+            items={data ?? []}
             swiper={{ className: 'py-0 pt-0' }}
             slideContainer={{
               className: clsx(

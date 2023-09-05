@@ -1,27 +1,26 @@
 import {
-  apiResourceNewsCategories,
-  apiResourcePublicServices,
+  apiResourceItemPathRead,
+  apiResourceItemRead,
 } from '@portalweb/api/server';
 
 export async function getMenuList() {
-  const { data: newsCategories } =
-    await apiResourceNewsCategories().itemHandler.readByQuery({
+  const newsCategories = await apiResourceItemPathRead('news_categories').items(
+    {
       limit: -1,
-      fields: ['name', 'slug', 'description'],
+    }
+  );
+  const publicServices = await apiResourceItemRead('public_services')
+    .setQuery({ limit: 5 })
+    .items({
+      normalizer: [['id', 'title', 'slug', 'description'], (data) => data],
     });
-  const { data: publicServices } =
-    await apiResourcePublicServices().itemHandler.readByQuery({
-      limit: 5,
-      fields: ['id', 'title', 'description', 'slug'],
-    });
-
   const mainMenu = [
     {
       title: 'Berita Bolsel',
       link: '/berita',
-      items: newsCategories?.map((d) => ({
+      items: newsCategories.map((d) => ({
         title: d.name,
-        link: `/berita?kategori=${d.slug}`,
+        link: `/berita/kategori/${d.slug}`,
         description: d.description,
         icon: d.slug ?? 'menuDefault',
       })),

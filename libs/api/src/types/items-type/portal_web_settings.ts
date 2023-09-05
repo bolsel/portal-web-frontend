@@ -1,4 +1,4 @@
-export type PortalWebSettings = {
+export interface PortalWebSettings {
   id: string;
   address: string;
   email: string;
@@ -6,4 +6,4 @@ export type PortalWebSettings = {
   link_instagram: string;
   link_twitter: string;
   link_youtube: string;
-};
+}

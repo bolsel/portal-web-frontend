@@ -3,35 +3,32 @@
 
 import { ReactNode } from 'react';
 import {
-  ApiResourceGetFetchParamsType,
-  ApiResourceItemsListType,
+  ApiSwrQueryProps,
+  TApiResourceItemsList,
+  TApiResourceItemsListKeys,
   useApiResourceSWR,
 } from '@portalweb/api';
 
 export function UISwrResource<
-  R extends keyof ApiResourceItemsListType,
-  P extends ApiResourceGetFetchParamsType<R>,
-  Res = ReturnType<typeof useApiResourceSWR<R, P>>
+  C extends TApiResourceItemsListKeys,
+  Path extends keyof TApiResourceItemsList[C]['paths']['read'],
+  Res = ReturnType<typeof useApiResourceSWR<C, Path>>
 >({
-  resourceKey,
-  pathQuery,
-  paramsQuery,
+  collection,
+  path,
+  query,
   children,
   loadingComponent,
   emptyComponent,
-}: P & {
-  resourceKey: R;
-  // @ts-ignore
-  children: (props: Res & { data: NonNullable<Res['data']> }) => ReactNode;
+}: {
+  collection: C;
+  path: Path;
+  query?: ApiSwrQueryProps<C>;
+  children: (props: Res) => ReactNode;
   loadingComponent?: (props: Res) => ReactNode;
   emptyComponent?: (props: Res) => ReactNode;
 }) {
-  // @ts-ignore
-  const swrRes = useApiResourceSWR({
-    resourceKey,
-    pathQuery,
-    paramsQuery,
-  });
+  const swrRes = useApiResourceSWR(collection, path, query);
   const loading = loadingComponent ? (
     loadingComponent(swrRes as Res)
   ) : (

@@ -38,9 +38,9 @@ export default function Lists() {
   return (
     <>
       <UISwrResource
-        resourceKey="public_services"
-        pathQuery={['listSimple']}
-        paramsQuery={{ page, limit }}
+        collection="public_services"
+        path="itemsMeta"
+        query={{ page, limit }}
         loadingComponent={() => (
           <UIListItems
             view={view}
@@ -68,7 +68,7 @@ export default function Lists() {
             <UIListItems
               view={view}
               setView={setView}
-              items={data.data}
+              items={data?.data ?? []}
               Component={({ item, view }) => (
                 <Link
                   href={`/layanan-publik/${item.slug}`}

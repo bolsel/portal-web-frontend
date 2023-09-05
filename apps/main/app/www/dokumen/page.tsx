@@ -1,10 +1,10 @@
-import { apiResourceDocumentCategories } from '@portalweb/api/server';
 import PageWithContainer from '../../../components/pages/page-with-container';
 import KategoriList from './_Kategori';
 import Lists from './_Lists';
 import KategoriName from './_KategoriName';
 import { Metadata } from 'next';
 import { titleWithMainTitle } from '../../../lib/helper';
+import { apiResourceItemRead } from '@portalweb/api/server';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -17,9 +17,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 export default async function MainDokumenPage() {
-  const { data: categories } = await apiResourceDocumentCategories().fetch({
-    pathQuery: ['listSimple'],
-  });
+  // const { data: categories } = await apiResourceDocumentCategories().fetch({
+  //   pathQuery: ['listSimple'],
+  // });
+  const categories = await apiResourceItemRead('document_categories')
+    .setQuery({ limit: -1 })
+    .items({});
   return (
     <PageWithContainer
       jumbotron={{

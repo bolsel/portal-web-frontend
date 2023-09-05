@@ -1,17 +1,18 @@
 'use client';
 
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import { UIShareItem, UIShareItemProps } from '@portalweb/ui';
-import { fetchNewsShareCount, getArticleUrl } from '../lib/helper';
+import {
+  NewsOrWebNewsItemType,
+  fetchNewsShareCount,
+  getArticleUrl,
+} from '../lib/helper';
 import { useParams } from 'next/navigation';
 
 export default function NewsShareItem({
   item,
   ...props
 }: Partial<UIShareItemProps> & {
-  item:
-    | ApiResourceGetNormalizerType<'news', 'bySlug'>
-    | ApiResourceGetNormalizerType<'web_news', 'bySlugWebId'>;
+  item: NewsOrWebNewsItemType;
 }) {
   const params = useParams();
   return (

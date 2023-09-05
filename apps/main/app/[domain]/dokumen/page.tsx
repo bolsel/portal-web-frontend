@@ -16,8 +16,8 @@ export async function generateMetadata({
   if (!site) notFound();
 
   return {
-    title: `Dokumen | ${site.organization_name}`,
-    description: `Lihat dokuman publik pada ${site.organization_name}`,
+    title: `Dokumen | ${site.organization.name}`,
+    description: `Lihat dokuman publik pada ${site.organization.name}`,
   };
 }
 export default async function SiteDokumenPage({ params: { domain } }) {
@@ -47,7 +47,7 @@ export default async function SiteDokumenPage({ params: { domain } }) {
           </div>
         </div>
         <div className="w-full max-w-none">
-          <Lists organizationId={site.organization_id} />
+          <Lists organizationId={site.organization.id} />
         </div>
       </div>
     </SiteLayout>

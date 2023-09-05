@@ -22,20 +22,25 @@ export default function Content({ site }) {
       {pageType === 'index' ? (
         <div>
           <UISwrResource
-            resourceKey="web_aduan_publik"
-            pathQuery={['byWebId', site.id]}
-            paramsQuery={{ limit: 10 }}
+            collection="web_aduan_publik"
+            path="items"
+            query={{
+              filter: {
+                website: { _eq: site.id },
+              },
+              limit: 10,
+            }}
             loadingComponent={() => (
               <div className="animate-pulse bg-base-200 p-5 rounded-lg">
                 Memuat data aduan...
               </div>
             )}
-            noItemsComponent={() => <div>Belum ada data aduan</div>}
+            emptyComponent={() => <div>Belum ada data aduan</div>}
           >
             {({ data }) => {
               return (
                 <div className="flex flex-col gap-4">
-                  {data.data.map((item, index) => {
+                  {(data ?? []).map((item, index) => {
                     return (
                       <div key={index} className="chat chat-start">
                         <div className="chat-image avatar">

@@ -1,4 +1,3 @@
-import { apiResourcePublicServices } from '@portalweb/api/server';
 import PageWithContainer from '../../../../components/pages/page-with-container';
 import { notFound } from 'next/navigation';
 import { UIBaseIcon } from '@portalweb/ui';
@@ -8,15 +7,26 @@ import Details from './_Details';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { titleWithMainTitle } from '../../../../lib/helper';
+import { apiResourceItemRead } from '@portalweb/api/server';
 
+const getItem = async (slug) => {
+  return await apiResourceItemRead('public_services')
+    .setQuery({
+      filter: {
+        slug: {
+          _eq: slug,
+        },
+      },
+    })
+    .items({
+      single: true,
+    })
+    .catch(() => null);
+};
 export async function generateMetadata({
   params: { slug },
 }): Promise<Metadata> {
-  const item = await apiResourcePublicServices()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) return notFound();
 
   return {
@@ -28,11 +38,7 @@ export async function generateMetadata({
   };
 }
 export default async function MainLayananPublikSlugPage({ params: { slug } }) {
-  const item = await apiResourcePublicServices()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) return notFound();
   const LogoComponent = ({ item, className }) => (
     <div className={`${className}`}>
@@ -75,12 +81,7 @@ export default async function MainLayananPublikSlugPage({ params: { slug } }) {
           <div className="flex flex-row gap-2 items-center">
             <UIBaseIcon icon="history" className="w-4 h-4" />
             <p className="font-lato text-xs text-blue-gray-800 leading-5">
-              Terakhir diupdate{' '}
-              {item.date_updated.toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
+              Terakhir diupdate {item.date_updated_format}
             </p>
           </div>
         </div>

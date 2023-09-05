@@ -1,4 +1,4 @@
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import {
   IUIBaseCreateCustomizableDefine,
   UIBaseCreateCustomizable,
@@ -6,15 +6,14 @@ import {
 import { UIBaseIcon, UIBaseIconNamesType } from '../../icon';
 import Link from 'next/link';
 
-export type UIBaseViewApplicationItemDetailType<
-  Item extends ApiResourceGetNormalizerType<'applications', 'listPage'>
-> = IUIBaseCreateCustomizableDefine<{
-  item: Item;
-}>;
+type _Item = TApiResourcePathReturn<'applications'>['read']['items'][0];
 
-export const UIBaseViewApplicationItemDetail = <
-  Item extends ApiResourceGetNormalizerType<'applications', 'listPage'>
->(
+export type UIBaseViewApplicationItemDetailType<Item extends _Item> =
+  IUIBaseCreateCustomizableDefine<{
+    item: Item;
+  }>;
+
+export const UIBaseViewApplicationItemDetail = <Item extends _Item>(
   props: UIBaseViewApplicationItemDetailType<Item>['props']
 ) =>
   UIBaseCreateCustomizable<UIBaseViewApplicationItemDetailType<Item>>({
@@ -54,7 +53,7 @@ export const UIBaseViewApplicationItemDetail = <
                   Organisasi
                 </h2>
                 <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
-                  {item.organization_name ?? '-'}
+                  {item.organization?.name ?? '-'}
                 </p>
               </div>
             </section>

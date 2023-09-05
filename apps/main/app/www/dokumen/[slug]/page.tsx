@@ -1,13 +1,25 @@
 import { UIBaseViewDocumentItemDetail } from '@portalweb/ui/server';
 import PageWithContainer from '../../../../components/pages/page-with-container';
-import { apiResourceDocuments } from '@portalweb/api/server';
 import DocumentFrame from './_Frame';
 import { notFound } from 'next/navigation';
 import { Metadata, ResolvingMetadata } from 'next';
+import { apiResourceItemRead } from '@portalweb/api/server';
 
 type Props = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
+};
+const getItem = async (slug) => {
+  return await apiResourceItemRead('documents')
+    .setQuery({
+      filter: {
+        slug: { _eq: slug },
+      },
+    })
+    .items({
+      single: true,
+    })
+    .catch(() => null);
 };
 export async function generateMetadata(
   { params, searchParams }: Props,
@@ -15,11 +27,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug;
-  const item = await apiResourceDocuments()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) {
     return notFound();
   }
@@ -30,11 +38,7 @@ export async function generateMetadata(
 }
 
 export default async function MainDokumenSlugPage({ params: { slug } }) {
-  const item = await apiResourceDocuments()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) {
     return notFound();
   }
@@ -42,7 +46,7 @@ export default async function MainDokumenSlugPage({ params: { slug } }) {
     <PageWithContainer
       jumbotron={{
         title: item.title,
-        subtitle: item.category_name,
+        subtitle: item.category.name,
         breadcrumb: [
           {
             label: 'Beranda',

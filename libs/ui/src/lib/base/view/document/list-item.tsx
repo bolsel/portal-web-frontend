@@ -46,7 +46,7 @@ export const UIBaseViewDocumentListItem = <Item extends Record<string, any>>(
         title: item.title,
         slug: item.slug,
         file: item.file,
-        category_name: item.category_name,
+        category_name: item.category.name,
         description: item.description,
         cover_image_url: item.image_cover?.url,
         publish_date: item.publish_date_format ?? item.publish_date,

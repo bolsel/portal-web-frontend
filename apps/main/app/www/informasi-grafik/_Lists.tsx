@@ -4,12 +4,14 @@ import { UISwrResource, UIViewGrafikInfoWidgetList } from '@portalweb/ui';
 export default function Lists() {
   return (
     <UISwrResource
-      resourceKey="grafik_info"
-      pathQuery={['listWidget']}
-      paramsQuery={{ limit: -1 }}
+      collection="grafik_info"
+      path="items"
+      query={{
+        limit: -1,
+      }}
       loadingComponent={() => <UIViewGrafikInfoWidgetList skeleton />}
     >
-      {({ data }) => <UIViewGrafikInfoWidgetList items={data.data} />}
+      {({ data }) => <UIViewGrafikInfoWidgetList items={data ?? []} />}
     </UISwrResource>
   );
 }

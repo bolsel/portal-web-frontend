@@ -1,24 +1,38 @@
-import { FileType, UserType } from '../system-types';
-import { DirectusStatusType } from '../index';
-import { ApplicationCategories } from './application_categories';
+import {
+  TDirectusFile,
+  TDirectusStatusField,
+  TDirectusUser,
+} from '../system-types';
 import { Organizations } from './organizations';
 
-export type Applications = {
+export interface ApplicationCategories {
   id: string;
-  status: DirectusStatusType;
+  name: string;
+  slug: string;
+}
+
+export interface Applications {
+  id: string;
+  status: TDirectusStatusField;
   sort: number;
   slug: string;
   title: string;
   description?: string;
-  logo?: FileType;
-  categories: { id: string; category: ApplicationCategories }[];
+  logo: string | TDirectusFile;
+  categories: number[] | ApplicationCategoriesLink[];
   link?: string;
   links?: { link: string; name: string }[];
   social_media?: { link: string; name: string }[];
-  organization?: Organizations;
+  organization?: string | Organizations;
 
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}
+
+export interface ApplicationCategoriesLink {
+  id: number;
+  application: string | Applications;
+  category: string | ApplicationCategories;
+}

@@ -1,30 +1,64 @@
 import { notFound } from 'next/navigation';
 import { getSiteData } from '../../../../lib/site';
 import SiteLayout from '#/main/components/layout/site/layout';
-import { apiResourceWebNews } from '@portalweb/api/server';
 import { UIBaseIcon, UIBlurImage, UIContentBlocks } from '@portalweb/ui';
 import Latest from './_Latest';
 import NewsShareItem from '#/main/components/news-share-item';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
+import { Metadata, ResolvingMetadata } from 'next';
 
+const getItem = async (slug) => {
+  return await apiResourceItemPathRead('web_news')
+    .bySlug({ paths: [slug] })
+    .catch(() => null);
+};
+
+export async function generateMetadata(
+  { params, searchParams },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+  const item = await getItem(slug);
+  if (!item) {
+    notFound();
+  }
+  const { title, description } = item;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [`/og-image/berita/${item.slug}`, item.image_cover.url],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      creator: '@kominfobolsel',
+    },
+  };
+}
 export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
   const site = await getSiteData(domain);
   if (!site) notFound();
-  const item = await apiResourceWebNews()
-    .fetch({
-      pathQuery: ['bySlugWebId', slug, site.id],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) notFound();
-  await apiResourceWebNews().itemHandler.updateOne(item.id, {
-    view_count: item.view_count + 1,
-  });
+
+  await apiResourceItemPathRead('web_news')
+    .shareAndViewCount({ paths: [slug, 'view'] })
+    .then((res) => {
+      item.view_count = res.view_count;
+      item.shared_count = res.shared_count;
+    });
 
   return (
     <SiteLayout
       site={site}
       jumbotron={{
         title: item.title,
-        subtitle: `Berita ${site.organization_name}`,
+        subtitle: `Berita ${site.organization.name}`,
       }}
     >
       <article className="px-5">
@@ -45,7 +79,7 @@ export default async function SiteBeritaSlugPage({ params: { domain, slug } }) {
                     <div className="flex items-center gap-1">
                       <UIBaseIcon icon="calendar" className="w-4 h-4" />
                       <p className="text-sm">
-                        {item.publish_date.toLocaleDateString('id-ID', {
+                        {item.publish_date_date.toLocaleDateString('id-ID', {
                           weekday: 'long',
                           day: 'numeric',
                           month: 'long',

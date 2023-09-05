@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 import {
-  apiResourceNews,
-  apiResourcePublicServices,
+  apiResourceItemPathRead,
+  apiResourceItemRead,
 } from '@portalweb/api/server';
 import BaseOgImage, {
   BaseOgImagePropsType,
@@ -17,10 +17,8 @@ export async function GET(
 ) {
   const ogTypes: Record<string, () => Promise<BaseOgImagePropsType | null>> = {
     berita: async () => {
-      const item = await apiResourceNews()
-        .fetch({
-          pathQuery: ['bySlug', slug],
-        })
+      const item = await apiResourceItemPathRead('news')
+        .bySlug({ paths: [slug] })
         .catch(() => null);
       if (!item) return null;
 
@@ -34,10 +32,11 @@ export async function GET(
       return { title, description, images, req };
     },
     'layanan-publik': async () => {
-      const item = await apiResourcePublicServices()
-        .fetch({
-          pathQuery: ['bySlug', slug],
+      const item = await apiResourceItemRead('public_services')
+        .setQuery({
+          filter: { slug: { _eq: slug } },
         })
+        .items({ single: true })
         .catch(() => null);
       if (!item) return null;
       return {

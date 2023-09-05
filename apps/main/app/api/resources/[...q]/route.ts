@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { apiResourceGet } from '@portalweb/api/server';
+import { resourceItems } from '@portalweb/api/server';
 import qs from 'qs';
 export const revalidate = 1000;
 const sendError = (message: any) => {
@@ -16,42 +16,21 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { q: string[] } }
 ) {
-  const [resourceKey, ...pathQuery] = params.q;
+  const [resourceKey, path, ...pathQuery] = params.q;
   try {
-    const apiResource = apiResourceGet(resourceKey);
-    if (!apiResource) {
+    const _apiResource = resourceItems[resourceKey];
+    if (!_apiResource) {
       throw new Error(`Api resource tidak ada: ${resourceKey}`);
     }
-    const t = await apiResource().fetch({
-      pathQuery: pathQuery,
-      paramsQuery: qs.parse(Object.fromEntries(request.nextUrl.searchParams)),
-    });
-    return NextResponse.json(t);
-  } catch (e: any) {
-    if (process.env.NODE_ENV === 'development') {
-      if (e && e['errors']) return sendError(e['errors']);
-      else if (e && e['message']) return sendError(e['message']);
-    } else {
-      return sendError('Terjadi kesalahan');
+    if (!_apiResource.paths.read[path]) {
+      throw new Error(`Api Resource path tidak ada: ${resourceKey}/${path}`);
     }
-  }
-}
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { q: string[] } }
-) {
-  const [resourceKey, ...pathQuery] = params.q;
-  try {
-    const apiResource = apiResourceGet(resourceKey);
-    if (!apiResource) {
-      throw new Error(`Api resource tidak ada: ${resourceKey}`);
-    }
-
-    const t = await apiResource().post({
-      pathQuery: pathQuery,
-      data: await request.json(),
-    });
-    return NextResponse.json(t);
+    const query = qs.parse(Object.fromEntries(request.nextUrl.searchParams));
+    if (query.limit) query.limit = parseInt(query.limit as string);
+    if (query.page) query.page = parseInt(query.page as string);
+    query.paths = pathQuery ?? [];
+    const data = await _apiResource.paths.read[path](query);
+    return NextResponse.json(data);
   } catch (e: any) {
     if (process.env.NODE_ENV === 'development') {
       if (e && e['errors']) return sendError(e['errors']);

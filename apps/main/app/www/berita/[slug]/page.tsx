@@ -1,14 +1,25 @@
-import { apiResourceNews } from '@portalweb/api/server';
+import {
+  apiResourceItem,
+  apiResourceItemPathRead,
+  apiResourceItemRead,
+} from '@portalweb/api/server';
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { UIBaseIcon, UIContentBlocks } from '@portalweb/ui';
 import Terkait from './_Terkait';
 import NewsHeaderRead from '#/main/components/news-header-read';
 import NewsShareItem from '#/main/components/news-share-item';
+import { readItems, updateItem } from '@directus/sdk';
+import { unstable_cache } from 'next/cache';
 
 type Props = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
+};
+const getItem = async (slug) => {
+  return apiResourceItemPathRead('news')
+    .bySlug({ paths: [slug] })
+    .catch(() => null);
 };
 export async function generateMetadata(
   { params, searchParams }: Props,
@@ -16,13 +27,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug;
-  const item = await apiResourceNews()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) {
-    return notFound();
+    notFound();
   }
   const { title, description } = item;
   return {
@@ -42,17 +49,17 @@ export async function generateMetadata(
   };
 }
 export default async function BeritaSlugPage({ params: { slug } }) {
-  const item = await apiResourceNews()
-    .fetch({
-      pathQuery: ['bySlug', slug],
-    })
-    .catch(() => null);
+  const item = await getItem(slug);
   if (!item) {
-    return notFound();
+    notFound();
   }
-  await apiResourceNews().itemHandler.updateOne(item.id, {
-    view_count: item.view_count + 1,
-  });
+  await apiResourceItemPathRead('news')
+    .shareAndViewCount({ paths: [slug, 'view'] })
+    .then((res) => {
+      item.view_count = res.view_count;
+      item.shared_count = res.shared_count;
+    });
+
   return (
     <main>
       <NewsHeaderRead item={item} />

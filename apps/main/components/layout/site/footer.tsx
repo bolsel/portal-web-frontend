@@ -1,14 +1,14 @@
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
-import { apiResourceOrganizations } from '@portalweb/api/server';
+import { TApiResourcePathReturn } from '@portalweb/api';
+import { apiResourceItemPathRead } from '@portalweb/api/server';
 import { UIBaseIcon, UIBaseIconNamesType } from '@portalweb/ui';
 
 export default async function Footer({
   site,
 }: {
-  site: ApiResourceGetNormalizerType<'websites', 'byDomain'>;
+  site: TApiResourcePathReturn<'websites'>['read']['byDomain'];
 }) {
-  const orgInfo = await apiResourceOrganizations().fetch({
-    pathQuery: ['info', site.organization_slug!],
+  const orgInfo = await apiResourceItemPathRead('organizations').infoBySlug({
+    paths: [site.organization.slug],
   });
   return (
     <footer>

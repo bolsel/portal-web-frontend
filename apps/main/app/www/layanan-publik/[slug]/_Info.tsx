@@ -51,10 +51,10 @@ export default function Info({ data }) {
       icon: 'category',
     });
   }
-  if (data.organization_name) {
+  if (data.organization && data.organization.name) {
     dataList.push({
       title: 'Organisasi',
-      value: data.organization_name,
+      value: data.organization.name,
       icon: 'organization',
     });
   }
@@ -155,7 +155,7 @@ export default function Info({ data }) {
       value: (
         <div className="flex gap-2">
           {data.social_media.map((sm, i) => {
-            const _icon = `social-color-${sm.name}` as UIBaseIconNamesType;
+            const _icon = `logo-color-${sm.name}` as UIBaseIconNamesType;
             return (
               <Link
                 key={i}

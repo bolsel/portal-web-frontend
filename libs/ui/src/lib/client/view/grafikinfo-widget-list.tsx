@@ -14,14 +14,14 @@ import {
   Autoplay,
   EffectCoverflow,
 } from 'swiper/modules';
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
+import { TApiResourcePathReturn } from '@portalweb/api';
 import { ComponentPropsWithoutRef, useRef } from 'react';
 import { UIBlurImage } from '../components/blur-image';
 import clsx from 'clsx';
 import { useUIModal } from '../components';
 
 type Props = {
-  items?: ApiResourceGetNormalizerType<'grafik_info', 'listWidget'>[];
+  items?: TApiResourcePathReturn<'grafik_info'>['read']['items'];
   skeleton?: true;
   slideContainer?: ComponentPropsWithoutRef<'div'>;
 };

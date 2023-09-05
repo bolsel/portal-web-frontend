@@ -1,13 +1,13 @@
-import { FileType, UserType } from '../system-types';
+import { TDirectusFile, TDirectusUser } from '../system-types';
 
-export type GrafikInfo = {
+export interface GrafikInfo {
   id: string;
   status: string;
   title: string;
-  image: FileType;
-  publish_date: Date;
-  user_created: UserType;
-  user_updated: UserType;
-  date_updated?: Date;
-  date_created: Date;
-};
+  image: string | TDirectusFile;
+  publish_date: string;
+  user_created: string | TDirectusUser;
+  user_updated: string | TDirectusUser;
+  date_updated?: string;
+  date_created: string;
+}

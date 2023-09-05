@@ -1,4 +1,3 @@
-import { ApiResourceGetNormalizerType } from '@portalweb/api';
 import {
   IUIBaseCreateCustomizableDefine,
   UIBaseCreateCustomizable,
@@ -6,8 +5,9 @@ import {
 import { UIBaseViewApplicationItemLogo } from './item-logo';
 import { RequireOnlyOne } from '../../types';
 import clsx from 'clsx';
+import { TApiResourcePathReturn } from '@portalweb/api';
 
-type _Item = ApiResourceGetNormalizerType<'applications', 'listPage'>;
+type _Item = TApiResourcePathReturn<'applications'>['read']['items'][0];
 export type UIBaseViewApplicationListItemType<Item extends _Item> =
   IUIBaseCreateCustomizableDefine<
     RequireOnlyOne<
@@ -73,7 +73,7 @@ group-hover:text-primary-700 group-hover:bg-primary-200"
               <p className="w-4/4 font-lato text-sm font-normal text-[#415C84] leading-5 line-clamp-3 md:line-clamp-2 mt-3 mb-3">
                 {item.description}
               </p>
-              {item.categories.map((category, i) => {
+              {item.categories?.map((category, i) => {
                 return (
                   <div
                     key={i}

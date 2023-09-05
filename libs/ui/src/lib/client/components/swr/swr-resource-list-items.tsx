@@ -2,27 +2,30 @@
 
 import { FC, ReactNode, useEffect, useState } from 'react';
 import {
-  ApiResourceGetFetchParamsType,
-  ApiResourceItemsListType,
+  ApiSwrQueryProps,
+  TApiResourceItemsList,
+  TApiResourceItemsListKeys,
   useApiResourceSWR,
 } from '@portalweb/api';
 import { UIBaseListViewType } from '../../../base';
 import { UIListItems } from '../list-items/list-items';
 
 export function UISwrResourceListItems<
-  R extends keyof ApiResourceItemsListType,
-  P extends ApiResourceGetFetchParamsType<R>,
-  Res = ReturnType<typeof useApiResourceSWR<R, P>>
+  C extends TApiResourceItemsListKeys,
+  Path extends keyof TApiResourceItemsList[C]['paths']['read'],
+  Res = ReturnType<typeof useApiResourceSWR<C, Path>>
 >({
-  resourceKey,
-  pathQuery,
-  paramsQuery,
+  collection,
+  path,
+  query,
   children,
   loadingComponent,
   view: defaultView,
   Component,
-}: P & {
-  resourceKey: R;
+}: {
+  collection: C;
+  path: Path;
+  query?: ApiSwrQueryProps<C>;
   children: (props: Res) => ReactNode;
   loadingComponent: (props: Res) => ReactNode;
   view: UIBaseListViewType;
@@ -31,20 +34,14 @@ export function UISwrResourceListItems<
     view: UIBaseListViewType;
   }>;
 }) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const swrRes = useApiResourceSWR({
-    resourceKey,
-    pathQuery,
-    paramsQuery,
-  });
+  const swrRes = useApiResourceSWR(collection, path, query);
 
   const [view, setView] = useState(defaultView ?? 'list');
-  const [page, setPage] = useState(paramsQuery?.page ?? 1);
-  const [limit, setLimit] = useState(paramsQuery?.limit ?? 6);
+  const [page, setPage] = useState(query?.page ?? 1);
+  const [limit, setLimit] = useState(query?.limit ?? 6);
   useEffect(() => {
-    setPage(paramsQuery?.page ?? 1);
-  }, [paramsQuery, pathQuery]);
+    setPage(query?.page ?? 1);
+  }, [query]);
 
   if (swrRes.isLoading) {
     return loadingComponent(swrRes as Res);

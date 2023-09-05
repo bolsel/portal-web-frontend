@@ -13,7 +13,7 @@ export default function Description({ site }) {
     <>
       {menu
         ? menu.description
-        : `Informasi dokumen pada ${site.organization_name}`}
+        : `Informasi dokumen pada ${site.organization.name}`}
     </>
   );
 }

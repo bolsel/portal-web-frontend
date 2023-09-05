@@ -14,8 +14,8 @@ export async function generateMetadata({
   if (!site) notFound();
 
   return {
-    title: `Berita | ${site.organization_name}`,
-    description: `Berita ${site.organization_name}`,
+    title: `Berita | ${site.organization.name}`,
+    description: `Berita ${site.organization.name}`,
   };
 }
 export default async function SiteBeritaPage({ params: { domain } }) {
@@ -29,7 +29,7 @@ export default async function SiteBeritaPage({ params: { domain } }) {
       site={site}
       jumbotron={{
         title: `Berita`,
-        subtitle: `Berita ${site.organization_name}`,
+        subtitle: `Berita ${site.organization.name}`,
       }}
     >
       <div className="p-10 grid grid-cols-1 gap-2 lg:gap-8 lg:grid-cols-[60%,auto]">
